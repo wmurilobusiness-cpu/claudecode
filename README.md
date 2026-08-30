@@ -51,9 +51,12 @@ Abra `index.html` no navegador e use F11 (tela cheia).
 | `→` `espaço` `PageDown` | Próximo slide |
 | `←` `PageUp` | Slide anterior |
 | `Home` / `End` | Primeiro / último slide |
+| `B` | Mostra/esconde os briefings de casting dos slots vazios |
 
 Cada slide entra com uma animação escalonada de 520ms, desativada para quem usa
-`prefers-reduced-motion` e no PDF. O deck escala sozinho para qualquer tela; a barra de navegação
+`prefers-reduced-motion` e no PDF. Slot de foto ainda vazio aparece como painel escuro, não como
+briefing — o deck está sempre apresentável. A tecla `B` revela os briefings quando você for
+escolher as imagens. O deck escala sozinho para qualquer tela; a barra de navegação
 some no PDF.
 
 ## Editar

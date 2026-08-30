@@ -313,7 +313,8 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
   color:var(--silver-dim);line-height:1.55}
 .ph .spec b{display:block;color:var(--red-hot);font-weight:400;letter-spacing:.26em;margin-bottom:5px}
 /* Assim que --img e preenchido, o briefing e o enquadramento saem de cena. */
-.ph.is-filled .spec,.ph.is-filled .brk{display:none}
+.ph .spec,.ph .brk{display:none}
+body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display:block}
 .ph.quiet:not(.is-filled){background:none;border-color:transparent}
 .ph.quiet:not(.is-filled) .spec,.ph.quiet:not(.is-filled) .brk,
 .ph.quiet:not(.is-filled) .grain{display:none}
@@ -555,16 +556,10 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 
 <!-- ===== 08 — ENTREGA ===== -->
 <section class="slide" data-phase="Entrega" data-title="Entrega">
-  <div class="ph bleed r g-left" data-slot="08" style="width:32%">
-    <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
-    <div class="spec"><b>Slot 08 · Execução prática</b>Wilton trabalhando: analisando celular ou
-      computador, orientando alguém, conferindo execução. É o slide do acompanhamento — a imagem
-      precisa mostrar o trabalho, não o físico.</div>
-  </div>
-  <div class="stage" style="padding-right:calc(32% + 60px)">
+  <div class="stage">
     <p class="eyebrow">O que você recebe</p>
-    <h1 class="h-sec" style="font-size:70px">Você não recebe uma ficha.<br><em>Recebe um sistema.</em></h1>
-    <div class="grid g2 stagger" style="margin-top:34px">
+    <h1 class="h-sec">Você não recebe uma ficha. <em>Recebe um sistema.</em></h1>
+    <div class="grid g4 stagger" style="margin-top:40px">
       <div class="card"><span class="idx">Frente 01</span><h3>Treino individualizado</h3>
         <p>Construído a partir da sua avaliação, do seu histórico, do seu tempo e do equipamento que
           você realmente tem acesso.</p></div>
@@ -659,16 +654,10 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 
 <!-- ===== 12 — REDUÇÃO DE RISCO ===== -->
 <section class="slide" data-phase="Compromisso" data-title="Meu compromisso">
-  <div class="ph bleed l g-right" data-slot="12" style="width:30%">
-    <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
-    <div class="spec"><b>Slot 12 · Proximidade</b>Retrato humano, olhando direto para a câmera.
-      Expressão séria e aberta, sem pose. É o slide da confiança — a foto precisa parecer conversa,
-      não campanha.</div>
-  </div>
-  <div class="stage" style="padding-left:calc(30% + 56px)">
+  <div class="stage">
     <p class="eyebrow">O que eu posso garantir</p>
-    <h1 class="h-sec" style="font-size:70px">Meu compromisso com você</h1>
-    <div class="grid g2 stagger" style="margin-top:32px">
+    <h1 class="h-sec">Meu compromisso com você</h1>
+    <div class="grid g4 stagger" style="margin-top:40px">
       <div class="card silver"><span class="idx silver">Compromisso</span><h3>Planejamento individualizado</h3>
         <p>Sua estratégia é construída a partir da sua avaliação — não adaptada de um modelo pronto.</p></div>
       <div class="card silver"><span class="idx silver">Compromisso</span><h3>Acompanhamento real</h3>
@@ -783,6 +772,7 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
   document.addEventListener('keydown', function(e){
     if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(cur + 1); }
     if (e.key === 'ArrowLeft'  || e.key === 'PageUp')                    { e.preventDefault(); go(cur - 1); }
+    if (e.key === 'b' || e.key === 'B') document.body.classList.toggle('brief');
     if (e.key === 'Home') go(0);
     if (e.key === 'End')  go(total - 1);
   });

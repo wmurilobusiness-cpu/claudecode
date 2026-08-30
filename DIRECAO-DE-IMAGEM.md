@@ -76,9 +76,12 @@ Os slots 02B e 02C estão temporariamente ocupados por palco e vestiário. Quand
 e EUA aparecerem, elas devem tomar esse lugar: são as duas imagens que mais individualizam o deck,
 porque nenhum outro profissional poderia preenchê-las com o mesmo conteúdo.
 
-Enquanto faltarem as fotos dos slots 08 e 12, esses dois slides mostram o briefing de casting no
-painel reservado. Para apresentar antes de consegui-las, os dois slides voltam ao layout sem foto —
-que já existia e funcionava.
+Os slides 8 e 12 voltaram ao layout de quatro cards em largura cheia, sem coluna de foto: nenhuma
+imagem do acervo serve a eles e não fazia sentido reservar espaço vazio. Quando as fotos existirem,
+a coluna volta — é uma edição só.
+
+Nos demais slots, foto ainda ausente aparece como painel escuro, não como briefing. O deck está
+apresentável a qualquer momento; a tecla `B` revela os briefings quando você for escolher imagens.
 
 ---
 
