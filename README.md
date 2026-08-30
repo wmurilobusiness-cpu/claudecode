@@ -8,12 +8,37 @@ Deck de vendas da consultoria **ONEPERCENT1% · Elite Training System** (Wilton 
 | Arquivo | O que é |
 | --- | --- |
 | `index.html` | O deck. Abra no navegador e apresente em tela cheia. |
-| `ROTEIRO-DE-CALL.md` | Título, texto, layout, foto sugerida e speaker notes de cada slide. |
+| `ROTEIRO-DE-CALL.md` | Por slide: título, copy, layout, imagem, tipografia, animações, speaker notes, objetivo psicológico e transição. |
 | `export/Metodo-1porcento-Apresentacao-de-Vendas.pdf` | PDF 1920×1080, 13 páginas. |
-| `export/png/` | Um PNG 1920×1080 por slide (para Instagram, Canva ou PowerPoint). |
+| `export/png/` | Um PNG 1920×1080 por slide. |
 | `deck/_body.html` | Fonte do deck. **Edite aqui**, nunca no `index.html`. |
+| `deck/fonts.css` | Bebas Neue e Barlow embutidas em base64 (subset latin, OFL). |
 | `deck/build.sh` | Gera o `index.html` a partir do `_body.html`. |
 | `deck/export.py` | Gera o PDF e os PNGs. |
+
+## Estrutura comercial
+
+`promessa → autoridade → problema → quebra de crença → mecanismo → entrega → valor percebido →
+investimento principal → condição especial → redução de risco → decisão`
+
+| Slide | Função |
+| --- | --- |
+| 1 | Hook |
+| 2 | Autoridade |
+| 3 | Problema real |
+| 4 | Os 4 vazamentos |
+| 5 | Quebra de crenças |
+| 6 | Mecanismo — Método 1% |
+| 7 | Ciclo 4A |
+| 8 | Entrega |
+| 9 | Valor percebido — âncora R$ 5.982 |
+| 10 | Investimento principal — 12x R$ 300 / R$ 3.000 |
+| 11 | Condição de entrada — 12x R$ 149,70 / R$ 1.497 |
+| 12 | Redução de risco |
+| 13 | Fechamento |
+
+A pergunta de investimento acontece **com o slide 9 na tela**, antes de avançar para o 10. O roteiro
+traz o script e as três ramificações de resposta.
 
 ## Apresentar
 
@@ -25,7 +50,9 @@ Abra `index.html` no navegador e use F11 (tela cheia).
 | `←` `PageUp` | Slide anterior |
 | `Home` / `End` | Primeiro / último slide |
 
-O deck escala sozinho para qualquer tela. A barra inferior (setas e pontos) some no PDF.
+Cada slide entra com uma animação escalonada de 520ms, desativada para quem usa
+`prefers-reduced-motion` e no PDF. O deck escala sozinho para qualquer tela; a barra de navegação
+some no PDF.
 
 ## Editar
 
@@ -33,22 +60,23 @@ O deck escala sozinho para qualquer tela. A barra inferior (setas e pontos) some
 2. `./deck/build.sh` — regenera o `index.html`.
 3. `python3 deck/export.py` — regenera PDF e PNGs.
 
-### Preencher os valores da oferta (slide 11)
+### Três campos que precisam ser preenchidos antes de usar
 
-Os campos de preço são os `<span class="blank">` dentro do bloco `.price`. Substitua o span
-pelo valor:
+**Slide 11 — escopo da condição de entrada.** A caixa tracejada `ESCOPO DESTA CONDIÇÃO` está em branco
+de propósito. Preencha com o que diferencia essa condição do programa completo (ciclo mais curto, menos
+reavaliações, escopo reduzido). Sem isso, as duas condições viram o mesmo pacote por preços
+diferentes — veja "Regras comerciais" no roteiro.
 
-```html
-<div class="main">12x <u>R$ 497</u></div>
-<div class="alt">R$ 4.970 à vista</div>
-```
+**Slide 12 — política de arrependimento.** A caixa `ARREPENDIMENTO: 7 DIAS` só deve permanecer se a
+política existir no seu contrato. Se não existir, apague a `div.editable.final`.
 
-Se o bônus não se aplicar, apague a `<div class="bonus">` inteira.
+**Slide 2 — certificação ACSM.** O chip traz "Personal Trainer certificado · ACSM · EUA". Confirme a
+nomenclatura oficial da credencial e ajuste antes de publicar.
 
-### Inserir as fotos
+### Inserir a foto do slide 1
 
-O slide 1 tem um painel de imagem à direita (`.hero-bleed`). Para usar uma foto real, adicione
-a imagem ao `background` do painel e remova a legenda `.cap`:
+O painel à direita é `.hero-bleed`. Para usar uma foto real, adicione a imagem ao background e remova
+a legenda `.cap`:
 
 ```html
 <div class="hero-bleed" style="background-image:url('foto.jpg');background-size:cover;
@@ -63,18 +91,21 @@ O `::after` do painel já aplica o degradê que funde a foto com o fundo preto.
 | --- | --- | --- |
 | `--ink` | `#06070A` | Fundo |
 | `--graphite` / `--graphite-2` | `#101216` / `#171A1F` | Cards |
-| `--steel` | `#262B32` | Filetes e bordas |
+| `--steel` / `--steel-2` | `#262B32` / `#343A43` | Filetes e bordas |
 | `--red` / `--red-hot` | `#D8071F` / `#FF2436` | Acento ONEPERCENT |
-| `--silver` | `#C3C9D1` | Metálico, textos de apoio |
+| `--silver` / `--silver-dim` | `#C3C9D1` / `#7C848E` | Metálico, apoio |
 | `--paper` / `--muted` | `#F2F4F6` / `#8B929B` | Texto |
 
-Tipografia: **Archivo** (títulos), **Barlow** (texto), **IBM Plex Mono** (dados e etiquetas).
-As três estão embutidas no arquivo em base64 — o deck renderiza idêntico offline, no PDF e em
-qualquer máquina, sem depender de internet.
+**Bebas Neue** é a fonte dominante: headlines, títulos, números, etiquetas, destaques e CTAs.
+**Barlow** aparece apenas em texto corrido, onde a caixa alta condensada prejudicaria a leitura.
+As duas estão embutidas em base64 — o deck renderiza idêntico offline, no PDF e em qualquer máquina.
+
+Cada slide tem uma moldura de instrumento: trilha de 13 setores no topo que preenche conforme a
+apresentação avança, wordmark à esquerda e leitura `FASE | 10 / 13` à direita.
 
 ## Regras de conteúdo
 
-O deck foi escrito para não conter: promessa de resultado, prazo de transformação, número
-não fornecido, formação não informada ou claim médico. Os gráficos dos slides 3 e 6 são
-marcados como **representação conceitual** — são diagramas de ideia, não dados. O slide 12
-declara explicitamente o que não é garantido. Mantenha isso ao editar.
+O deck não contém promessa de resultado, prazo de transformação, falsa urgência, escassez inventada,
+número não fornecido ou claim médico. O slide 12 declara explicitamente o que não é garantido. Os
+únicos valores são a escada de preços fixa (R$ 5.982 · 12x R$ 300 / R$ 3.000 · 12x R$ 149,70 /
+R$ 1.497). Mantenha isso ao editar.

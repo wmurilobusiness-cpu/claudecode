@@ -5,6 +5,8 @@ from playwright.sync_api import sync_playwright
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PNG  = ROOT / 'export' / 'png'
 PNG.mkdir(parents=True, exist_ok=True)
+for stale in PNG.glob('*.png'):  # slide titles change between versions
+    stale.unlink()
 PDF  = ROOT / 'export' / 'Metodo-1porcento-Apresentacao-de-Vendas.pdf'
 
 with sync_playwright() as p:
