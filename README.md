@@ -9,6 +9,8 @@ Deck de vendas da consultoria **ONEPERCENT1% · Elite Training System** (Wilton 
 | --- | --- |
 | `index.html` | O deck. Abra no navegador e apresente em tela cheia. |
 | `ROTEIRO-DE-CALL.md` | Por slide: título, copy, layout, imagem, tipografia, animações, speaker notes, objetivo psicológico e transição. |
+| `DIRECAO-DE-IMAGEM.md` | Curadoria dos 15 slots de foto: casting, recorte, resolução mínima, posição e tratamento. |
+| `fotos/` | Onde entram os arquivos de imagem. Veja `fotos/LEIA-ME.md`. |
 | `export/Metodo-1porcento-Apresentacao-de-Vendas.pdf` | PDF 1920×1080, 13 páginas. |
 | `export/png/` | Um PNG 1920×1080 por slide. |
 | `deck/_body.html` | Fonte do deck. **Edite aqui**, nunca no `index.html`. |
@@ -73,17 +75,28 @@ política existir no seu contrato. Se não existir, apague a `div.editable.final
 **Slide 2 — certificação ACSM.** O chip traz "Personal Trainer certificado · ACSM · EUA". Confirme a
 nomenclatura oficial da credencial e ajuste antes de publicar.
 
-### Inserir a foto do slide 1
+### Inserir as fotos
 
-O painel à direita é `.hero-bleed`. Para usar uma foto real, adicione a imagem ao background e remova
-a legenda `.cap`:
+São 15 slots de imagem nos 13 slides. Cada um é um `<div class="ph">` com um briefing de casting
+visível enquanto está vazio. Para preencher, acrescente `--img` ao slot:
 
 ```html
-<div class="hero-bleed" style="background-image:url('foto.jpg');background-size:cover;
-     background-position:center">
+<div class="ph bleed r g-left" data-slot="01"
+     style="width:44%;--img:url('fotos/slot-01.jpg');--pos:center 30%">
 ```
 
-O `::after` do painel já aplica o degradê que funde a foto com o fundo preto.
+`--pos` ajusta o enquadramento dentro do slot (`center 30%` sobe o recorte, `center 70%` desce).
+O briefing e as marcas de enquadramento somem sozinhos — não é preciso apagar nada.
+
+O tratamento visual é aplicado por CSS, igual em todos os slots: contraste `1.14`, saturação `0.84`,
+brilho `0.88`, grão cinematográfico e gradiente de leitura por slot. É correção de cor, não retoque:
+nada altera físico, rosto ou proporções.
+
+Quatro slots são de fundo (slides 4, 7, 9 e 11) e ficam invisíveis quando vazios — o slide funciona
+sem eles. Nos slides 9 e 11 a recomendação é justamente deixá-los vazios, para que os números
+dominem.
+
+Especificação completa de cada slot: `DIRECAO-DE-IMAGEM.md`.
 
 ## Identidade visual
 

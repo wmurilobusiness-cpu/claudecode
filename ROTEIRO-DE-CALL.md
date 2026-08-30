@@ -5,6 +5,9 @@
 Para cada slide: **título · copy exata · layout · imagem sugerida · hierarquia tipográfica ·
 animações/transições · speaker notes · objetivo psicológico · transição verbal**.
 
+A especificação de imagem completa — casting, recorte, resolução mínima, posição e tratamento de cada
+um dos 15 slots — está em `DIRECAO-DE-IMAGEM.md`.
+
 ## Lógica comercial do deck
 
 `promessa → autoridade → problema → quebra de crença → mecanismo → entrega → valor percebido →
@@ -57,9 +60,10 @@ Painel de imagem sangrando à direita, com colchetes vermelhos de enquadramento 
 outro elemento: um slide, uma ideia.
 
 **4. Imagem sugerida**
-Wilton em pé, academia escura, luz lateral fria vindo da direita, olhar direto na câmera, postura
-parada e neutra — não posando, não em execução. Enquadramento de 3/4 do corpo, fundo com profundidade.
-**Evite** foto sorrindo ou pose de palco: o registro aqui é autoridade calma, não exibição.
+Slot `01` — sangrando à direita, 44%. Hero/autoridade: corpo inteiro ou meio corpo, academia escura,
+luz lateral fria, olhar direto na câmera. Gradiente `g-left` protege a headline.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Eyebrow 19px → headline 112px (o maior contraste de escala do deck) → sub 25px em Barlow. A queda
@@ -114,9 +118,10 @@ células (o lastro de vivência), e uma linha de chips com a formação (a prova
 virar currículo). A hierarquia visual desce junto com a hierarquia de importância.
 
 **4. Imagem sugerida**
-Este slide funciona sem foto. Se quiser incluir, use uma imagem de bastidor — anotando avaliação,
-filmando conteúdo, treinando — em preto e branco de baixo contraste, discreta no canto inferior direito.
-**Não** use foto de pose: a credibilidade aqui vem dos números e da história.
+Slots `02A`, `02B`, `02C` — retrato profissional na coluna direita, mais duas miniaturas históricas
+abaixo (futebol e Estados Unidos). Máximo três imagens: uma quarta transforma autoridade em álbum.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Números 72px em Bebas com o `+` em vermelho → rótulos 17px tracking .24em → faixa 38px → chips 17px.
@@ -183,8 +188,10 @@ direita, o que muda em você (branco). À direita, alinhado à esquerda, o que n
 O eixo é o argumento inteiro em forma gráfica: de um lado movimento, do outro lado inércia.
 
 **4. Imagem sugerida**
-Sem foto. Se quiser um elemento de apoio: régua/paquímetro metálico em macro, muito escuro, no canto
-inferior direito com 15% de opacidade. A metáfora é medição, não academia.
+Slot `03` — sangrando à direita, 33%. Contemplativa, não posada: Wilton observando o próprio trabalho.
+Foto de execução intensa aqui contradiz a copy.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Headline 84px → sub 44px → pares 34px (os dois lados no mesmo tamanho, porque a comparação exige
@@ -244,8 +251,10 @@ Quatro cards iguais em linha, cada um com filete vermelho no topo e a etiqueta `
 a natureza do problema.
 
 **4. Imagem sugerida**
-Sem foto. Textura opcional de fundo: chapa metálica escovada muito escura, quase imperceptível,
-atrás dos cards.
+Slot `04` — fundo do slide inteiro sob overlay de 90–95%. Academia muito escura, sem sujeito
+reconhecível. Slot silencioso: se ficar vazio, o slide funciona sem foto.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Etiqueta 16px vermelha → título do card 33px em Bebas → corpo 18px em Barlow. O título em caixa alta
@@ -308,8 +317,10 @@ sinaliza troca de registro: o slide 4 é acusação (o que está errado agora), 
 layout novo.
 
 **4. Imagem sugerida**
-Sem foto. A força do slide é o reconhecimento — a pessoa precisa se ver em pelo menos duas dessas
-quatro crenças, e imagem competiria com isso.
+Slot `05` — sangrando à **esquerda**, 38%. Treino pesado, carga real, sem sorriso. A imagem afirma
+"treinar pesado" para que o texto possa negar que basta.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Idêntica ao slide 4, com a etiqueta `CRENÇA 01–04` em prata. Aqui a numeração **é** informação: é a
@@ -364,9 +375,10 @@ por setas vermelhas em uma linha horizontal, cada nó com filete vermelho no top
 atravessa a largura inteira. A leitura é vertical (conceito) e depois horizontal (mecanismo).
 
 **4. Imagem sugerida**
-Sem foto. A metáfora automotiva certa aqui, se quiser um elemento gráfico: um traçado de telemetria de
-volta em pista, muito discreto, atrás do fluxo — porque o piloto não troca o carro entre voltas, ele
-ajusta uma variável por vez e mede o efeito. É exatamente o argumento do slide.
+Slot `06` — fundo do slide inteiro. Porsche ou detalhe de engenharia; se houver foto de Wilton com o
+carro, tem prioridade. Régua de telemetria vermelha amarra a foto ao fluxo 4A.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 `MÉTODO 1%` 132px → sub 40px → nós 40px com etiqueta 15px → barra de fecho 19px tracking .26em.
@@ -428,8 +440,10 @@ cíclica. Cada card tem um filete divisor interno separando a descrição operac
 da frase de intenção (por que acontece).
 
 **4. Imagem sugerida**
-Sem foto. Se quiser reforçar a linguagem de engenharia: quatro ícones de linha fina em prata — prancheta,
-compasso, monitor de dados, chave de ajuste — um por card, discretos, sem preencher.
+Slot `07` — fundo sob overlay de 90–95%. O diagrama é o produto; nada pode competir com os quatro
+cards. Slot silencioso.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Etapa 16px vermelha → nome da etapa 33px em Bebas → descrição 18px em Barlow → frase de intenção 17px
@@ -493,9 +507,10 @@ Terceira e última repetição da grade de quatro cards, fechando o padrão: dia
 mecanismo (4), entrega (4). O deck inteiro pensa em quatro — e isso vira memória visual.
 
 **4. Imagem sugerida**
-Opcional e apenas uma: print real da tela de treino do aplicativo que você usa, dentro do card 04.
-Se não tiver print real, não use nada — mockup genérico de banco de imagens derruba o nível do deck
-inteiro.
+Slot `08` — sangrando à direita, 32%. Wilton trabalhando: celular, computador, orientando, conferindo
+execução. Aqui a foto mostra o trabalho, não o físico.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Headline 84px em duas linhas, com a segunda em vermelho — a estrutura "não é X, é Y" só funciona se
@@ -562,8 +577,10 @@ mais que o dobro do tamanho dos valores individuais. Nenhum card, nenhuma decora
 extrato, porque extrato tem credibilidade que peça de marketing não tem.
 
 **4. Imagem sugerida**
-Nenhuma, em hipótese alguma. Este slide precisa parecer documento financeiro. Qualquer imagem o
-transforma em anúncio e destrói a ancoragem.
+Slot `09` — fundo, e a recomendação é **deixar vazio**. Este slide precisa parecer documento
+financeiro; R$ 5.982,00 é o único elemento que pode chamar atenção.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Itens 21px em Barlow (deliberadamente discretos) → valores 34px em Bebas → `VALOR TOTAL` 42px e
@@ -629,7 +646,10 @@ duas camadas (Bebas para a promessa, Barlow para a explicação) e a nota de anc
 R$ 5.982 discretamente. A ancoragem fica **visível ao lado do preço**, não só na memória.
 
 **4. Imagem sugerida**
-Nenhuma. Preço com imagem compete por atenção e enfraquece o número.
+Slot `10` — sangrando à direita, 27%, o slot mais estreito com sujeito. Retrato sóbrio, enquadramento
+fechado. Contrapeso ao preço, nunca protagonista.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 `12x R$ 300` a **150px** — o maior tipo do deck inteiro, acima até das headlines. `R$ 3.000 À VISTA`
@@ -749,7 +769,10 @@ vermelho. Visualmente esta condição é mais discreta que o programa principal,
 a alternativa, não o destaque.
 
 **4. Imagem sugerida**
-Nenhuma, pelo mesmo motivo do slide 10.
+Slot `11` — fundo, e a recomendação é **deixar vazio**. O contraste com o slide 10, que tem foto, já
+cria a hierarquia entre condição principal e alternativa.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 `12x R$ 149,70` a 150px em **branco** (não vermelho) — mesmo tamanho do slide 10, cor menos enfática.
@@ -811,7 +834,10 @@ esquerda em barra de citação, a política de arrependimento à direita em caix
 elemento vermelho de destaque — este é o slide mais sóbrio do deck, e a sobriedade é o argumento.
 
 **4. Imagem sugerida**
-Nenhuma. Confiança se constrói com silêncio visual.
+Slot `12` — sangrando à **esquerda**, 30%. Retrato humano olhando direto para a câmera, expressão
+séria e aberta. Menos contraste que os outros slots: dureza contradiz proximidade.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Cards idênticos aos demais. O fecho a 32px em Bebas com a segunda metade em branco puro. A caixa de
@@ -873,8 +899,10 @@ A coluna do Método 1% é mais larga que a do caminho antigo — assimetria prop
 mais etapas porque tem mais estrutura. O CTA é o único botão do deck inteiro.
 
 **4. Imagem sugerida**
-Nenhuma — ou, se quiser fechar o arco visual, a mesma foto do slide 1 em enquadramento mais fechado
-(rosto), no canto direito. Abertura e fechamento com a mesma pessoa, em escalas diferentes.
+Slot `13` — sangrando à direita, 41%. Uma das três melhores do acervo, de sessão diferente da do slot
+01. Corpo inteiro, caminhando ou postura dominante. Fecha o arco visual aberto no slide 1.
+
+Especificação completa em `DIRECAO-DE-IMAGEM.md`.
 
 **5. Hierarquia tipográfica**
 Headline de seção 64px → etapas dos caminhos 23px → headline monumental **96px** em duas linhas, a
