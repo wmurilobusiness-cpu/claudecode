@@ -314,6 +314,9 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 .ph .spec b{display:block;color:var(--red-hot);font-weight:400;letter-spacing:.26em;margin-bottom:5px}
 /* Assim que --img e preenchido, o briefing e o enquadramento saem de cena. */
 .ph.is-filled .spec,.ph.is-filled .brk{display:none}
+.ph.quiet:not(.is-filled){background:none;border-color:transparent}
+.ph.quiet:not(.is-filled) .spec,.ph.quiet:not(.is-filled) .brk,
+.ph.quiet:not(.is-filled) .grain{display:none}
 .ph.is-filled{border-color:rgba(38,43,50,.55)}
 
 /* Gradientes de leitura — nunca deixar texto importante sobre rosto ou fisico. */
@@ -321,6 +324,9 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 .ph.g-right{--grade:linear-gradient(270deg,var(--ink) 0%,rgba(6,7,10,.72) 22%,rgba(6,7,10,.05) 58%,rgba(6,7,10,.26) 100%)}
 .ph.g-bottom{--grade:linear-gradient(0deg,var(--ink) 0%,rgba(6,7,10,.62) 26%,rgba(6,7,10,.05) 66%)}
 .ph.g-even{--grade:linear-gradient(180deg,rgba(6,7,10,.42),rgba(6,7,10,.58))}
+/* Sessoes com fundo bege/quente: dessatura mais e esfria, para entrarem na paleta. */
+.ph.warm::before{filter:contrast(1.2) saturate(.5) brightness(.72) hue-rotate(-6deg)}
+.ph.warm::after{background:var(--grade),linear-gradient(180deg,rgba(10,14,22,.34),rgba(10,14,22,.42))}
 
 /* Slot sangrando na borda do palco (slides 1, 3, 6, 13). */
 .ph.bleed{position:absolute;top:86px;bottom:72px;border-top:0;border-bottom:0;border-radius:0;z-index:1}
@@ -355,7 +361,7 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 
 <!-- ===== 01 — HOOK ===== -->
 <section class="slide" data-phase="Abertura" data-title="Hook">
-  <div class="ph bleed r g-left" data-slot="01" style="width:44%">
+  <div class="ph bleed r g-left" data-slot="01" style="width:44%;--img:url('fotos/slot-01.jpg');--pos:center 38%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 01 · Hero / Autoridade</b>A foto mais forte do acervo. Corpo inteiro ou meio
       corpo, academia escura, luz lateral fria, olhar direto na câmera. Postura parada e confiante —
@@ -401,19 +407,19 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="ph g-bottom" data-slot="02A" style="flex:1;min-height:0">
+        <div class="ph g-bottom" data-slot="02A" style="flex:1;min-height:0;--img:url('fotos/slot-02a.jpg');--pos:center 34%">
           <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
           <div class="spec"><b>Slot 02A · Profissional</b>Retrato vertical. Wilton como profissional e
             atleta — físico apresentado com sobriedade, olhar firme, fundo limpo e escuro.</div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="ph thumb g-bottom" data-slot="02B">
+          <div class="ph thumb g-bottom" data-slot="02B" style="--img:url('fotos/slot-02b.jpg');--pos:center 28%">
             <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
-            <div class="spec"><b>02B</b>Futebol — foto histórica de campo ou uniforme.</div>
+            <div class="spec"><b>02B</b>Premiação — palco, troféu.</div>
           </div>
-          <div class="ph thumb g-bottom" data-slot="02C">
+          <div class="ph thumb g-bottom warm" data-slot="02C" style="--img:url('fotos/slot-02c.jpg');--pos:center 40%">
             <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
-            <div class="spec"><b>02C</b>Estados Unidos — período de 6 anos.</div>
+            <div class="spec"><b>02C</b>Bastidor — vestiário, preparação.</div>
           </div>
         </div>
       </div>
@@ -423,7 +429,7 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 
 <!-- ===== 03 — PROBLEMA REAL ===== -->
 <section class="slide" data-phase="Diagnóstico" data-title="O problema real">
-  <div class="ph bleed r g-left" data-slot="03" style="width:33%">
+  <div class="ph bleed r g-left warm" data-slot="03" style="width:33%;--img:url('fotos/slot-03.jpg');--pos:center 42%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 03 · Análise</b>Contemplativa, não posada. Wilton treinando ou observando
       — de perfil, olhando para o próprio trabalho. Deve transmitir análise e estratégia, não esforço.</div>
@@ -467,7 +473,7 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 
 <!-- ===== 05 — QUEBRA DE CRENÇAS ===== -->
 <section class="slide" data-phase="Quebra de crenças" data-title="Por que recomeçar">
-  <div class="ph bleed l g-right" data-slot="05" style="width:38%">
+  <div class="ph bleed l g-right warm" data-slot="05" style="width:38%;--img:url('fotos/slot-05.jpg');--pos:center 44%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 05 · Treino intenso</b>Wilton treinando pesado — carga real, esforço
       visível, sem sorriso. A imagem afirma "treinar pesado" para que o texto possa negar que basta.</div>
@@ -493,7 +499,7 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 
 <!-- ===== 06 — MECANISMO ÚNICO ===== -->
 <section class="slide" data-phase="Mecanismo" data-title="Método 1%">
-  <div class="ph" data-slot="06" style="position:absolute;inset:0;z-index:0;border:0;border-radius:0;
+  <div class="ph quiet" data-slot="06" style="position:absolute;inset:0;z-index:0;border:0;border-radius:0;
        --grade:linear-gradient(100deg,var(--ink) 0%,rgba(6,7,10,.93) 34%,rgba(6,7,10,.58) 62%,rgba(6,7,10,.72) 100%)">
     <div class="grain"></div>
     <div class="spec" style="left:auto;right:96px;bottom:auto;top:132px;text-align:right;max-width:40ch">
@@ -596,7 +602,7 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 
 <!-- ===== 10 — INVESTIMENTO PRINCIPAL ===== -->
 <section class="slide" data-phase="Investimento" data-title="Programa completo">
-  <div class="ph bleed r g-left" data-slot="10" style="width:27%">
+  <div class="ph bleed r g-left warm" data-slot="10" style="width:27%;--img:url('fotos/slot-10.jpg');--pos:center 26%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 10 · Premium</b>Retrato vertical sóbrio, fundo escuro e limpo. Discreto —
       o preço é o protagonista deste slide e a foto não pode disputar com ele.</div>
@@ -684,7 +690,7 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 
 <!-- ===== 13 — FECHAMENTO ===== -->
 <section class="slide" data-phase="Decisão" data-title="A decisão">
-  <div class="ph bleed r g-left" data-slot="13" style="width:41%">
+  <div class="ph bleed r g-left warm" data-slot="13" style="width:41%;--img:url('fotos/slot-13.jpg');--pos:center 44%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 13 · Decisão</b>Uma das três melhores do acervo, e de outra sessão que a
       do slot 01. Corpo inteiro, caminhando ou em postura dominante, olhar na câmera. Precisa dar
@@ -726,10 +732,16 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
   var pad    = function(n){ return (n < 10 ? '0' : '') + n; };
 
   // Instrument frame on every slide: sector rail, wordmark, phase readout, footer.
-  // Um slot deixa de mostrar o briefing de casting assim que --img e definido.
+  // Um slot so deixa de mostrar o briefing depois que a imagem carrega de verdade.
+  // Assim, enquanto o arquivo nao estiver em fotos/, o slot segue exibindo o casting
+  // em vez de virar um painel vazio.
   deck.querySelectorAll('.ph').forEach(function(el){
-    var img = getComputedStyle(el).getPropertyValue('--img').trim();
-    if (img && img !== 'none') el.classList.add('is-filled');
+    var v = getComputedStyle(el).getPropertyValue('--img').trim();
+    var m = v.match(/url\(\s*['"]?([^'")]+)['"]?\s*\)/);
+    if (!m) return;
+    var probe = new Image();
+    probe.onload = function(){ el.classList.add('is-filled'); };
+    probe.src = m[1];
   });
 
   slides.forEach(function(s, i){
