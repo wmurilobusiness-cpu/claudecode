@@ -324,6 +324,9 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
 .ph.g-right{--grade:linear-gradient(270deg,var(--ink) 0%,rgba(6,7,10,.72) 22%,rgba(6,7,10,.05) 58%,rgba(6,7,10,.26) 100%)}
 .ph.g-bottom{--grade:linear-gradient(0deg,var(--ink) 0%,rgba(6,7,10,.62) 26%,rgba(6,7,10,.05) 66%)}
 .ph.g-even{--grade:linear-gradient(180deg,rgba(6,7,10,.42),rgba(6,7,10,.58))}
+/* Fontes muito saturadas (neon): recuam mais, para nao disputar com os cards. */
+.ph.loud::before{filter:contrast(1.1) saturate(.6) brightness(.62)}
+.ph.loud::after{background:var(--grade),linear-gradient(180deg,rgba(6,7,10,.3),rgba(6,7,10,.42))}
 /* Sessoes com fundo bege/quente: dessatura mais e esfria, para entrarem na paleta. */
 .ph.warm::before{filter:contrast(1.2) saturate(.5) brightness(.72) hue-rotate(-6deg)}
 .ph.warm::after{background:var(--grade),linear-gradient(180deg,rgba(10,14,22,.34),rgba(10,14,22,.42))}
@@ -464,7 +467,7 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
 
 <!-- ===== 05 — QUEBRA DE CRENÇAS ===== -->
 <section class="slide" data-phase="Quebra de crenças" data-title="Por que recomeçar">
-  <div class="ph bleed l g-right" data-slot="05" style="width:38%;--pos:center 44%">
+  <div class="ph bleed l g-right loud" data-slot="05" data-img="fotos/slot-05" style="width:38%;--pos:center 55%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 05 · Treino intenso</b>Wilton treinando pesado — carga real, esforço
       visível, sem sorriso. A imagem afirma "treinar pesado" para que o texto possa negar que basta.</div>
@@ -587,7 +590,7 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
 
 <!-- ===== 10 — INVESTIMENTO PRINCIPAL ===== -->
 <section class="slide" data-phase="Investimento" data-title="Programa completo">
-  <div class="ph bleed r g-left" data-slot="10" style="width:27%;--pos:center 26%">
+  <div class="ph bleed r g-left" data-slot="10" data-img="fotos/slot-10" style="width:27%;--pos:30% center">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 10 · Premium</b>Retrato vertical sóbrio, fundo escuro e limpo. Discreto —
       o preço é o protagonista deste slide e a foto não pode disputar com ele.</div>

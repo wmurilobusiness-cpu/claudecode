@@ -16,10 +16,15 @@ autossuficiente, abre offline e vai por e-mail sem pasta de apoio.
 | **02A** Autoridade | Palco, troféu erguido | Resultado, não esforço. Vertical, sujeito grande no quadro |
 | **02B** Bastidor | Dia de competição | Miniatura larga sob o retrato principal, legendada — humaniza sem virar álbum |
 | **03** Problema real | Academia escura, neon vermelho, figura sozinha de cabeça baixa | O melhor achado do conjunto. Paleta exata e a imagem literal da estagnação. Figura anônima funciona melhor que um retrato: o prospect se projeta nela |
+| **05** Quebra de crenças | Teto e estrutura da academia em neon vermelho | Recorte da mesma origem do slide 3, mas de uma região **acima** da figura: o assunto é o ambiente, não a pessoa. Recebe atenuação extra para não disputar com os cards |
+| **10** Investimento | Parede preta texturizada com a faixa vermelha da bancada | Recorte do lado direito da foto do slide 1, sem figura. O slide pede algo que não dispute com o preço, e textura é exatamente isso |
 | **13** Fechamento | Palco, pose de abdominal e coxa, corpo inteiro | Postura dominante, fecha o arco aberto no slide 1 sem repetir a foto |
 
-Slots **05** e **10** ficaram sem foto e aparecem como painel escuro. Slides **08** e **12** estão em
-largura cheia, sem coluna de imagem.
+Os slots **05** e **10** são **recortes de detalhe**, não fotos novas: regiões sem figura das imagens
+usadas nos slides 3 e 1. Funcionam porque o assunto de cada recorte é outro — ambiente e textura, não
+pessoa — mas duas fotos próprias seriam melhores. Ver "Lacunas".
+
+Slides **08** e **12** estão em largura cheia, sem coluna de imagem.
 
 ### O que a volta pelo Canva quebrou
 
@@ -39,8 +44,8 @@ regerado do fonte, que é fiel por construção.
 | 1 | **12** | Retrato olhando para a câmera, sem pose — é o slide em que você diz o que não garante |
 | 2 | **08** | Você trabalhando: celular, computador, orientando alguém |
 | 3 | **06** | Carro ou detalhe de engenharia (slide limpo enquanto não existe) |
-| 4 | **05** | Treino pesado com carga real |
-| 5 | **10** | Retrato sóbrio, enquadramento fechado |
+| 4 | **05** | Treino pesado com carga real (hoje é recorte de ambiente) |
+| 5 | **10** | Retrato sóbrio, enquadramento fechado (hoje é recorte de textura) |
 
 Futebol e Estados Unidos seguem sem imagem — são as duas que mais individualizariam o deck.
 
