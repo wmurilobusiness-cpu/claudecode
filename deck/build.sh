@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-# Wraps deck/_body.html into a standalone HTML document for local viewing and PDF export.
-# The same _body.html is published as an Artifact, where the host supplies the skeleton.
-# Split point: everything before `<div id="deck">` is metadata (title + styles) -> <head>.
+# Gera o index.html a partir de deck/_body.html.
+# As fotos de fotos/ entram embutidas em base64, como as fontes: o arquivo resultante
+# e autossuficiente — abre offline, vai por e-mail e publica como Artifact sem
+# depender de nenhum caminho relativo.
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
+raiz="$(dirname "$here")"
 src="$here/_body.html"
 split=$(grep -n '^<div id="deck">' "$src" | head -1 | cut -d: -f1)
-[ -n "$split" ] || { echo "deck root not found" >&2; exit 1; }
+[ -n "$split" ] || { echo "raiz do deck nao encontrada" >&2; exit 1; }
 {
   echo '<!doctype html>'
   echo '<html lang="pt-BR">'
@@ -17,8 +19,20 @@ split=$(grep -n '^<div id="deck">' "$src" | head -1 | cut -d: -f1)
   echo '<style>html,body{margin:0;padding:0;background:#06070A;color-scheme:dark}img{max-width:100%}</style>'
   echo '</head>'
   echo '<body>'
+  # As fotos precisam existir ANTES do script do deck rodar, senao ele cai no
+  # caminho de arquivo local — que nao existe no Artifact publicado.
+  python3 "$here/embed_fotos.py" "$raiz/fotos"
   sed -n "${split},\$p" "$src"
   echo '</body>'
   echo '</html>'
-} > "$here/../index.html"
-echo "built index.html ($(wc -c < "$here/../index.html") bytes)"
+} > "$raiz/index.html"
+echo "index.html gerado ($(( $(wc -c < "$raiz/index.html") / 1024 )) KB)"
+
+# Versao para publicar como Artifact: mesmo conteudo, sem o esqueleto HTML
+# (o host fornece doctype/head/body) e com as fotos ja embutidas.
+{
+  sed -n "1,$((split-1))p" "$src"
+  python3 "$here/embed_fotos.py" "$raiz/fotos" 2>/dev/null
+  sed -n "${split},\$p" "$src"
+} > "$here/_artifact.html"
+echo "_artifact.html gerado ($(( $(wc -c < "$here/_artifact.html") / 1024 )) KB)"

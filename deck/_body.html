@@ -68,8 +68,9 @@ h1{font-family:var(--f-display);font-weight:400;line-height:.94;letter-spacing:.
 .h-sec{font-size:84px}
 .h-big{font-size:132px;line-height:.88}
 h1 em{font-style:normal;color:var(--red-hot)}
-h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
+/* Prata solido, nao gradiente recortado: background-clip:text nao sobrevive a
+   exportacao para outras ferramentas e vira um retangulo preenchido. */
+h1 .sv{color:#C6CCD3}
 .lead{font-size:23px;line-height:1.55;color:var(--muted);max-width:62ch;margin:26px 0 0}
 .lead strong{color:var(--paper);font-weight:600}
 .sub-xl{font-family:var(--f-display);font-size:44px;line-height:1.06;color:var(--silver);
@@ -263,6 +264,9 @@ h1 .sv{background:linear-gradient(180deg,#FFFFFF 0%,#C6CCD3 46%,#767E88 100%);
 #nav .dots{display:flex;gap:5px}
 #nav .dots b{width:8px;height:8px;background:var(--steel);border-radius:1px;cursor:pointer;display:block}
 #nav .dots b.on{background:var(--red-hot)}
+/* #nav tem display:flex, que sobrepoe o display:none padrao do atributo hidden.
+   Sem esta regra a barra de navegacao vaza para o PDF exportado. */
+[hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ---------- print / PDF ---------- */
@@ -402,18 +406,13 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
       <div style="display:flex;flex-direction:column;gap:16px">
         <div class="ph g-bottom" data-slot="02A" data-img="fotos/slot-02a" style="flex:1;min-height:0;--pos:center 34%">
           <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
-          <div class="spec"><b>Slot 02A · Profissional</b>Retrato vertical. Wilton como profissional e
-            atleta — físico apresentado com sobriedade, olhar firme, fundo limpo e escuro.</div>
+          <div class="ph-cap"><s>Atleta</s>Fisiculturismo</div>
+          <div class="spec"><b>Slot 02A</b>Retrato vertical, profissional e atleta.</div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="ph thumb g-bottom" data-slot="02B" data-img="fotos/slot-02b" style="--pos:center 28%">
-            <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
-            <div class="spec"><b>02B</b>Premiação — palco, troféu.</div>
-          </div>
-          <div class="ph thumb g-bottom warm" data-slot="02C" data-img="fotos/slot-02c" style="--pos:center 40%">
-            <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
-            <div class="spec"><b>02C</b>Bastidor — vestiário, preparação.</div>
-          </div>
+        <div class="ph thumb g-bottom" data-slot="02B" data-img="fotos/slot-02b" style="--pos:center 30%">
+          <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
+          <div class="ph-cap"><s>Bastidor</s>Dia de competição</div>
+          <div class="spec"><b>02B</b>Bastidor de competição.</div>
         </div>
       </div>
     </div>
@@ -422,10 +421,9 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
 
 <!-- ===== 03 — PROBLEMA REAL ===== -->
 <section class="slide" data-phase="Diagnóstico" data-title="O problema real">
-  <div class="ph bleed r g-left warm" data-slot="03" data-img="fotos/slot-03" style="width:33%;--pos:center 42%">
+  <div class="ph bleed r g-left" data-slot="03" data-img="fotos/slot-03" style="width:33%;--pos:center 42%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
-    <div class="spec"><b>Slot 03 · Análise</b>Contemplativa, não posada. Wilton treinando ou observando
-      — de perfil, olhando para o próprio trabalho. Deve transmitir análise e estratégia, não esforço.</div>
+    <div class="spec"><b>Slot 03 · O problema</b>Academia escura, figura sozinha, cabeça baixa entre séries.</div>
   </div>
   <div class="stage" style="padding-right:calc(33% + 64px)">
     <p class="eyebrow">O diagnóstico</p>
@@ -466,7 +464,7 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
 
 <!-- ===== 05 — QUEBRA DE CRENÇAS ===== -->
 <section class="slide" data-phase="Quebra de crenças" data-title="Por que recomeçar">
-  <div class="ph bleed l g-right warm" data-slot="05" data-img="fotos/slot-05" style="width:38%;--pos:center 44%">
+  <div class="ph bleed l g-right" data-slot="05" style="width:38%;--pos:center 44%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 05 · Treino intenso</b>Wilton treinando pesado — carga real, esforço
       visível, sem sorriso. A imagem afirma "treinar pesado" para que o texto possa negar que basta.</div>
@@ -589,7 +587,7 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
 
 <!-- ===== 10 — INVESTIMENTO PRINCIPAL ===== -->
 <section class="slide" data-phase="Investimento" data-title="Programa completo">
-  <div class="ph bleed r g-left warm" data-slot="10" data-img="fotos/slot-10" style="width:27%;--pos:center 26%">
+  <div class="ph bleed r g-left" data-slot="10" style="width:27%;--pos:center 26%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 10 · Premium</b>Retrato vertical sóbrio, fundo escuro e limpo. Discreto —
       o preço é o protagonista deste slide e a foto não pode disputar com ele.</div>
@@ -671,7 +669,7 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
 
 <!-- ===== 13 — FECHAMENTO ===== -->
 <section class="slide" data-phase="Decisão" data-title="A decisão">
-  <div class="ph bleed r g-left warm" data-slot="13" data-img="fotos/slot-13" style="width:41%;--pos:center 44%">
+  <div class="ph bleed r g-left" data-slot="13" data-img="fotos/slot-13" style="width:41%;--pos:center 44%">
     <i class="brk tl"></i><i class="brk br"></i><div class="grain"></div>
     <div class="spec"><b>Slot 13 · Decisão</b>Uma das três melhores do acervo, e de outra sessão que a
       do slot 01. Corpo inteiro, caminhando ou em postura dominante, olhar na câmera. Precisa dar
@@ -720,8 +718,14 @@ body.brief .ph:not(.is-filled) .spec,body.brief .ph:not(.is-filled) .brk{display
   // para que nenhuma foto precise ser renomeada antes de entrar na pasta fotos/.
   // Enquanto nada carrega, o slot segue como painel escuro em vez de virar um buraco.
   var EXTENSOES = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG'];
+  var EMBUTIDAS = window.__FOTOS || {};
   deck.querySelectorAll('.ph[data-img]').forEach(function(el){
     var base = el.dataset.img, i = 0;
+    if (EMBUTIDAS[base]) {                 // foto embutida pelo build
+      el.style.setProperty('--img', "url('" + EMBUTIDAS[base] + "')");
+      el.classList.add('is-filled');
+      return;
+    }
     (function tenta(){
       if (i >= EXTENSOES.length) return;
       var url = base + '.' + EXTENSOES[i++];

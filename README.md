@@ -10,7 +10,7 @@ Deck de vendas da consultoria **ONEPERCENT1% · Elite Training System** (Wilton 
 | `index.html` | O deck. Abra no navegador e apresente em tela cheia. |
 | `ROTEIRO-DE-CALL.md` | Por slide: título, copy, layout, imagem, tipografia, animações, speaker notes, objetivo psicológico e transição. |
 | `DIRECAO-DE-IMAGEM.md` | Curadoria dos 15 slots de foto: casting, recorte, resolução mínima, posição e tratamento. |
-| `fotos/` | Onde entram os arquivos de imagem. Veja `fotos/LEIA-ME.md`. |
+| `fotos/` | Fotos do deck. O build as embute em base64 no `index.html`. |
 | `export/Metodo-1porcento-Apresentacao-de-Vendas.pdf` | PDF 1920×1080, 13 páginas. |
 | `export/png/` | Um PNG 1920×1080 por slide. |
 | `deck/_body.html` | Fonte do deck. **Edite aqui**, nunca no `index.html`. |
@@ -114,7 +114,11 @@ Especificação completa de cada slot: `DIRECAO-DE-IMAGEM.md`.
 
 **Bebas Neue** é a fonte dominante: headlines, títulos, números, etiquetas, destaques e CTAs.
 **Barlow** aparece apenas em texto corrido, onde a caixa alta condensada prejudicaria a leitura.
-As duas estão embutidas em base64 — o deck renderiza idêntico offline, no PDF e em qualquer máquina.
+As duas estão embutidas em base64 — e as fotos também. O `index.html` é autossuficiente: renderiza
+idêntico offline, vai por e-mail e não depende de nenhuma pasta ao lado.
+
+Nenhum efeito frágil sobrevive a uma volta por outra ferramenta, então o deck não usa nenhum. Em
+particular, não há `background-clip:text`: ele vira um retângulo branco sólido ao ser reimportado.
 
 Cada slide tem uma moldura de instrumento: trilha de 13 setores no topo que preenche conforme a
 apresentação avança, wordmark à esquerda e leitura `FASE | 10 / 13` à direita.

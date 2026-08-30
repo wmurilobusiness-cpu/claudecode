@@ -6,16 +6,45 @@ composição e como é tratada.
 
 ## Curadoria aplicada
 
-As fotos chegaram como imagens na conversa, não como arquivos — verifiquei o disco do projeto e só
-o PDF de referência está lá. Então a curadoria abaixo está **feita e já cabeada no deck**: cada slot
-aponta para `fotos/slot-XX.jpg`. Falta copiar os arquivos para a pasta `fotos/` com esses nomes.
-Enquanto o arquivo não existir, o slot continua exibindo o briefing de casting em vez de virar um
-painel vazio — o deck não quebra em nenhum momento.
+As fotos chegaram dentro do PDF exportado do Canva e foram extraídas de lá. São **cinco** — o Canva
+não recebeu as demais. Estão embutidas no deck em base64, como as fontes: `index.html` é
+autossuficiente, abre offline e vai por e-mail sem pasta de apoio.
 
-### Inventário recebido
+| Slot | Foto | Por que ali |
+| --- | --- | --- |
+| **01** Hook | Vestiário, parede preta com faixa vermelha | Única com a paleta exata do deck e espaço negativo à esquerda para a headline. A faixa vermelha da bancada casa com a marca |
+| **02A** Autoridade | Palco, troféu erguido | Resultado, não esforço. Vertical, sujeito grande no quadro |
+| **02B** Bastidor | Dia de competição | Miniatura larga sob o retrato principal, legendada — humaniza sem virar álbum |
+| **03** Problema real | Academia escura, neon vermelho, figura sozinha de cabeça baixa | O melhor achado do conjunto. Paleta exata e a imagem literal da estagnação. Figura anônima funciona melhor que um retrato: o prospect se projeta nela |
+| **13** Fechamento | Palco, pose de abdominal e coxa, corpo inteiro | Postura dominante, fecha o arco aberto no slide 1 sem repetir a foto |
 
-| ID | Foto | Categoria | Destino |
-| --- | --- | --- | --- |
+Slots **05** e **10** ficaram sem foto e aparecem como painel escuro. Slides **08** e **12** estão em
+largura cheia, sem coluna de imagem.
+
+### O que a volta pelo Canva quebrou
+
+| Problema | Causa | Correção |
+| --- | --- | --- |
+| "Estratégia, Performance e Transformação" virou uma **barra branca sólida** | `background-clip:text` não sobrevive à exportação entre ferramentas | Trocado por prata sólido — o construto frágil saiu do deck |
+| Cards de estatística embaralhados, rótulos sobrepostos | Reflow na importação | Regenerado do fonte, que nunca teve o problema |
+| Foto errada em cada slide | As imagens foram posicionadas sem seguir a curadoria | Recolocadas por função |
+
+A correção não foi feita em cima do PDF do Canva: as fotos foram extraídas dele e o deck foi
+regerado do fonte, que é fiel por construção.
+
+### Lacunas que continuam
+
+| Prioridade | Slot | O que falta |
+| --- | --- | --- |
+| 1 | **12** | Retrato olhando para a câmera, sem pose — é o slide em que você diz o que não garante |
+| 2 | **08** | Você trabalhando: celular, computador, orientando alguém |
+| 3 | **06** | Carro ou detalhe de engenharia (slide limpo enquanto não existe) |
+| 4 | **05** | Treino pesado com carga real |
+| 5 | **10** | Retrato sóbrio, enquadramento fechado |
+
+Futebol e Estados Unidos seguem sem imagem — são as duas que mais individualizariam o deck.
+
+--- | --- | --- | --- |
 | P01 | Palco NPC, pose de abdominal e coxa, banner Muscle Contest, nº 524 | Bodybuilding | **slot 02A** |
 | P02 | Palco, troféu erguido, sorrindo, nº 524 | Storytelling | **slot 02B** |
 | P03 | Academia, parede preta texturizada, bandana, encostado, shorts cinza | Hero / Autoridade | **slot 01** |
