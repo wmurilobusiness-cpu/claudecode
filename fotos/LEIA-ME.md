@@ -1,24 +1,28 @@
 # Fotos
 
-Coloque aqui os arquivos de imagem do deck, um por slot.
+Coloque aqui os 8 arquivos, com estes nomes-base:
 
-Nomeie pelo slot para que a manutenção seja óbvia:
-`slot-01.jpg`, `slot-02a.jpg`, `slot-02b.jpg`, `slot-02c.jpg`, `slot-03.jpg` … `slot-13.jpg`.
+| Nome do arquivo | Qual foto |
+| --- | --- |
+| `slot-01` | Academia, parede preta, você encostado, bandana |
+| `slot-02a` | Palco, pose de abdominal e coxa, nº 524 |
+| `slot-02b` | Palco, troféu erguido |
+| `slot-02c` | Vestiário, parede preta com faixa vermelha |
+| `slot-03` | Azulejo bege, pose lateral |
+| `slot-05` | Azulejo bege, front lat spread |
+| `slot-10` | Azulejo bege, front double biceps |
+| `slot-13` | Azulejo bege, rear lat spread de braços abertos |
 
-Para ligar uma foto ao slide, edite `deck/_body.html` e acrescente `--img` ao slot correspondente:
+**A extensão não importa.** O deck procura sozinho por `.jpg`, `.jpeg`, `.png` e `.webp`,
+maiúsculas incluídas — não é preciso renomear nem converter. A única exceção é **HEIC**
+(padrão do iPhone), que navegador nenhum abre: se o arquivo for `.heic`, converta para JPEG antes.
 
-```html
-<div class="ph bleed r g-left" data-slot="01"
-     style="width:44%;--img:url('fotos/slot-01.jpg');--pos:center 30%">
-```
+Pronto. Nenhuma outra edição é necessária — o briefing de casting some sozinho e o tratamento
+visual é aplicado automaticamente.
 
-`--pos` controla o enquadramento dentro do slot (padrão `center`). Use `center 30%` para subir o
-recorte quando o rosto ficar baixo demais, `center 70%` para descer.
+Se um recorte cortar mal, ajuste o `--pos` do slot em `deck/_body.html`: `center 30%` sobe o
+enquadramento, `center 70%` desce.
 
-Depois rode `./deck/build.sh` e `python3 deck/export.py`.
-
-O briefing de casting e as marcas de enquadramento somem automaticamente quando `--img` é definido —
-não é preciso apagar nada. O tratamento visual (contraste, dessaturação, pretos, grão e gradiente de
-leitura) é aplicado pelo CSS, igual em todos os slots.
+Depois rode `./deck/build.sh` e `python3 deck/export.py` para regerar o PDF e os PNGs.
 
 Especificação completa de cada slot: `../DIRECAO-DE-IMAGEM.md`.

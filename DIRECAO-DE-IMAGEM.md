@@ -31,16 +31,19 @@ painel vazio — o deck não quebra em nenhum momento.
 
 ### Arquivos a salvar
 
+A extensão não importa — o deck procura por `.jpg`, `.jpeg`, `.png` e `.webp` sozinho. Só HEIC
+não funciona em navegador: converta para JPEG antes.
+
 | Salvar como | Qual foto |
 | --- | --- |
-| `fotos/slot-01.jpg` | P03 — academia, parede preta, encostado |
-| `fotos/slot-02a.jpg` | P01 — palco, pose de abdominal e coxa |
-| `fotos/slot-02b.jpg` | P02 — palco, troféu erguido |
-| `fotos/slot-02c.jpg` | P12 — vestiário, parede preta e faixa vermelha |
-| `fotos/slot-03.jpg` | P07 — azulejo, pose lateral |
-| `fotos/slot-05.jpg` | P10 — azulejo, front lat spread |
-| `fotos/slot-10.jpg` | P06 — azulejo, front double biceps |
-| `fotos/slot-13.jpg` | P11 — azulejo, rear lat spread com braços abertos |
+| `fotos/slot-01` | P03 — academia, parede preta, encostado |
+| `fotos/slot-02a` | P01 — palco, pose de abdominal e coxa |
+| `fotos/slot-02b` | P02 — palco, troféu erguido |
+| `fotos/slot-02c` | P12 — vestiário, parede preta e faixa vermelha |
+| `fotos/slot-03` | P07 — azulejo, pose lateral |
+| `fotos/slot-05` | P10 — azulejo, front lat spread |
+| `fotos/slot-10` | P06 — azulejo, front double biceps |
+| `fotos/slot-13` | P11 — azulejo, rear lat spread com braços abertos |
 
 ### Por que estes descartes
 
