@@ -1,0 +1,1366 @@
+<title>Máquina de Aquisição 1%</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --ink:#06070A; --graphite:#101216; --graphite-2:#171A1F;
+  --steel:#262B32; --steel-2:#343A43;
+  --red:#D8071F; --red-hot:#FF2436;
+  --silver:#C3C9D1; --silver-dim:#7C848E;
+  --paper:#F2F4F6; --muted:#8B929B;
+  --ok:#3FB27F; --warn:#D9A227;
+  --display:"Bebas Neue","Oswald","Arial Narrow",sans-serif;
+  --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1500px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:236px minmax(0,1fr);gap:56px}
+@media(max-width:1080px){.wrap{grid-template-columns:1fr;gap:0}nav.toc{display:none}}
+
+/* ── cabeçalho ───────────────────────────────────────── */
+header.top{border-bottom:1px solid var(--steel);background:linear-gradient(180deg,#0B0D11,var(--ink))}
+header.top .inner{max-width:1500px;margin:0 auto;padding:64px 28px 52px}
+.eyebrow{font-family:var(--display);font-size:19px;letter-spacing:.36em;color:var(--red-hot);text-transform:uppercase}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(52px,7.4vw,104px);line-height:.92;
+  letter-spacing:.005em;margin:14px 0 0;text-transform:uppercase;text-wrap:balance;max-width:16ch}
+h1 em{font-style:normal;color:var(--red-hot)}
+.deck{font-size:19px;color:var(--silver);max-width:64ch;margin-top:22px}
+.metaline{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-family:var(--display);font-size:15px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--silver-dim);border:1px solid var(--steel);padding:7px 13px 5px;background:var(--graphite)}
+
+/* ── índice ──────────────────────────────────────────── */
+nav.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto;padding:48px 0 60px}
+nav.toc p.lab{font-family:var(--display);font-size:15px;letter-spacing:.3em;color:var(--silver-dim);
+  text-transform:uppercase;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--steel)}
+nav.toc a{display:flex;gap:10px;text-decoration:none;color:var(--muted);font-size:13.5px;line-height:1.34;
+  padding:5px 0;border-left:2px solid transparent;padding-left:10px;transition:color .15s,border-color .15s}
+nav.toc a b{font-family:var(--mono);font-size:11px;color:var(--steel-2);font-weight:700;padding-top:1px}
+nav.toc a:hover{color:var(--paper)}
+nav.toc a.on{color:var(--paper);border-left-color:var(--red)}
+nav.toc a.on b{color:var(--red-hot)}
+
+/* ── blocos ──────────────────────────────────────────── */
+main{padding:48px 0 120px;min-width:0}
+section{padding-top:58px;margin-bottom:14px;scroll-margin-top:24px}
+section+section{border-top:1px solid var(--steel);margin-top:44px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,4.2vw,56px);line-height:.96;
+  margin:10px 0 20px;text-transform:uppercase;text-wrap:balance;letter-spacing:.01em}
+h3{font-family:var(--display);font-weight:400;font-size:27px;line-height:1.06;margin:38px 0 12px;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--paper)}
+h4{font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--silver);margin:26px 0 8px}
+p{margin:0 0 15px;max-width:74ch}
+main a{color:var(--silver);text-decoration:underline;text-decoration-color:var(--steel-2);text-underline-offset:3px}
+strong{color:#fff;font-weight:600}
+em.hyp{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--warn);border:1px solid rgba(217,162,39,.32);padding:2px 6px;white-space:nowrap;vertical-align:2px}
+ul,ol{margin:0 0 16px;padding-left:20px;max-width:74ch}
+li{margin-bottom:7px}
+li::marker{color:var(--steel-2)}
+ul.tight li{margin-bottom:3px}
+
+/* ── caixas ──────────────────────────────────────────── */
+.box{background:var(--graphite);border-top:2px solid var(--steel-2);padding:22px 24px;margin:22px 0}
+.box.v{border-top-color:var(--red)}
+.box.ok{border-top-color:var(--ok)}
+.box.warn{border-top-color:var(--warn)}
+.box .lab{font-family:var(--display);font-size:16px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--silver-dim);margin-bottom:10px}
+.box.v .lab{color:var(--red-hot)} .box.ok .lab{color:var(--ok)} .box.warn .lab{color:var(--warn)}
+.box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
+.grid{display:grid;gap:14px;margin:20px 0}
+.g2{grid-template-columns:repeat(auto-fit,minmax(268px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--graphite);border-top:2px solid var(--red);padding:18px 20px}
+.card.s{border-top-color:var(--steel-2)}
+.card h5{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 7px;text-transform:uppercase;letter-spacing:.02em}
+.card p{font-size:14.5px;color:var(--muted);margin:0}
+.card p+p{margin-top:8px}
+.num{font-family:var(--display);font-size:52px;line-height:1;color:var(--paper);font-variant-numeric:tabular-nums}
+.num small{font-size:19px;color:var(--silver-dim)}
+
+/* ── tabelas ─────────────────────────────────────────── */
+.scroll{overflow-x:auto;margin:20px 0;border:1px solid var(--steel);background:var(--graphite)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th{font-family:var(--display);font-weight:400;font-size:15px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--silver-dim);text-align:left;padding:12px 14px;border-bottom:1px solid var(--steel-2);white-space:nowrap;background:var(--graphite-2)}
+td{padding:11px 14px;border-bottom:1px solid var(--steel);color:var(--silver);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+td b{color:#fff;font-weight:600}
+tbody tr.hi td{background:rgba(216,7,31,.07)}
+tbody tr.hi td b{color:var(--paper)}
+.pill{font-family:var(--display);font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px 1px;
+  border:1px solid var(--steel-2);color:var(--silver-dim);white-space:nowrap}
+.pill.ok{color:var(--ok);border-color:rgba(63,178,127,.4)}
+.pill.warn{color:var(--warn);border-color:rgba(217,162,39,.4)}
+.pill.crit{color:var(--red-hot);border-color:rgba(255,36,54,.42)}
+
+/* ── árvore / código ─────────────────────────────────── */
+pre{font-family:var(--mono);font-size:13px;line-height:1.66;background:var(--graphite);border:1px solid var(--steel);
+  padding:20px 22px;overflow-x:auto;margin:20px 0;color:var(--silver)}
+pre b{color:var(--paper);font-weight:700}
+pre i{color:var(--red-hot);font-style:normal}
+pre u{color:var(--silver-dim);text-decoration:none}
+code{font-family:var(--mono);font-size:12.5px;background:var(--graphite-2);border:1px solid var(--steel);
+  padding:1px 5px;color:var(--silver)}
+
+/* ── diagnóstico ─────────────────────────────────────── */
+.diag{display:grid;gap:0;margin:20px 0;border:1px solid var(--steel)}
+.diag .row{display:grid;grid-template-columns:minmax(200px,1.1fr) minmax(0,1.6fr);gap:0;border-bottom:1px solid var(--steel)}
+.diag .row:last-child{border-bottom:none}
+.diag .sig{padding:14px 18px;background:var(--graphite-2);font-family:var(--mono);font-size:12.5px;
+  line-height:1.5;color:var(--paper);border-right:1px solid var(--steel)}
+.diag .dx{padding:14px 18px;font-size:14px;color:var(--silver);background:var(--graphite)}
+.diag .dx b{color:#fff}
+@media(max-width:640px){.diag .row{grid-template-columns:1fr}.diag .sig{border-right:none;border-bottom:1px solid var(--steel)}}
+
+/* ── linha do tempo ──────────────────────────────────── */
+.tl{margin:22px 0;border-left:1px solid var(--steel);padding-left:0}
+.tl .ph{position:relative;padding:0 0 26px 26px}
+.tl .ph::before{content:"";position:absolute;left:-4.5px;top:9px;width:8px;height:8px;background:var(--red);}
+.tl .ph:last-child{padding-bottom:0}
+.tl .ph .when{font-family:var(--display);font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:var(--paper)}
+.tl .ph ul{margin-top:6px;margin-bottom:0}
+footer{border-top:1px solid var(--steel);padding:34px 28px 70px;color:var(--silver-dim);font-size:13.5px}
+footer .inner{max-width:1500px;margin:0 auto}
+:focus-visible{outline:2px solid var(--red-hot);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<header class="top"><div class="inner">
+<p class="eyebrow">ONEPERCENT1% · Plano de aquisição paga</p>
+<h1>Máquina de<br>aquisição <em>1%</em></h1>
+<p class="deck">Auditoria, arquitetura de Meta Ads, economics e plano de 30 dias para vender o Método 1% por call — Brasil e brasileiros no exterior. Escrito contra os números reais do seu deck, não contra o ticket do briefing.</p>
+<div class="metaline">
+<span class="chip">21 blocos</span>
+<span class="chip">Funil de aplicação → call</span>
+<span class="chip">2 mercados</span>
+<span class="chip">Métrica-mãe: CAC × cash collected</span>
+</div>
+</div></header>
+
+<div class="wrap">
+<nav class="toc"><p class="lab">Índice</p>
+<a href="#b0"><b>00</b><span>Antes de tudo: 3 correções</span></a>
+<a href="#b1"><b>01</b><span>Diagnóstico do funil atual</span></a>
+<a href="#b2"><b>02</b><span>Gargalos encontrados</span></a>
+<a href="#b3"><b>03</b><span>Arquitetura do Meta Ads</span></a>
+<a href="#b4"><b>04</b><span>Brasil vs. exterior</span></a>
+<a href="#b5"><b>05</b><span>Veredito sobre 1–1–9</span></a>
+<a href="#b6"><b>06</b><span>Orçamento diário</span></a>
+<a href="#b7"><b>07</b><span>Configuração passo a passo</span></a>
+<a href="#b8"><b>08</b><span>Segmentação</span></a>
+<a href="#b9"><b>09</b><span>Estratégia dos 9 criativos</span></a>
+<a href="#b10"><b>10</b><span>Matar / manter / escalar</span></a>
+<a href="#b11"><b>11</b><span>Pixel + CAPI + CRM</span></a>
+<a href="#b12"><b>12</b><span>Eventos de otimização</span></a>
+<a href="#b13"><b>13</b><span>Economics e CAC máximo</span></a>
+<a href="#b14"><b>14</b><span>Remarketing</span></a>
+<a href="#b15"><b>15</b><span>Otimização do quiz</span></a>
+<a href="#b16"><b>16</b><span>Show rate</span></a>
+<a href="#b17"><b>17</b><span>Processo de vendas</span></a>
+<a href="#b18"><b>18</b><span>Dashboard</span></a>
+<a href="#b19"><b>19</b><span>Primeiros 30 dias</span></a>
+<a href="#b20"><b>20</b><span>Próximos experimentos</span></a>
+<a href="#b21"><b>21</b><span>As 10 primeiras ações</span></a>
+</nav>
+
+<main>
+
+<section id="b0">
+<p class="eyebrow">Bloco 00</p>
+<h2>Antes de tudo: três correções no briefing</h2>
+<p>Você pediu para ser confrontado. Começo por aqui, porque estas três coisas mudam todo o resto do documento — inclusive o orçamento e o CAC máximo.</p>
+
+<div class="box v">
+<p class="lab">Correção 1 — Seu ticket não é R$ 4.000</p>
+<p>Você pediu para modelar tudo com ticket médio de R$ 4.000. Seu próprio deck (<code>ROTEIRO-DE-CALL.md</code>, escada de preços marcada como "não altere") vende:</p>
+<ul class="tight">
+<li>Programa completo: <b>12x R$ 300 ou R$ 3.000 à vista</b></li>
+<li>Condição de entrada: <b>12x R$ 149,70 ou R$ 1.497 à vista</b></li>
+</ul>
+<p style="margin-top:12px">Não existe R$ 4.000 e não existe R$ 5.000 na sua oferta. O teto é R$ 3.000. E como o slide 11 existe justamente para recuperar quem travou no preço, uma parte real das vendas sai a R$ 1.497. Com <em class="hyp">hipótese</em> de 70% no programa completo e 30% na entrada, seu <strong>ticket médio realizado é R$ 2.549</strong>, não R$ 4.000. Isso é uma diferença de 36% — e o CAC máximo cai na mesma proporção. Modelei este documento em <strong>R$ 2.550 (real)</strong> e mostro R$ 4.000 em paralelo apenas onde você pediu explicitamente, para você ver o tamanho do erro.</p>
+</div>
+
+<div class="box v">
+<p class="lab">Correção 2 — 12x mata o tráfego pago antes do CAC matar</p>
+<p>Você paga o Meta hoje e recebe R$ 300 daqui a 30 dias. Com CAC de R$ 700, cada cliente novo abre um buraco de caixa de R$ 400 que só fecha no <strong>terceiro mês</strong>. Rodando R$ 300/dia, você fica caixa-negativo por 3 a 4 meses seguidos — e a maioria das operações morre aí, não por ROAS ruim, mas por falta de capital de giro.</p>
+<p>Três saídas, em ordem de preferência: <strong>(a)</strong> cartão parcelado <strong>com antecipação de recebíveis</strong> — o cliente paga 12x, você recebe quase tudo em D+2 pagando 8–14% de taxa; é a solução limpa e não mexe no preço, o que respeita sua própria regra de "mesmo preço para todos"; <strong>(b)</strong> entrada + saldo parcelado (ex.: R$ 900 + 7x R$ 300); <strong>(c)</strong> bônus por pagamento à vista — bônus, nunca desconto, porque desconto contradiz o slide 11.</p>
+<p><strong>Antes de subir orçamento acima de R$ 200/dia, resolva a antecipação.</strong> É a ação de maior impacto financeiro deste documento inteiro e não custa nada de mídia.</p>
+</div>
+
+<div class="box warn">
+<p class="lab">Correção 3 — Não consegui abrir seu funil</p>
+<p>O proxy de rede desta sessão bloqueia <code>avaliacao.wiltonmurilo.com</code> e <code>wiltonmurilo.com</code> por política de egresso — não é erro de link, é restrição do ambiente. Então <strong>não vou fingir que auditei a página</strong>. O que fiz: auditei a oferta e a call de verdade, a partir do <code>ROTEIRO-DE-CALL.md</code> e do <code>DIRECAO-DE-IMAGEM.md</code> deste repositório, que determinam o teto do funil inteiro. Para o quiz, o Bloco 1 traz um protocolo de auditoria de 34 pontos que você executa em 25 minutos, e o Bloco 2 traz as hipóteses de gargalo ordenadas por probabilidade, cada uma com o teste que a confirma ou elimina.</p>
+<p><strong>Para eu fechar a auditoria da página:</strong> me mande (1) print da primeira dobra, (2) a lista literal das perguntas do quiz na ordem, com as opções de resposta, (3) o que aparece na tela final antes do calendário, (4) qual ferramenta hospeda o quiz e qual hospeda o calendário. Com isso eu devolvo o Bloco 1 completo e reescrevo o Bloco 15.</p>
+</div>
+</section>
+
+<section id="b1">
+<p class="eyebrow">Bloco 01</p>
+<h2>Diagnóstico completo do funil atual</h2>
+<p>Divido em três: o que auditei de fato (a oferta e a call, que determinam o teto de tudo que vem antes), a coerência entre as etapas, e o protocolo para você fechar a auditoria da página em 25 minutos.</p>
+
+<h3>1.1 · O que auditei de fato — a oferta e a call</h3>
+<p>Li o deck de 13 slides, o roteiro completo e a direção de imagem. Este é o ativo mais forte do seu negócio hoje, e é melhor do que a média do mercado de consultoria fitness com folga. Os achados:</p>
+
+<div class="grid g2">
+<div class="card"><h5>Força · O mecanismo é real</h5><p>"Você não recebe uma ficha, recebe um sistema" + Ciclo 4A (Avaliar → Arquitetar → Acompanhar → Ajustar) é um mecanismo nomeado, sequencial e defensável. Isso é o que permite anúncio de consciência de solução em vez de "quer emagrecer?". A maioria dos concorrentes não tem isso.</p></div>
+<div class="card"><h5>Força · Zero promessa de resultado</h5><p>Sua regra de não prometer peso nem prazo não é só ética: é <b>vantagem operacional em Meta Ads</b>. A categoria saúde/fitness é a que mais perde conta por promessa de resultado. Você já opera no padrão que mantém a conta viva. Não abandone isso na hora de escrever criativo.</p></div>
+<div class="card"><h5>Força · Diagnóstico externo</h5><p>Slide 3 ("o problema não é falta de esforço, é um plano que não evolui") tira a culpa moral do prospect. Esse é o melhor ângulo de anúncio que você tem, e é o que separa você do mercado de força de vontade.</p></div>
+<div class="card"><h5>Força · A avaliação É a etapa 1</h5><p>Seu domínio é <code>avaliacao.</code> e a Etapa 01 do 4A é AVALIAR. O quiz não é um formulário antes do método — ele <b>é</b> a primeira etapa do método. Isso deve estar escrito na primeira dobra. Muda a percepção de "cadastro" para "início do processo".</p></div>
+</div>
+
+<h4>Os cinco furos que encontrei</h4>
+<div class="scroll"><table>
+<thead><tr><th>#</th><th>Furo</th><th>Por que importa para o tráfego pago</th><th>Gravidade</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td><b>Escopo da condição de entrada está em branco</b><br><span style="color:var(--muted)">Slide 11, campo tracejado</span></td><td>Você vai começar a vender calls com a oferta secundária indefinida. Na hora que o prospect travar no preço, você improvisa o escopo — e improviso vira preço variável por pessoa, que é exatamente o que sua própria regra comercial proíbe. Isso derruba taxa de fechamento e cria problema de entrega.</td><td><span class="pill crit">Bloqueia tráfego</span></td></tr>
+<tr><td class="n">2</td><td><b>Não existe LTV definido</b></td><td>Programa de 12 meses sem caminho de renovação ou continuidade definido = LTV igual ao ticket. Sem receita de expansão, todo o seu CAC máximo tem que sair de uma única venda. Definir a renovação (mesmo que simples: manutenção mensal pós-ciclo) é a alavanca mais barata para dobrar seu CAC aceitável.</td><td><span class="pill crit">Bloqueia escala</span></td></tr>
+<tr><td class="n">3</td><td><b>Os 6 anos nos EUA estão invisíveis</b></td><td>Você quer atacar brasileiro morando fora e tem, no seu próprio histórico, seis anos vivendo nos Estados Unidos — mais uma certificação americana. Esse é o ativo de posicionamento mais forte que existe para o Mercado B, e hoje ele é uma linha de texto no slide 2 sem nenhuma foto. Não é detalhe de deck: é o ângulo central da campanha do exterior.</td><td><span class="pill warn">Oportunidade perdida</span></td></tr>
+<tr><td class="n">4</td><td><b>Credencial ACSM não confirmada</b></td><td>Seu próprio README marca isso como pendente. Credencial errada em anúncio de saúde é risco de reprovação e de reclamação. Confirme a nomenclatura oficial antes de escrever qualquer criativo que cite certificação.</td><td><span class="pill warn">Risco de conta</span></td></tr>
+<tr><td class="n">5</td><td><b>Política de arrependimento indefinida</b></td><td>A caixa "7 dias" só pode ficar se existir em contrato. Em venda a distância no Brasil o direito de arrependimento de 7 dias é legal, não opcional — então o que precisa existir é o processo de reembolso, não a decisão de oferecê-lo. Com tráfego pago o volume de arrependimento sobe, e sem processo definido isso vira chargeback, que vira risco de gateway.</td><td><span class="pill warn">Risco financeiro</span></td></tr>
+</tbody></table></div>
+
+<div class="box v">
+<p class="lab">Restrição crítica de política — leia antes de produzir criativo</p>
+<p>A política de <b>atributos pessoais</b> do Meta proíbe anúncio que afirme ou insinue que o Meta sabe algo sobre a condição pessoal de quem vê. Em fitness isso derruba conta com frequência. Na prática:</p>
+<ul class="tight">
+<li><b>Não pode:</b> "Você engordou depois que se mudou?" · "Cansado de estar acima do peso?" · "Sua barriga te incomoda?" · qualquer "você é/você está" apontando para o corpo de quem vê.</li>
+<li><b>Pode:</b> "A maioria dos homens acima de 30 que treina há anos trava no mesmo ponto." · "Existe um motivo estrutural para o esforço não virar resultado." · falar do problema em terceira pessoa, ou a partir de você.</li>
+<li><b>Antes/depois é território minado:</b> imagens de antes/depois e resultados idealizados são restritas nessa categoria. Sua prova precisa ser de <b>processo</b> (dados, ajustes, acompanhamento, evolução de carga), não de barriga. O que, convenientemente, é exatamente o que seu slide 12 já defende.</li>
+</ul>
+<p style="margin-top:12px">Essa restrição não é um obstáculo ao seu posicionamento — ela <b>coincide</b> com ele. Seu diferencial já é processo, não promessa. Escreva os criativos nesse registro e você ganha duas coisas de uma vez: conta estável e coerência com a call.</p>
+</div>
+
+<h3>1.2 · Coerência anúncio → quiz → call</h3>
+<p>Este é o ponto que mais gente erra em funil de aplicação, e é onde eu concentraria sua atenção. Seu funil tem três narradores e eles precisam contar <strong>a mesma história em três profundidades</strong>, não três histórias diferentes:</p>
+<pre><b>ANÚNCIO</b>   planta o diagnóstico    <i>"o problema não é seu esforço, é o plano parado"</i>
+   ↓
+<b>QUIZ</b>      prova o diagnóstico     <u>cada pergunta faz a pessoa encontrar SEU vazamento</u>
+   ↓
+<b>CALL</b>      confirma o diagnóstico  <i>slide 3 e 4 viram reconhecimento, não informação nova</i></pre>
+<p>Se o anúncio vender "emagreça em 90 dias" e a call abrir com "o problema não é falta de esforço", a call inteira vira reconstrução de expectativa e você queima os primeiros 10 minutos consertando o que o anúncio prometeu. <strong>O seu slide 3 e o seu slide 4 são o briefing dos seus criativos.</strong> Os quatro vazamentos (treino sem direção, dieta sem estratégia, recuperação ignorada, ausência de dados) e as quatro crenças (ficha pronta, dieta radical, mais treino, mudar tudo) dão oito ângulos de anúncio já validados pela sua própria argumentação de venda — e o quiz deveria ter uma pergunta que mapeia diretamente "qual dos quatro vazamentos é o seu", porque essa é literalmente a pergunta de ancoragem que você faz na call.</p>
+<div class="box ok">
+<p class="lab">Recomendação estrutural do funil</p>
+<p>Faça o quiz terminar entregando <b>um diagnóstico nomeado</b>: "Seu vazamento principal é AUSÊNCIA DE DADOS". Isso faz três coisas ao mesmo tempo: aumenta a percepção de valor da conclusão (a pessoa recebe algo, não só entrega dados), cria o motivo específico da call ("na call eu te mostro como corrigir esse vazamento") e entrega a você, antes da call, o eixo pelo qual conduzir a conversa. É a mudança de maior impacto isolado que você pode fazer no funil.</p>
+</div>
+
+<h3>1.3 · Protocolo de auditoria da página — 34 pontos</h3>
+<p>Execute isso no celular, em rede 4G, como se fosse um lead frio vindo do Instagram. Pontue cada item <b>0</b> (ausente), <b>1</b> (existe mas fraco) ou <b>2</b> (forte). Anote o tempo de cada etapa.</p>
+<div class="scroll"><table>
+<thead><tr><th>Etapa</th><th>O que verificar</th></tr></thead>
+<tbody>
+<tr><td><b>Primeira dobra</b><br><span style="color:var(--muted)">7 pontos</span></td><td>1. A promessa é legível em 3 segundos sem rolar. 2. Ela repete a promessa do anúncio (não uma parecida). 3. Existe uma razão para responder <i>agora</i>. 4. Está claro que é uma avaliação, não uma compra. 5. Está claro quanto tempo leva. 6. O CTA é primeira pessoa ("Quero minha avaliação") e não "Enviar". 7. Carrega em menos de 2,5s no 4G.</td></tr>
+<tr><td><b>Entrada no quiz</b><br><span style="color:var(--muted)">5 pontos</span></td><td>8. A primeira pergunta aparece sem clique extra, ou a um clique só. 9. A primeira pergunta é fácil, não invasiva e sobre o <i>problema</i>, não sobre dados cadastrais. 10. Existe barra de progresso. 11. Não pede e-mail antes da primeira pergunta. 12. Não pede login, não abre popup, não pede permissão.</td></tr>
+<tr><td><b>Progressão</b><br><span style="color:var(--muted)">8 pontos</span></td><td>13. Entre 8 e 14 perguntas no total. 14. Uma pergunta por tela. 15. Avanço automático ao selecionar (sem botão "próximo"). 16. Nenhuma pergunta aberta obrigatória antes do meio. 17. Existe pelo menos uma pergunta de microcompromisso ("o quanto isso te incomoda hoje?"). 18. Existe pergunta que mapeia o vazamento/crença do deck. 19. As perguntas constroem desejo, não só coletam dado. 20. Nenhuma pergunta faz a pessoa se sentir julgada.</td></tr>
+<tr><td><b>Qualificação</b><br><span style="color:var(--muted)">5 pontos</span></td><td>21. Pergunta de tempo/rotina existe. 22. Pergunta de tentativas anteriores existe. 23. Pergunta de disposição de investimento existe e está <i>depois</i> do meio. 24. Existe pergunta de urgência/prazo. 25. Existe pergunta de país/cidade (crítico para separar mercado A e B).</td></tr>
+<tr><td><b>Fechamento e transição</b><br><span style="color:var(--muted)">9 pontos</span></td><td>26. A tela final entrega um diagnóstico, não só "obrigado". 27. Existe prova (depoimento, número, autoridade) na tela final. 28. O calendário aparece <i>na mesma página</i>, sem redirect novo. 29. Se redireciona, os UTMs e o <code>fbclid</code> sobrevivem ao redirect. 30. O calendário mostra horários nos próximos 72h. 31. O agendamento pede WhatsApp com DDI. 32. Existe uma frase explicando o que acontece na call. 33. Existe tela de confirmação com o horário escrito por extenso e fuso. 34. Chega mensagem no WhatsApp em menos de 2 minutos.</td></tr>
+</tbody></table></div>
+<p><b>Leitura do placar:</b> abaixo de 40/68 o problema está no funil e não vale subir orçamento. Entre 40 e 55, rode com R$ 150/dia enquanto corrige. Acima de 55, o funil aguenta escala e o gargalo provavelmente está no criativo ou na call.</p>
+</section>
+
+<section id="b2">
+<p class="eyebrow">Bloco 02</p>
+<h2>Gargalos encontrados</h2>
+<p>Dois grupos: os <strong>confirmados</strong> (encontrados no material real do negócio) e os <strong>prováveis</strong> (hipóteses sobre a página, ordenadas por probabilidade a priori em funis de aplicação deste tipo, cada uma com o teste que a confirma). Trate o segundo grupo como lista de verificação, não como conclusão.</p>
+
+<h3>2.1 · Gargalos confirmados</h3>
+<div class="scroll"><table>
+<thead><tr><th>Gargalo</th><th>Onde vaza</th><th>Correção</th><th>Prazo</th></tr></thead>
+<tbody>
+<tr class="hi"><td><b>Ticket 36% menor que o planejado</b></td><td>Economics inteiro</td><td>Definir escopo da entrada; decidir se ela existe desde a primeira call ou só a partir da segunda objeção; recalcular CAC máximo em R$ 2.550</td><td>Antes do dia 1</td></tr>
+<tr class="hi"><td><b>Caixa: 12x contra CAC à vista</b></td><td>Capacidade de escalar</td><td>Antecipação de recebíveis, ou entrada + parcelas</td><td>Antes do dia 1</td></tr>
+<tr><td><b>Escopo da condição de entrada em branco</b></td><td>Taxa de fechamento</td><td>Preencher o campo do slide 11 e congelar</td><td>Antes da 1ª call paga</td></tr>
+<tr><td><b>Sem renovação/LTV</b></td><td>Teto de CAC</td><td>Definir oferta de continuidade pós-ciclo</td><td>Semana 3</td></tr>
+<tr><td><b>Ativo "6 anos nos EUA" não usado</b></td><td>Mercado B inteiro</td><td>Virar o eixo central dos criativos do exterior</td><td>Semana 1</td></tr>
+<tr><td><b>Prova visual só de físico, nenhuma de trabalho</b></td><td>Criativo e slide 8</td><td>Produzir material de você trabalhando: tela de ajuste, análise de vídeo, WhatsApp de acompanhamento</td><td>Semana 2</td></tr>
+</tbody></table></div>
+
+<h3>2.2 · Gargalos prováveis na página — ordenados por probabilidade</h3>
+<div class="scroll"><table>
+<thead><tr><th>#</th><th>Hipótese de gargalo</th><th class="n">Prob.</th><th>Sintoma no dashboard</th><th>Teste que confirma</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td><b>Quebra de contexto entre anúncio e página</b> — a promessa do criativo não é a primeira frase da página</td><td class="n">alta</td><td>CTR bom, LPV bom, Quiz Start &lt; 35%</td><td>Coloque o print do anúncio ao lado do print da dobra. Se as duas frases não puderem ser lidas como a mesma frase, é isso.</td></tr>
+<tr><td class="n">2</td><td><b>Quiz longo demais ou com pergunta pesada cedo</b></td><td class="n">alta</td><td>Quiz Complete / Quiz Start &lt; 45%</td><td>Instrumente <code>QuizProgress</code> por pergunta e olhe em qual índice cai. Abandono concentrado em uma pergunta = a pergunta. Abandono distribuído = comprimento.</td></tr>
+<tr><td class="n">3</td><td><b>Transição para o calendário como redirect novo</b></td><td class="n">alta</td><td>Quiz Complete alto, Booked Call &lt; 25%</td><td>Conclua o quiz e observe: se a URL muda de domínio e a página recarrega do zero, você perde 15–30% ali e provavelmente perde o <code>fbclid</code> junto.</td></tr>
+<tr><td class="n">4</td><td><b>Tela final sem diagnóstico</b> — "obrigado, escolha um horário"</td><td class="n">alta</td><td>Mesmo sintoma do #3</td><td>A tela final entrega alguma conclusão sobre a pessoa? Se não, o agendamento está pedindo tempo sem ter dado nada em troca.</td></tr>
+<tr><td class="n">5</td><td><b>Zero rastreio server-side</b></td><td class="n">alta</td><td>Meta reporta 40% menos leads que a ferramenta do quiz</td><td>Compare o número de <code>Lead</code> no Gerenciador com o número de respostas completas na ferramenta, no mesmo período. Diferença acima de 20% = perda de sinal (iOS, bloqueadores, navegador in-app).</td></tr>
+<tr><td class="n">6</td><td><b>Pergunta de investimento cedo demais ou ausente</b></td><td class="n">média</td><td>Ou conclusão baixa (cedo), ou show rate ok e fechamento &lt; 12% (ausente)</td><td>Veja em qual posição ela está. Antes de 70% do quiz = cedo.</td></tr>
+<tr><td class="n">7</td><td><b>Calendário com folga longa demais</b></td><td class="n">média</td><td>Booked Call bom, Show Rate &lt; 50%</td><td>Qual o horário mais próximo oferecido? Se for além de 72h, o show rate cai por decaimento de intenção.</td></tr>
+<tr><td class="n">8</td><td><b>Sem WhatsApp imediato pós-agendamento</b></td><td class="n">média</td><td>Show Rate &lt; 50%</td><td>Agende como lead e cronometre. Acima de 5 minutos sem contato humano, você já perdeu parte do show.</td></tr>
+<tr><td class="n">9</td><td><b>Página pesada no 4G</b></td><td class="n">média</td><td>LPV / Clique &lt; 75%</td><td>A diferença entre cliques no link e Landing Page View é a sua taxa de desistência de carregamento. Acima de 25% é problema técnico, não de copy.</td></tr>
+<tr><td class="n">10</td><td><b>Sem separação de país no quiz</b></td><td class="n">média</td><td>Impossível ler CAC por mercado</td><td>Existe pergunta de onde a pessoa mora? Sem isso você não fecha o loop do Mercado B.</td></tr>
+</tbody></table></div>
+
+<div class="box warn">
+<p class="lab">A regra de ouro do diagnóstico</p>
+<p>Uma etapa só é gargalo <b>em relação à anterior</b>. Nunca olhe um número absoluto: olhe a razão entre etapas consecutivas. Um Quiz Complete de 200 pode ser excelente ou terrível dependendo se vieram de 300 ou de 900 Quiz Starts. O Bloco 18 monta o painel exatamente nessa lógica.</p>
+</div>
+</section>
+
+<section id="b3">
+<p class="eyebrow">Bloco 03</p>
+<h2>Arquitetura recomendada do Meta Ads</h2>
+<p>Três camadas, implantadas em ordem. Não crie a camada 3 antes da 1 estar gerando volume.</p>
+
+<h4>Fase 1 — dias 1 a 21 · descoberta</h4>
+<pre><b>CAMPANHA 01 · BR-AQUISICAO-Q3</b>  <u>Objetivo: Vendas (Conversões no site) · Orçamento no conjunto (ABO)</u>
+└── <b>CONJUNTO: BR-BROAD-M25-55</b>   <u>R$ 200/dia · evento: QuizComplete · atribuição 7d clique / 1d visualização</u>
+    ├── AD 01 · <i>vazamento · dados</i>
+    ├── AD 02 · <i>crença · ficha pronta</i>
+    ├── AD 03 · <i>identidade · homem 30+ que treina há anos</i>
+    ├── AD 04 · <i>autoridade · atleta + formação</i>
+    └── AD 05 · <i>contrarian · "não é falta de disciplina"</i>
+
+<b>CAMPANHA 02 · EXT-AQUISICAO-Q3</b>  <u>Objetivo: Vendas (Conversões no site) · ABO</u>
+└── <b>CONJUNTO: US-BR-PT-BROAD</b>    <u>R$ 150/dia · país: EUA · idioma: Português · evento: QuizStart→QuizComplete</u>
+    ├── AD 06 · <i>identidade · brasileiro nos EUA</i>
+    ├── AD 07 · <i>rotina · o corpo mudou depois da mudança</i>
+    ├── AD 08 · <i>ponte · "eu morei 6 anos aí"</i>
+    └── AD 09 · <i>acompanhamento em português</i></pre>
+
+<h4>Fase 2 — a partir do dia 22 · separação de teste e escala</h4>
+<pre><b>CAMPANHA 01 · BR-ESCALA</b>          <u>CBO · R$ 300+/dia · só criativos vencedores</u>
+└── <b>CONJUNTO: BR-BROAD-VENCEDORES</b>
+    ├── AD vencedor 1 + suas iterações A2/B2/C2
+    └── AD vencedor 2 + suas iterações
+
+<b>CAMPANHA 03 · BR-TESTE</b>            <u>ABO · R$ 100/dia · orçamento fixo, nunca escala</u>
+└── <b>CONJUNTO: BR-BROAD-CHALLENGERS</b>
+    ├── 3 a 5 challengers novos por semana
+
+<b>CAMPANHA 02 · EXT-ESCALA</b>          <u>ABO · conjuntos separados por bloco econômico</u>
+├── <b>CONJUNTO: US-CA-UK</b>            <u>CPM alto, poder de compra alto</u>
+└── <b>CONJUNTO: PT-IE-EU</b>            <u>CPM baixo — nunca no mesmo conjunto do bloco acima</u></pre>
+
+<h4>Fase 3 — quando o site passar de 1.000 visitantes únicos / 30 dias</h4>
+<pre><b>CAMPANHA 04 · REMARKETING</b>        <u>ABO · 10 a 15% do orçamento total · frequência limitada</u>
+├── <b>CONJUNTO: RMK-QUENTE</b>          <u>iniciou quiz e não concluiu + concluiu e não agendou (7 dias)</u>
+└── <b>CONJUNTO: RMK-MORNO</b>           <u>visitou site 30d + vídeo 50% 30d + engajou IG 30d</u></pre>
+
+<div class="box v">
+<p class="lab">As três decisões estruturais e o porquê de cada uma</p>
+<ul class="tight">
+<li><b>Campanhas separadas por mercado, não conjuntos dentro da mesma campanha.</b> Você quer poder pausar, escalar e ler o exterior sem tocar no Brasil. Com CBO numa campanha só, o orçamento migra inteiro para o mercado de evento mais barato — que sempre será o Brasil, por CPM. Você acordaria com R$ 290 no Brasil e R$ 10 no exterior, e concluiria erroneamente que "o exterior não funciona".</li>
+<li><b>ABO na fase de descoberta, CBO só na escala.</b> CBO otimiza custo por evento entre conjuntos. Na descoberta você não quer o custo mais baixo, quer <b>dado de cada hipótese</b>. Orçamento no conjunto é o que garante que cada hipótese receba verba suficiente para ser lida.</li>
+<li><b>Um conjunto amplo por mercado, não vários por interesse.</b> Com R$ 200/dia e evento de meio de funil, você tem verba para um conjunto sair da fase de aprendizado. Dois conjuntos, nenhum sai. Essa é a matemática inteira — está no Bloco 6.</li>
+</ul>
+</div>
+</section>
+
+<section id="b4">
+<p class="eyebrow">Bloco 04</p>
+<h2>Brasil vs. brasileiros no exterior</h2>
+
+<h3>4.1 · Suas hipóteses, avaliadas uma a uma</h3>
+<p>Você pediu para não assumir que estão corretas. Concordo com quatro, discordo de duas e reformulo uma.</p>
+<div class="scroll"><table>
+<thead><tr><th>Sua hipótese</th><th>Meu veredito</th><th>Raciocínio</th></tr></thead>
+<tbody>
+<tr><td>Maior renda e poder de compra</td><td><span class="pill ok">Provável</span></td><td>Renda em USD/EUR/GBP contra preço em BRL é a arbitragem central desse mercado. 12x R$ 300 é aproximadamente US$ 55/mês. Nos EUA, isso é menos que uma mensalidade de academia comum e uma fração de uma sessão avulsa com personal.</td></tr>
+<tr><td>Percepção diferente sobre R$ 3.000</td><td><span class="pill ok">Muito provável</span></td><td>É a mesma arbitragem vista pelo outro lado. Mas atenção: isso significa que <b>seu preço está errado para esse mercado</b> — ver 4.3.</td></tr>
+<tr><td>Rotina mais corrida</td><td><span class="pill warn">Fraca</span></td><td>Brasileiro no Brasil em capital grande também tem rotina destruída. Isso não é diferencial de mercado, é ângulo genérico. Não construa a campanha do exterior sobre isso.</td></tr>
+<tr><td>Dificuldade com alimentação brasileira</td><td><span class="pill ok">Forte e específica</span></td><td>É concreta, verificável e ninguém no mercado brasileiro fala com ela. "Montar dieta com o que existe no Walmart / Tesco / Continente" é um ângulo que só faz sentido para esse público — e é exatamente o tipo de detalhe que prova que você entende a vida da pessoa.</td></tr>
+<tr><td>Mudança de peso depois de se mudar</td><td><span class="pill warn">Forte, mas proibida na 1ª pessoa</span></td><td>O fenômeno é real e ressoa. Mas você <b>não pode</b> escrever "você engordou depois que se mudou" — atributo pessoal. Reescreva em terceira pessoa ou a partir de você: "quase todo brasileiro que eu acompanho fora do Brasil descreve a mesma coisa nos primeiros dois anos."</td></tr>
+<tr><td>Menos rede de apoio</td><td><span class="pill ok">Forte</span></td><td>Solidão e ausência de referência são dor real e conectam com o que você vende, que é acompanhamento — não planilha. É o ângulo mais alinhado com a sua oferta.</td></tr>
+<tr><td>Dificuldade de achar acompanhamento em português</td><td><span class="pill ok">A mais forte de todas</span></td><td>Não é só língua: é referência cultural de comida, de treino, de rotina. E é a única hipótese em que você tem <b>prova pessoal</b>: seis anos morando nos Estados Unidos. Isso não é um argumento de marketing, é biografia — e biografia não é copiável pelo concorrente.</td></tr>
+</tbody></table></div>
+
+<h3>4.2 · Comunicação específica ou genérica?</h3>
+<p><strong>Específica no gancho, genérica no corpo.</strong> O motivo é mecânico: a segmentação por país + idioma já entrega o anúncio a quem interessa; o gancho não precisa fazer a filtragem geográfica, precisa fazer a <em>parada do dedo</em>. E identidade explícita ("brasileiro que mora fora") é o gancho de maior taxa de reconhecimento que existe para esse público — mas identidade sozinha não gera desejo. Ela só compra os 2 segundos de atenção.</p>
+<pre><b>ESTRUTURA RECOMENDADA DO CRIATIVO DO EXTERIOR</b>
+
+0–3s   <i>GANCHO DE IDENTIDADE</i>    "Brasileiro que mora fora do Brasil:"  ← seleção
+3–12s  <u>DOR ESPECÍFICA DO CONTEXTO</u>  comida, rotina, sozinho, sem referência
+12–25s <u>DIAGNÓSTICO (igual ao do BR)</u>  "não é falta de esforço, é plano parado"
+25–35s <i>PONTE DE AUTORIDADE</i>      "eu morei 6 anos nos Estados Unidos"      ← só você tem
+35–45s <u>CTA</u>                        "faça a avaliação — etapa 1 do método"</pre>
+<p>Rode <strong>também</strong> os criativos genéricos em português dentro do conjunto do exterior. É um teste de custo quase zero e responde uma pergunta que vale muito: se o criativo genérico converter igual, você economiza toda a produção paralela; se o específico ganhar por margem larga, você acabou de descobrir que identidade vale mais que ângulo nesse mercado — e isso vira regra de produção.</p>
+
+<h3>4.3 · A decisão que você ainda não tomou: preço em dólar</h3>
+<div class="box v">
+<p class="lab">Confronto</p>
+<p>Vender 12x R$ 300 para um brasileiro que ganha em dólar é <b>deixar dinheiro na mesa em escala industrial</b>. O mesmo programa, precificado a US$ 1.200–1.800, continua barato para quem mora nos EUA e <b>triplica seu ticket</b> — o que triplica seu CAC máximo, o que te permite comprar tráfego num mercado de CPM 3 a 5 vezes maior sem quebrar a conta. Sem isso, o Mercado B tem CPM de país rico e ticket de país em desenvolvimento, e a matemática fica hostil.</p>
+<p>Isso <b>não</b> viola sua regra comercial de "mesmo preço para todos". Sua regra proíbe preço variável por disposição individual a pagar, descoberto na call. Preço por mercado, publicado, igual para todos daquele mercado, com custo de entrega diferente (horário de atendimento, fuso, suporte) é outra coisa — é o padrão de qualquer operação internacional.</p>
+<p><b>Se você não quiser mexer no preço agora:</b> aceite que o Mercado B vai ter CAC/ticket pior que o Brasil e trate-o como aposta de aprendizado com verba limitada, não como motor. Mas decida conscientemente, não por omissão.</p>
+</div>
+
+<h3>4.4 · Tiers de país — sim, mas não três</h3>
+<p>Três tiers desde o dia 1 fragmenta demais. A ordem de entrada que eu usaria:</p>
+<div class="grid g3">
+<div class="card"><h5>Fase 1 · EUA sozinho</h5><p>Maior comunidade brasileira fora do Brasil, maior poder de compra, fuso compatível com uma agenda no Brasil (1 a 5h de diferença) e é onde a sua história pessoal tem lastro. Um país só = leitura limpa.</p></div>
+<div class="card s"><h5>Fase 2 · + Canadá e Reino Unido</h5><p>No <b>mesmo</b> conjunto dos EUA. CPM e poder de compra da mesma ordem de grandeza, então não há canibalização de entrega. Ganha volume sem sujar a leitura.</p></div>
+<div class="card s"><h5>Fase 3 · Portugal + Irlanda + Europa</h5><p><b>Conjunto separado, obrigatoriamente.</b> CPM sensivelmente menor: no mesmo conjunto dos EUA, o algoritmo joga quase toda a entrega para lá e você perde o mercado caro sem perceber. Ticket e economics também são diferentes.</p></div>
+</div>
+<p><b>Austrália: fora, por enquanto.</b> Não por mercado — por agenda. 11 a 13 horas de diferença significa call às 5h da manhã ou às 22h. Você não vai sustentar isso, e no-show por fuso é o pior tipo de no-show: caro e frustrante. Entra só quando houver volume que justifique um bloco fixo de horário.</p>
+</section>
+
+<section id="b5">
+<p class="eyebrow">Bloco 05</p>
+<h2>Sua estrutura 1–1–9: manter ou mudar?</h2>
+<div class="box v">
+<p class="lab">Veredito</p>
+<p style="font-family:var(--display);font-size:33px;line-height:1.1;text-transform:uppercase;color:#fff;margin-bottom:12px">Mudar. 1–1–9 está errada por dois motivos independentes, e cada um sozinho já bastaria.</p>
+<p><b>Motivo 1 — mistura Brasil e exterior numa leitura só.</b> Você mesmo levantou o risco no item 6 do seu briefing, e ele é real. Com um conjunto único você não consegue ler CAC por mercado, e pior: a entrega migra sozinha para o mercado de evento mais barato. Você não estaria testando dois mercados, estaria financiando o Brasil e chamando isso de teste internacional.</p>
+<p><b>Motivo 2 — nove anúncios num conjunto não são nove testes.</b> Este é o motivo técnico, e é o que quase ninguém explica direito. Está detalhado abaixo.</p>
+</div>
+
+<h3>5.1 · Por que 9 anúncios num conjunto não geram 9 aprendizados</h3>
+<p>Você já sabe que o Meta não divide orçamento igualmente. O problema é mais específico do que isso. Dentro de um conjunto, a entrega converge rapidamente — normalmente em 24 a 72 horas — para 2 ou 3 anúncios, e essa convergência é decidida por <strong>sinais rasos e precoces</strong>: taxa de clique, taxa de visualização de vídeo, engajamento inicial. Não por CAC. O algoritmo não sabe, no dia 2, quais leads viraram call agendada, e muito menos quais viraram venda.</p>
+<p>A consequência prática, e é grave para o seu caso: <strong>o anúncio que traz o lead mais qualificado é frequentemente o que tem CTR menor</strong> — porque ele qualifica no próprio gancho e afasta curioso. Num 1–1–9, esse anúncio é morto pelo algoritmo no dia 2, antes de gerar uma única call. Você teria matado seu melhor criativo sem nunca ter visto o número que importa.</p>
+<pre><b>O QUE ACONTECE NUM 1–1–9 COM R$ 300/DIA EM 7 DIAS</b>   <u>R$ 2.100 no total</u>
+
+AD 01  ████████████████████████████  R$ 780   ~26 leads  ~3 calls   <i>lido</i>
+AD 02  ██████████████████            R$ 520   ~17 leads  ~2 calls   <i>lido</i>
+AD 03  ███████████                   R$ 330   ~11 leads  ~1 call    <u>parcial</u>
+AD 04  █████                         R$ 160   ~5 leads   0 calls    <u>ilegível</u>
+AD 05  ███                           R$ 110   ~4 leads   0 calls    <u>ilegível</u>
+AD 06  ██                            R$  80   ~3 leads   0 calls    <u>ilegível</u>
+AD 07  █                             R$  50   ~2 leads   0 calls    <u>ilegível</u>
+AD 08  █                             R$  40   ~1 lead    0 calls    <u>ilegível</u>
+AD 09  █                             R$  30   ~1 lead    0 calls    <u>ilegível</u>
+
+<i>Seis dos nove criativos não foram testados. Foram engavetados pelo algoritmo</i>
+<i>com base em CTR de 48 horas — e você vai achar que eles "não funcionaram".</i></pre>
+<p style="max-width:74ch;color:var(--muted);font-size:14px"><em class="hyp">Distribuição hipotética</em> — a proporção varia, o padrão de concentração não.</p>
+
+<h3>5.2 · As cinco estruturas, comparadas</h3>
+<div class="scroll"><table>
+<thead><tr><th>Estrutura</th><th>Benefício</th><th>Problema</th><th>Veredito</th></tr></thead>
+<tbody>
+<tr><td><b>A · 1–1–9</b><br>sua proposta</td><td>Máxima consolidação de sinal; simples de operar; o algoritmo tem toda a verba num lugar só.</td><td>Impossível separar mercados; 6 de 9 criativos ficam ilegíveis; seleção precoce por métrica rasa mata o criativo qualificador.</td><td><span class="pill crit">Não</span></td></tr>
+<tr><td><b>B · 1 campanha, 2 conjuntos</b><br>BR + EXT</td><td>Resolve a leitura por mercado; mantém consolidação razoável.</td><td>Se usar CBO, o orçamento foge para o Brasil. Com ABO funciona, mas você perde a independência de pausar/escalar campanhas inteiras e a leitura de relatório fica mais suja.</td><td><span class="pill warn">Aceitável</span></td></tr>
+<tr><td><b>C · 2 campanhas, 1 conjunto cada, 9 criativos cada</b></td><td>Separação limpa de mercado e de orçamento; escala independente.</td><td>9 criativos por conjunto reproduz o problema de legibilidade do item 5.1, agora em dobro. Exige o dobro de verba para o mesmo aprendizado.</td><td><span class="pill warn">Quase</span></td></tr>
+<tr><td><b>D · teste separado de escala</b></td><td>É o formato correto <b>para quando existirem vencedores</b>. Protege o desempenho da campanha madura das oscilações do teste.</td><td>Prematuro no dia 1: você ainda não tem vencedor para proteger, e dividir a verba entre teste e escala agora atrasa a descoberta.</td><td><span class="pill ok">Sim, na fase 2</span></td></tr>
+<tr><td><b>E · Advantage+ / broad total</b></td><td>Onde o Meta mais investiu; excelente quando há sinal de conversão abundante e histórico de pixel.</td><td>Depende de volume de evento para funcionar. Com pixel novo, evento profundo e R$ 200/dia, o Advantage+ tende a otimizar para o sinal mais fácil que encontrar — que é justamente o lead ruim.</td><td><span class="pill warn">Depois, não agora</span></td></tr>
+</tbody></table></div>
+
+<div class="box ok">
+<p class="lab">O que eu usaria</p>
+<p><b>C modificada:</b> duas campanhas (BR e EXT), um conjunto amplo em cada, ABO — mas com <b>5 anúncios no Brasil e 4 no exterior no primeiro round</b>, e não 9 em cada. Os 9 criativos entram, todos; só que em <b>rounds semanais</b>, com os vencedores permanecendo e os não testados entrando na rodada seguinte. Você troca "testar 9 mal" por "testar 9 de verdade, em três semanas". No dia 22, isso vira a estrutura D: campanha de escala com os vencedores e campanha de teste com verba fixa recebendo challengers toda semana.</p>
+</div>
+</section>
+
+<section id="b6">
+<p class="eyebrow">Bloco 06</p>
+<h2>Orçamento diário recomendado</h2>
+<p>Começo pela conta que determina tudo, e que é a resposta real para "quanto investir por dia".</p>
+
+<h3>6.1 · A conta que decide o orçamento</h3>
+<p>O Meta precisa de aproximadamente <strong>50 eventos de otimização por conjunto a cada 7 dias</strong> para sair da fase de aprendizado. Isso é ~7,1 eventos por dia. Logo:</p>
+<p style="font-family:var(--mono);font-size:15px;color:var(--paper);border-left:2px solid var(--red);padding-left:16px;max-width:none">orçamento mínimo do conjunto = custo por evento × 7,1</p>
+<p>Não é opinião, é aritmética. E ela te diz, antes de gastar um real, <em>qual evento você tem direito de otimizar</em>:</p>
+<div class="scroll"><table>
+<thead><tr><th>Evento de otimização</th><th class="n">Custo/evento BR</th><th class="n">R$/dia p/ aprender</th><th class="n">Custo/evento EXT (EUA)</th><th class="n">R$/dia p/ aprender</th><th>Qualidade do sinal</th></tr></thead>
+<tbody>
+<tr><td>Landing Page View</td><td class="n">R$ 4</td><td class="n">R$ 29</td><td class="n">R$ 11</td><td class="n">R$ 79</td><td><span class="pill crit">Rasa demais</span></td></tr>
+<tr><td>QuizStart</td><td class="n">R$ 9</td><td class="n">R$ 64</td><td class="n">R$ 25</td><td class="n">R$ 179</td><td><span class="pill warn">Aceitável p/ arrancar</span></td></tr>
+<tr class="hi"><td><b>QuizComplete / Lead</b></td><td class="n">R$ 22</td><td class="n"><b>R$ 157</b></td><td class="n">R$ 60</td><td class="n">R$ 429</td><td><span class="pill ok">Ponto de partida certo</span></td></tr>
+<tr><td>Qualified Lead</td><td class="n">R$ 45</td><td class="n">R$ 321</td><td class="n">R$ 120</td><td class="n">R$ 857</td><td><span class="pill ok">Alvo do mês 2</span></td></tr>
+<tr><td>Booked Call</td><td class="n">R$ 140</td><td class="n">R$ 1.000</td><td class="n">R$ 350</td><td class="n">R$ 2.500</td><td><span class="pill ok">Alvo do mês 3–4</span></td></tr>
+<tr><td>Purchase</td><td class="n">R$ 900</td><td class="n">R$ 6.430</td><td class="n">R$ 1.800</td><td class="n">R$ 12.860</td><td><span class="pill crit">Fora de alcance</span></td></tr>
+</tbody></table></div>
+<p><em class="hyp">Custos hipotéticos</em> — são estimativas de ordem de grandeza para calibrar a decisão, não benchmarks. Substitua pelos seus números reais na semana 2; a estrutura da conta continua válida, só os valores mudam.</p>
+<p><strong>Leitura direta:</strong> otimizar por <b>Booked Call</b> desde o dia 1, como você preferia, exigiria R$ 1.000/dia só no Brasil. Otimizar por <b>Purchase</b> exigiria R$ 6.430/dia. Ambos estão fora de questão agora — e essa é a razão matemática, não uma opinião de cautela. O evento certo para começar é <b>QuizComplete</b>, e ele custa R$ 157/dia por conjunto.</p>
+
+<h3>6.2 · Os sete cenários que você pediu</h3>
+<div class="scroll"><table>
+<thead><tr><th class="n">R$/dia</th><th class="n">Mês</th><th>O que esse orçamento compra</th><th class="n">Criativos legíveis</th><th>Veredito</th></tr></thead>
+<tbody>
+<tr><td class="n"><b>100</b></td><td class="n">3.000</td><td>Um mercado, um conjunto, otimização só até QuizStart. Não alcança QuizComplete. Você vai gerar leads, mas o algoritmo estará aprendendo com o sinal errado.</td><td class="n">2–3</td><td><span class="pill crit">Insuficiente</span></td></tr>
+<tr><td class="n"><b>150</b></td><td class="n">4.500</td><td>Brasil apenas, no limite exato do aprendizado por QuizComplete. Funciona, mas sem folga: qualquer semana ruim te joga de volta para a fase de aprendizado.</td><td class="n">3–4</td><td><span class="pill warn">Mínimo absoluto</span></td></tr>
+<tr class="hi"><td class="n"><b>200</b></td><td class="n">6.000</td><td>Brasil com folga sobre o limite de aprendizado. 5 criativos com leitura razoável em 7 dias. Ainda sem exterior.</td><td class="n">4–5</td><td><span class="pill ok">Mínimo recomendado</span></td></tr>
+<tr><td class="n"><b>250</b></td><td class="n">7.500</td><td>Brasil confortável. Já dá para ler custo por Booked Call por criativo em 10–14 dias, mesmo sem otimizar por ele.</td><td class="n">5</td><td><span class="pill ok">Bom</span></td></tr>
+<tr><td class="n"><b>300</b></td><td class="n">9.000</td><td>Ou Brasil forte sozinho (chegando perto de otimizar por Qualified Lead), ou R$ 200 BR + R$ 100 EXT — mas R$ 100 no exterior não aprende nada. <b>Prefira Brasil sozinho a dividir mal.</b></td><td class="n">5–6</td><td><span class="pill ok">Bom</span></td></tr>
+<tr class="hi"><td class="n"><b>400</b></td><td class="n">12.000</td><td>Primeiro patamar em que os <b>dois mercados</b> existem de verdade: R$ 250 BR + R$ 150 EXT. O exterior otimiza por QuizStart no início e migra para QuizComplete quando o custo real aparecer.</td><td class="n">5 + 4</td><td><span class="pill ok">Ideal</span></td></tr>
+<tr><td class="n"><b>500</b></td><td class="n">15.000</td><td>R$ 300 BR + R$ 200 EXT. Brasil perto de otimizar por Qualified Lead; exterior com leitura confiável. <b>Verifique sua agenda antes</b> — ver 6.4.</td><td class="n">6 + 4</td><td><span class="pill ok">Ótimo, se a agenda aguentar</span></td></tr>
+</tbody></table></div>
+
+<h3>6.3 · A recomendação</h3>
+<div class="grid g3">
+<div class="card"><h5>Mínimo</h5><p class="num">R$ 200<small>/dia</small></p><p style="margin-top:10px">100% Brasil · R$ 200 no conjunto BR · exterior fechado.<br><b>Não abra o exterior neste patamar.</b> Dois mercados subfinanciados aprendem menos que um mercado bem financiado.</p></div>
+<div class="card"><h5>Ideal</h5><p class="num">R$ 400<small>/dia</small></p><p style="margin-top:10px">R$ 250 Brasil + R$ 150 Exterior (EUA).<br>É o menor orçamento em que as duas hipóteses de mercado geram dado real no mesmo mês. É aqui que eu começaria.</p></div>
+<div class="card"><h5>Agressivo</h5><p class="num">R$ 700<small>/dia</small></p><p style="margin-top:10px">R$ 400 Brasil + R$ 300 Exterior.<br>Só depois de: antecipação resolvida, escopo da entrada definido, e capacidade de call comprovada em duas semanas.</p></div>
+</div>
+
+<div class="box warn">
+<p class="lab">Capital de giro — o número que ninguém calcula</p>
+<p>Enquanto você receber 12x sem antecipação, precisa de reserva equivalente a <b>2,5 a 3 meses de mídia</b> só para não quebrar no meio da curva. A R$ 400/dia isso é R$ 30.000 a R$ 36.000 de caixa parado. <b>Com antecipação de recebíveis, cai para menos de um mês.</b> Se você só puder fazer uma coisa desta lista inteira antes de ligar as campanhas, faça essa.</p>
+</div>
+
+<h3>6.4 · O teto que não é financeiro: sua agenda</h3>
+<p>A R$ 400/dia no cenário saudável, você gera algo entre <strong>60 e 110 calls agendadas por mês</strong>, das quais 35 a 65 comparecem. Isso é 2 a 3 calls por dia útil, cada uma com deck de 13 slides, diagnóstico e fechamento — mais o pré e o pós. <strong>Esse é o seu gargalo real acima de R$ 400/dia, não o dinheiro.</strong> Antes de ir para R$ 700, uma das três precisa acontecer: (a) uma triagem que corte no-show e desqualificado antes da sua agenda, (b) um SDR fazendo confirmação e pré-call, ou (c) uma call mais curta com o deck reduzido para os slides 1, 3, 4, 6, 8, 9, 10, 12, 13. Escalar mídia com agenda saturada só produz agendamento que você mesmo cancela — e nada destrói mais rápido a reputação de um funil high ticket.</p>
+</section>
+
+<section id="b7">
+<p class="eyebrow">Bloco 07</p>
+<h2>Configuração passo a passo no Ads Manager</h2>
+<p>Literalmente o que selecionar, na ordem em que aparece. Faça a campanha Brasil primeiro, valide, depois duplique para o exterior.</p>
+
+<h3>Nível campanha</h3>
+<div class="scroll"><table>
+<thead><tr><th>Campo</th><th>Selecionar</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Objetivo</td><td><b>Vendas</b> (Sales)</td><td>Não use "Cadastros"/Leads com formulário instantâneo: você precisa do tráfego no seu quiz, não de um lead form nativo. Objetivo Vendas + conversão no site é o que aciona os modelos de otimização por conversão profunda.</td></tr>
+<tr><td>Tipo de compra</td><td>Leilão</td><td>—</td></tr>
+<tr><td>Teste A/B</td><td>Desligado</td><td>Split test do Meta divide orçamento entre células e você não tem verba para isso agora.</td></tr>
+<tr><td>Orçamento Advantage (CBO)</td><td><b>Desligado</b> na fase 1</td><td>Você quer controle por conjunto enquanto descobre. Liga na fase 2, só na campanha de escala.</td></tr>
+<tr><td>Categoria especial</td><td><b>Nenhuma</b></td><td>Consultoria fitness não é categoria especial. Mas revise a política de atributos pessoais — Bloco 1.</td></tr>
+<tr><td>Nome</td><td><code>BR | AQUISICAO | QUIZCOMPLETE | v1</code></td><td>Padrão fixo: mercado | função | evento | versão. Você vai agradecer no mês 3.</td></tr>
+</tbody></table></div>
+
+<h3>Nível conjunto</h3>
+<div class="scroll"><table>
+<thead><tr><th>Campo</th><th>Selecionar</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td>Local de conversão</td><td>Site</td><td>—</td></tr>
+<tr><td>Evento de conversão</td><td><b>QuizComplete</b> (ou o <code>Lead</code> mapeado só para conclusão qualificada — ver Bloco 12)</td><td>É o evento mais profundo que seu orçamento sustenta.</td></tr>
+<tr><td>Orçamento</td><td>Diário, <b>R$ 200</b></td><td>Diário e não vitalício: você vai mexer toda semana.</td></tr>
+<tr><td>Programação</td><td>Contínuo, sem restrição de horário</td><td>Restringir horário reduz o leilão sem ganho comprovado nesse volume.</td></tr>
+<tr><td>Público — local</td><td>Brasil · <b>Pessoas que moram neste local</b></td><td>O padrão inclui quem está viajando. Trocar para "moram" é obrigatório, e é ainda mais crítico na campanha do exterior.</td></tr>
+<tr><td>Público — idade</td><td>25–55</td><td>Amplo o suficiente para o algoritmo e estreito o suficiente para não queimar verba em quem não compra R$ 3.000. Corte por dados reais na semana 3, nunca antes.</td></tr>
+<tr><td>Público — gênero</td><td>Todos</td><td>Deixe o criativo selecionar. Se seus 9 criativos forem masculinos, o algoritmo vai encontrar homens sozinho.</td></tr>
+<tr><td>Público — detalhado</td><td><b>Vazio</b> (broad)</td><td>Ver Bloco 8.</td></tr>
+<tr><td>Segmentação Advantage detalhada</td><td>Ligado (é automático quando o detalhamento está vazio)</td><td>—</td></tr>
+<tr><td>Idiomas</td><td>Vazio no Brasil · <b>Português</b> no exterior</td><td>No exterior é o filtro principal e não opcional.</td></tr>
+<tr><td>Posicionamentos</td><td><b>Advantage+ (automático)</b></td><td>Com uma exceção: exclua Audience Network se depois de 14 dias ele mostrar volume alto de LPV com taxa de QuizStart muito abaixo da média. Antes disso, não mexa.</td></tr>
+<tr><td>Otimização de entrega</td><td>Conversões</td><td>—</td></tr>
+<tr><td>Janela de atribuição</td><td><b>7 dias clique + 1 dia visualização</b></td><td>Ciclo de decisão de high ticket não cabe em 1 dia. Não use 1d clique.</td></tr>
+<tr><td>Estratégia de lance</td><td><b>Maior volume</b> (sem teto)</td><td>Teto de custo com pixel novo trava a entrega. Passe para "Meta de custo" só depois de conhecer seu custo real por evento — semana 4 ou depois.</td></tr>
+</tbody></table></div>
+
+<h3>Nível anúncio</h3>
+<div class="scroll"><table>
+<thead><tr><th>Campo</th><th>Selecionar</th></tr></thead>
+<tbody>
+<tr><td>Identidade</td><td>Página do Facebook + conta do Instagram conectadas. <b>Sem conta do Instagram, você perde a maior parte do inventário que interessa.</b></td></tr>
+<tr><td>Formato</td><td>Vídeo único (9:16 nativo). Recorte 1:1 e 4:5 pelo próprio Meta apenas se o vídeo aguentar; caso contrário, faça os recortes você.</td></tr>
+<tr><td>Aprimoramentos Advantage+ para criativo</td><td><b>Desligue</b> texto gerado, sobreposição, música e filtros durante o teste. Eles alteram o criativo e você perde a leitura da hipótese. Ligue depois, na escala, como experimento próprio.</td></tr>
+<tr><td>Destino</td><td>Site · URL com UTMs completas (Bloco 11)</td></tr>
+<tr><td>CTA do botão</td><td><b>Saiba mais</b> ou <b>Cadastre-se</b>. Evite "Comprar agora" — contradiz a promessa de avaliação gratuita.</td></tr>
+<tr><td>Nome do anúncio</td><td><code>AD01 | VAZAMENTO-DADOS | HOOKA-BODYB-CTAC | 9x16</code> — o nome precisa carregar a hipótese, senão a tabela do Bloco 20 fica ilegível.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="b8">
+<p class="eyebrow">Bloco 08</p>
+<h2>Segmentação</h2>
+
+<h3>8.1 · Brasil</h3>
+<p><strong>Broad, sem interesse, e não é preguiça.</strong> Com Advantage detalhada e um pixel recebendo QuizComplete, o algoritmo encontra o padrão de quem completa seu quiz mais rápido e mais barato do que qualquer lista de interesses que você monte — e sem o custo de leilão de audiência estreita. Interesses só voltam a fazer sentido quando você tiver uma hipótese que o broad não consegue alcançar, e aí como <em>teste</em>, não como padrão.</p>
+<p>Único recorte que eu manteria: <strong>idade 25–55</strong>. Abaixo de 25, a capacidade de pagar R$ 3.000 cai bruscamente, e o algoritmo adora entregar para 18–24 porque é barato.</p>
+
+<h3>8.2 · Exterior — a decisão que importa</h3>
+<p>Você perguntou se país + amplo + criativo em português basta, ou se precisa de targeting de idioma, interesses de Brasil, lookalikes. Resposta, em ordem de força:</p>
+<div class="scroll"><table>
+<thead><tr><th>Camada</th><th>Força</th><th>Comentário</th></tr></thead>
+<tbody>
+<tr class="hi"><td><b>País + Idioma: Português</b></td><td><span class="pill ok">Use — é a base</span></td><td>O filtro mais confiável que existe para esse público. Pega quem declara português ao Meta ou usa a interface em português. Traz também portugueses e angolanos residentes; o criativo em português brasileiro faz a filtragem final.</td></tr>
+<tr class="hi"><td><b>"Pessoas que moram neste local"</b></td><td><span class="pill ok">Obrigatório</span></td><td>Sem isso você paga para mostrar anúncio de "brasileiro morando nos EUA" para brasileiro em férias em Orlando.</td></tr>
+<tr><td>Criativo fazendo a seleção</td><td><span class="pill ok">Use junto</span></td><td>Complementa, não substitui. Gancho de identidade nos 3 primeiros segundos.</td></tr>
+<tr><td>Interesses tipo "Brasil", "cultura brasileira"</td><td><span class="pill warn">Não no início</span></td><td>Impreciso — pega turista, curioso e descendente de terceira geração — e estreita o leilão, subindo um CPM que já é alto. Se for testar, faça como conjunto separado depois da validação.</td></tr>
+<tr><td>Lookalike de clientes</td><td><span class="pill warn">Ainda não</span></td><td>Precisa de base semeadora relevante para valer a pena. Com poucas dezenas de clientes, o lookalike é ruído. Volte a isso a partir de ~100 registros de qualidade.</td></tr>
+<tr><td>Lookalike de quem concluiu o quiz</td><td><span class="pill ok">Sim, na semana 4+</span></td><td>Esse chega antes: quando houver algumas centenas de conclusões, um LAL 1–3% delas é uma camada legítima de expansão.</td></tr>
+<tr><td>Seguidores / engajamento IG</td><td><span class="pill ok">Sim, mas como remarketing</span></td><td>Com +200 mil seguidores, esse é um dos seus ativos mais subutilizados — mas ele pertence ao Bloco 14, não à prospecção fria.</td></tr>
+</tbody></table></div>
+<div class="box ok">
+<p class="lab">Configuração final do conjunto do exterior</p>
+<p><code>Local: Estados Unidos · Pessoas que moram neste local · Idade 25–55 · Todos os gêneros · Idiomas: Português · Segmentação detalhada: vazia · Posicionamentos: Advantage+</code></p>
+</div>
+</section>
+
+<section id="b9">
+<p class="eyebrow">Bloco 09</p>
+<h2>Estratégia dos 9 criativos</h2>
+<p>Não vi os seus 9 anúncios. Então entrego o instrumento para você classificá-los, o teste que revela se eles são realmente diferentes, e o mapa de hipóteses que eu usaria — construído a partir do seu próprio deck, que já contém oito ângulos validados que você usa para vender ao vivo.</p>
+
+<h3>9.1 · Ficha de classificação — preencha para cada anúncio</h3>
+<div class="scroll"><table>
+<thead><tr><th>Campo</th><th>O que responder</th></tr></thead>
+<tbody>
+<tr><td><b>Gancho</b></td><td>A primeira frase, literal, dos 3 primeiros segundos</td></tr>
+<tr><td><b>Dor</b></td><td>Qual dos 4 vazamentos ou das 4 crenças do seu deck ele ativa</td></tr>
+<tr><td><b>Desejo</b></td><td>O estado final prometido — e ele é estético, funcional, social ou identitário?</td></tr>
+<tr><td><b>Mecanismo</b></td><td>Cita o Método 1% / Ciclo 4A, ou vende resultado sem mecanismo?</td></tr>
+<tr><td><b>Nível de consciência</b></td><td>Inconsciente · Consciente do problema · Da solução · Do produto · Totalmente</td></tr>
+<tr><td><b>Avatar</b></td><td>Gênero, faixa, contexto, país. Se você não consegue nomear <i>uma</i> pessoa, o criativo é genérico.</td></tr>
+<tr><td><b>Formato</b></td><td>Fala à câmera · b-roll narrado · captura de tela · depoimento · carrossel · estático</td></tr>
+<tr><td><b>Promessa</b></td><td>A frase exata. Ela é compatível com a política de não prometer resultado?</td></tr>
+<tr><td><b>CTA</b></td><td>O que pede, e como nomeia o destino (avaliação? aplicação? formulário?)</td></tr>
+<tr><td><b>Estilo</b></td><td>Autoridade sóbria · confronto · vulnerabilidade · didático · aspiracional</td></tr>
+<tr><td><b>Prova</b></td><td>Nenhuma · autoridade · números · caso · processo. <b>Marque também se é prova de físico ou de trabalho.</b></td></tr>
+<tr><td><b>Emoção principal</b></td><td>Frustração · vergonha · esperança · raiva · alívio · orgulho · medo do futuro</td></tr>
+</tbody></table></div>
+
+<div class="box v">
+<p class="lab">O teste de diferenciação — aplique antes de subir qualquer coisa</p>
+<p>Dois anúncios são <b>o mesmo anúncio</b> se compartilharem os três: <b>nível de consciência</b>, <b>avatar</b> e <b>emoção principal</b>. Formato diferente e roupa diferente não fazem hipótese diferente — fazem variação. Se, ao preencher a ficha, você descobrir que 7 dos 9 são "homem 30+, consciente do problema, frustração", você não tem 9 testes: tem 1 teste com 9 embalagens, e vai gastar três semanas para descobrir qual embalagem é mais bonita.</p>
+<p><b>Meta mínima do primeiro round:</b> cobrir pelo menos <b>3 níveis de consciência diferentes</b> e <b>3 emoções diferentes</b>. Se os seus 9 não cobrirem, produza os que faltam antes de começar — é mais barato do que descobrir isso com R$ 4.000 gastos.</p>
+</div>
+
+<h3>9.2 · O mapa que eu usaria no primeiro round</h3>
+<p>Cada linha é uma hipótese de marketing distinta, e cada uma nasce de algo que já está no seu deck ou na sua biografia. A coluna "o que o resultado te ensina" é o que separa laboratório de tentativa.</p>
+<div class="scroll"><table>
+<thead><tr><th>Slot</th><th>Hipótese</th><th class="n">Consciência</th><th>Emoção</th><th>Se vencer, você aprendeu que…</th></tr></thead>
+<tbody>
+<tr><td><b>AD 01</b><br>Brasil</td><td><b>Ausência de dados</b> — "você está ajustando treino e dieta no achismo porque não mede nada"</td><td class="n">Problema</td><td>Frustração</td><td>…o seu público compra <b>método</b>. Abre toda uma linha de criativo técnico/didático.</td></tr>
+<tr><td><b>AD 02</b><br>Brasil</td><td><b>A ficha pronta</b> — "foi feita para todo mundo, logo não foi feita para você"</td><td class="n">Solução</td><td>Raiva</td><td>…o público já rejeitou soluções genéricas e está pronto para o argumento de individualização. Ângulo contra-concorrência.</td></tr>
+<tr><td><b>AD 03</b><br>Brasil</td><td><b>Identidade 30+</b> — "o que funcionava aos 25 parou de funcionar, e ninguém te avisou"</td><td class="n">Problema</td><td>Medo do futuro</td><td>…a segmentação por fase de vida é mais forte que a por objetivo. Muda todo o casting dos criativos seguintes.</td></tr>
+<tr><td><b>AD 04</b><br>Brasil</td><td><b>Autoridade</b> — atleta, 13 anos de esporte, formação, quem já acompanhou</td><td class="n">Produto</td><td>Confiança</td><td>…a marca pessoal já carrega a venda. Se ganhar, invista em conteúdo de autoridade e reduza o custo de convencimento.</td></tr>
+<tr><td><b>AD 05</b><br>Brasil</td><td><b>Contrarian</b> — "não é falta de disciplina. Provavelmente nunca foi."</td><td class="n">Inconsciente</td><td>Alívio</td><td>…tirar a culpa converte melhor que criar urgência. É a hipótese mais alinhada ao seu slide 1 e a que eu apostaria.</td></tr>
+<tr><td><b>AD 06</b><br>Exterior</td><td><b>Identidade migrante</b> — "brasileiro que mora fora:" + dor de contexto</td><td class="n">Problema</td><td>Reconhecimento</td><td>…identidade sozinha seleciona. Se vencer, replique a estrutura para cada país.</td></tr>
+<tr><td><b>AD 07</b><br>Exterior</td><td><b>Comida</b> — "montar dieta com o que existe no mercado daí, não com o que tem no Brasil"</td><td class="n">Solução</td><td>Alívio</td><td>…a dor operacional específica vence a dor genérica. Abre uma linha inteira de criativo utilitário.</td></tr>
+<tr><td><b>AD 08</b><br>Exterior</td><td><b>A ponte</b> — "eu morei seis anos nos Estados Unidos. Eu sei exatamente o que acontece nos dois primeiros anos."</td><td class="n">Produto</td><td>Confiança</td><td>…sua biografia é o ativo. Incopiável pelo concorrente. Se vencer, é o eixo permanente do Mercado B.</td></tr>
+<tr><td><b>AD 09</b><br>Exterior</td><td><b>Sem rede de apoio</b> — acompanhamento em português, alguém do seu lado no fuso da sua vida</td><td class="n">Problema</td><td>Solidão</td><td>…o que você vende de fato (acompanhamento) é o que atrai — e não treino/dieta. Reposiciona a oferta inteira.</td></tr>
+</tbody></table></div>
+
+<h3>9.3 · Distribuição por nível de consciência</h3>
+<p>Você pediu explicitamente para não depender de "quer emagrecer?". Concordo, e o motivo é econômico, não estético: "quer emagrecer" fala com o público <em>mais consciente do problema e menos consciente da solução</em>, que é o mais disputado, o mais barato de atrair e o mais caro de converter em R$ 3.000. Distribuição-alvo do seu portfólio de criativos:</p>
+<div class="grid g3">
+<div class="card s"><h5>Inconsciente · 15%</h5><p>A pessoa não relaciona o problema à ausência de sistema. Entra por identidade, rotina ou por uma observação sobre o mundo. Maior alcance, maior CPL, pior conversão imediata — mas é o que constrói o topo para os próximos meses.</p></div>
+<div class="card"><h5>Consciente do problema · 40%</h5><p>Sabe que travou, não sabe por quê. <b>É o seu centro de gravidade</b> — e coincide com os slides 3 e 4 do deck. A maior parte da verba mora aqui.</p></div>
+<div class="card"><h5>Consciente da solução · 25%</h5><p>Já sabe que precisa de acompanhamento; está escolhendo quem. Aqui entram os ângulos contra-alternativa: ficha pronta, app genérico, personal da academia, "já fiz consultoria antes e não deu certo".</p></div>
+<div class="card s"><h5>Consciente do produto · 15%</h5><p>Conhece você. Aqui vive o remarketing e o conteúdo de autoridade. CPL baixo, conversão alta, volume limitado pelo tamanho da sua audiência.</p></div>
+<div class="card s"><h5>Totalmente consciente · 5%</h5><p>Só falta a oferta e o empurrão. Público minúsculo, conversão altíssima. É o público de remarketing quente do Bloco 14 — nunca de prospecção fria.</p></div>
+</div>
+
+<h3>9.4 · Anatomia modular — construa já pensando na iteração</h3>
+<p>Grave cada criativo em blocos separáveis, porque no Bloco 10 você vai precisar recombiná-los para descobrir o que realmente fez o anúncio funcionar:</p>
+<pre><b>[A] GANCHO</b>      0–3s    a frase que para o dedo
+<b>[B] CORPO</b>       3–35s   dor → diagnóstico → mecanismo → prova
+<b>[C] CTA</b>         35–45s  o pedido e o nome do destino
+
+<u>Grave 3 ganchos alternativos para cada corpo, no mesmo dia, com a mesma roupa e luz.</u>
+<u>Custa 10 minutos a mais na gravação e economiza uma semana de teste depois.</u></pre>
+</section>
+
+<section id="b10">
+<p class="eyebrow">Bloco 10</p>
+<h2>Critérios para matar, manter e escalar</h2>
+
+<h3>10.1 · Por que CTR é um péssimo juiz sozinho</h3>
+<div class="box v">
+<p class="lab">O paradoxo do gancho qualificador</p>
+<p>Um anúncio que abre com <i>"Se você não consegue investir em acompanhamento profissional agora, esse vídeo não é para você"</i> vai ter CTR menor que um que abre com <i>"3 truques para secar a barriga"</i>. Necessariamente. Ele afastou gente de propósito.</p>
+<p>Mas o primeiro entrega gente que já se posicionou sobre dinheiro antes de clicar. O segundo entrega curiosidade barata. Se o primeiro tem CTR 0,9% e custo por call agendada de R$ 120, e o segundo tem CTR 2,4% e custo por call de R$ 380, o segundo é <b>três vezes pior</b> — e é ele que o algoritmo vai preferir nas primeiras 48 horas, e é ele que você vai chamar de vencedor se olhar a coluna errada.</p>
+<p><b>Regra:</b> CTR e CPC são diagnóstico de <i>gancho</i>, nunca decisão de <i>investimento</i>. A decisão é sempre tomada na coluna mais profunda que já tiver dado suficiente — e nunca antes.</p>
+</div>
+
+<h3>10.2 · Azar estatístico versus criativo ruim</h3>
+<p>Esta é a distinção que você pediu, e ela tem resposta numérica. A incerteza relativa de uma contagem de conversões é aproximadamente <strong>1 ÷ √n</strong>:</p>
+<div class="scroll"><table>
+<thead><tr><th class="n">Conversões observadas</th><th class="n">Margem de erro aprox. (95%)</th><th>O que você pode afirmar</th></tr></thead>
+<tbody>
+<tr><td class="n">1–4</td><td class="n">± 100%+</td><td>Nada. Literalmente nada. Um criativo com 1 conversão e outro com 4 são indistinguíveis.</td></tr>
+<tr><td class="n">5</td><td class="n">± 88%</td><td>Só extremos: zero contra muitos.</td></tr>
+<tr><td class="n">10</td><td class="n">± 63%</td><td>Diferenças acima de 2x começam a ser reais.</td></tr>
+<tr><td class="n">20</td><td class="n">± 45%</td><td>Diferenças acima de 60% são provavelmente reais.</td></tr>
+<tr><td class="n">30</td><td class="n">± 37%</td><td><b>Limiar prático de decisão.</b></td></tr>
+<tr><td class="n">100</td><td class="n">± 20%</td><td>Diferenças de 30% já são acionáveis.</td></tr>
+</tbody></table></div>
+<p><strong>Tradução operacional:</strong> com 6 calls agendadas de um criativo e 3 de outro, você <em>não sabe</em> qual é melhor — você tem uma diferença compatível com puro acaso. Por isso as regras de corte abaixo são baseadas em <strong>gasto acumulado</strong>, e não em taxas comparadas: gasto é a única coisa que garante que a amostra existiu.</p>
+
+<h3>10.3 · Regras de corte por gasto acumulado</h3>
+<p>Referência: <em class="hyp">alvo hipotético</em> de <strong>R$ 150 por call agendada no Brasil</strong> — substitua pelo seu número real assim que existir.</p>
+<div class="scroll"><table>
+<thead><tr><th class="n">Gasto do anúncio</th><th>Condição</th><th>Decisão</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td class="n">&lt; R$ 75</td><td>qualquer</td><td><b>Não toque.</b> Única exceção: reprovado por política.</td><td>Amostra inexistente. Mexer aqui é superstição.</td></tr>
+<tr><td class="n">R$ 75</td><td>0 QuizStart</td><td>Matar</td><td>Nem chegou à página. Problema de gancho ou de compatibilidade anúncio↔página.</td></tr>
+<tr><td class="n">R$ 150</td><td>0 QuizComplete</td><td>Matar</td><td>Traz gente que não se reconhece no quiz: atenção errada.</td></tr>
+<tr><td class="n">R$ 300</td><td>0 Booked Call, mas QuizComplete barato</td><td><b>Não mate o anúncio</b> — investigue a tela final</td><td>Se todos os criativos têm o mesmo sintoma, o gargalo é do funil, não do anúncio. Matar criativo aqui é tratar febre com analgésico.</td></tr>
+<tr><td class="n">R$ 450 (3×)</td><td>0 Booked Call e QuizComplete caro</td><td>Matar</td><td>Agora há evidência suficiente.</td></tr>
+<tr><td class="n">R$ 450</td><td>1–2 Booked Calls, custo dentro do alvo</td><td>Manter e observar</td><td>Zona de incerteza estatística. Cortar aqui é onde se mata vencedor.</td></tr>
+<tr><td class="n">R$ 900 (6×)</td><td>custo por call &gt; 2× alvo</td><td>Matar</td><td>—</td></tr>
+<tr><td class="n">R$ 900</td><td>custo por call &lt; alvo, comparecimento normal</td><td><b>Promover à campanha de escala</b></td><td>—</td></tr>
+</tbody></table></div>
+<h4>Quando NÃO desligar, mesmo com número feio</h4>
+<ul>
+<li>Menos de R$ 75 gastos — sempre.</li>
+<li>Nas primeiras 48h de vida do conjunto, ou nas 48h seguintes a qualquer edição de orçamento acima de 20%: o conjunto está reaprendendo e todo custo está inflado.</li>
+<li>Quando o anúncio tem CTR baixo mas <b>taxa de conclusão de quiz acima da média</b>: ele está qualificando. Esse é o perfil do seu melhor criativo, não do pior.</li>
+<li>Quando o problema é comum a todos os anúncios do conjunto — o gargalo é do funil.</li>
+<li>Segunda-feira de manhã olhando o fim de semana. Decida sempre com janelas de 7 dias fechadas.</li>
+</ul>
+
+<h3>10.4 · Escala vertical</h3>
+<div class="grid g2">
+<div class="card"><h5>Quando subir</h5><p>Três dias consecutivos com custo por evento igual ou abaixo do alvo, <b>fora</b> da fase de aprendizado, e com pelo menos 30 eventos acumulados no conjunto.</p></div>
+<div class="card"><h5>Quanto subir</h5><p><b>20 a 30% por vez</b>, no máximo a cada 3 dias. Acima de ~30% o conjunto costuma reentrar em aprendizado e você perde 2 a 3 dias de eficiência para ganhar 1 de volume. Não é regra do Meta, é observação de comportamento — e o custo de errar é assimétrico.</p></div>
+<div class="card"><h5>Quando parar</h5><p>Quando o custo por evento subir mais de 30% sobre a média dos 7 dias anteriores e permanecer assim por 3 dias, ou quando a frequência subir com queda simultânea de CTR — saturação de audiência. Volte ao último orçamento estável e vá para a escala horizontal.</p></div>
+<div class="card s"><h5>O que nunca fazer</h5><p>Dobrar orçamento numa sexta. Subir orçamento e trocar criativo no mesmo dia — você perde a atribuição da causa. Subir depois de <i>um</i> dia bom.</p></div>
+</div>
+
+<h3>10.5 · Escala horizontal</h3>
+<ul>
+<li><b>Novos conceitos:</b> ângulos do Bloco 20 que ainda não foram testados. É a alavanca de maior teto.</li>
+<li><b>Novos ganchos sobre corpo vencedor:</b> o mais barato e o de maior retorno imediato — ver 10.6.</li>
+<li><b>Novos formatos:</b> o mesmo argumento como fala à câmera, como narração sobre b-roll, como captura de tela de um ajuste real, como carrossel.</li>
+<li><b>Nova geografia:</b> duplicar a campanha do Brasil para Portugal, ou a dos EUA para Canadá e Reino Unido.</li>
+<li><b>Novos públicos:</b> lookalike de quem concluiu o quiz, lookalike de clientes quando a base permitir.</li>
+<li><b>Novo posicionamento isolado:</b> Reels apenas, ou Stories apenas, como conjunto próprio — só quando houver verba para não fragmentar.</li>
+</ul>
+
+<h3>10.6 · Iteração criativa — descobrindo o que fez funcionar</h3>
+<p>Vencedor = <code>A + B + C</code>. Teste uma variável por vez, nunca duas:</p>
+<pre><b>RODADA 1 · o gancho é a causa?</b>
+  A2 + B + C     gancho novo, mesmo corpo, mesmo CTA
+  A3 + B + C     terceiro gancho
+  <u>Se A2 e A3 mantiverem o desempenho → o corpo é o motor, o gancho é intercambiável.</u>
+  <u>Se despencarem → o gancho é o ativo. Proteja-o e itere em cima dele.</u>
+
+<b>RODADA 2 · o corpo é a causa?</b>
+  A + B2 + C     mesmo gancho, argumento reordenado ou outra prova
+  <u>Isole: mude a ordem OU a prova, nunca as duas.</u>
+
+<b>RODADA 3 · o CTA é a causa?</b>
+  A + B + C2     "faça sua avaliação" vs "veja se você se qualifica" vs "agende o diagnóstico"
+  <u>O CTA raramente muda CTR. Muda taxa de conclusão do quiz e taxa de agendamento —</u>
+  <u>por isso ele só pode ser julgado no fim do funil.</u></pre>
+<p><strong>Regra do laboratório:</strong> nenhuma rodada com menos de R$ 300 por variação. Abaixo disso você está lendo ruído e chamando de aprendizado.</p>
+</section>
+
+<section id="b11">
+<p class="eyebrow">Bloco 11</p>
+<h2>Tracking — Pixel, CAPI e CRM</h2>
+<p>Você definiu isto como crítico e concordo: sem esta camada, tudo que vem antes vira opinião. O objetivo operacional é um só — <strong>conseguir responder, com nome e sobrenome, qual anúncio trouxe cada cliente pago</strong>. Isso exige uma chave de junção que atravesse o funil inteiro.</p>
+
+<h3>11.1 · A cadeia completa</h3>
+<pre><b>META ADS</b>
+   │  URL com UTMs + fbclid
+   ▼
+<b>LANDING / QUIZ</b>  <i>avaliacao.wiltonmurilo.com</i>
+   │  ① gera <i>lead_id</i> (UUID) e grava em localStorage
+   │  ② captura fbclid → constrói <i>_fbc</i> · lê <i>_fbp</i>
+   │  ③ grava UTMs de primeiro toque em cookie no domínio raiz
+   │  ④ Pixel + CAPI disparam em paralelo com o MESMO <i>event_id</i>
+   ▼
+<b>CALENDÁRIO</b>  <i>Cal.com / Calendly</i>
+   │  ⑤ URL recebe ?lead_id=&utm_*=&fbc=&fbp= como campos ocultos
+   │  ⑥ webhook de agendamento → seu servidor → CAPI <i>Schedule</i>
+   ▼
+<b>CRM</b>  <i>(ou planilha, no começo)</i>
+   │  ⑦ uma linha por lead, carregando lead_id + utms + fbc + fbp + telefone + e-mail
+   │  ⑧ você marca: compareceu · não compareceu · fechou · valor · forma de pagamento
+   ▼
+<b>DE VOLTA PARA O META</b>
+      ⑨ CAPI <i>Purchase</i> com value, currency, fbc, fbp, e-mail e telefone com hash
+      ⑩ <u>o loop fecha: o Meta aprende quem realmente comprou</u></pre>
+
+<h3>11.2 · Eventos — quais devem existir</h3>
+<div class="scroll"><table>
+<thead><tr><th>Evento</th><th>Tipo</th><th>Dispara quando</th><th class="n">Pixel</th><th class="n">CAPI</th><th>Serve para</th></tr></thead>
+<tbody>
+<tr><td><code>PageView</code></td><td>Padrão</td><td>Toda página</td><td class="n">sim</td><td class="n">sim</td><td>Base, remarketing</td></tr>
+<tr><td><code>ViewContent</code></td><td>Padrão</td><td>Landing carregada + 3s ou 25% de scroll</td><td class="n">sim</td><td class="n">não</td><td>Separar visita real de bounce técnico</td></tr>
+<tr class="hi"><td><code>QuizStart</code></td><td>Custom</td><td>Primeira resposta selecionada</td><td class="n">sim</td><td class="n">sim</td><td><b>Diagnóstico</b> + otimização de arranque no exterior</td></tr>
+<tr><td><code>QuizProgress</code></td><td>Custom</td><td>A cada pergunta, com parâmetro <code>step</code></td><td class="n">sim</td><td class="n">não</td><td>Achar a pergunta que derruba. <b>Nunca</b> para otimização.</td></tr>
+<tr class="hi"><td><code>Lead</code></td><td>Padrão</td><td>Quiz concluído — <b>todos</b>, com parâmetro <code>qualified: true/false</code></td><td class="n">sim</td><td class="n">sim</td><td><b>Otimização da Fase 1</b></td></tr>
+<tr class="hi"><td><code>QualifiedLead</code></td><td>Conversão personalizada sobre <code>Lead</code> filtrada por <code>qualified=true</code></td><td>—</td><td class="n">—</td><td class="n">—</td><td><b>Otimização da Fase 2</b></td></tr>
+<tr><td><code>InitiateCheckout</code></td><td>Padrão</td><td>Abriu o calendário</td><td class="n">sim</td><td class="n">sim</td><td>Medir a fricção da transição quiz→calendário</td></tr>
+<tr class="hi"><td><code>Schedule</code></td><td>Padrão</td><td>Agendamento <b>confirmado</b> (webhook do calendário)</td><td class="n">não</td><td class="n">sim</td><td><b>Otimização da Fase 3</b> — o alvo final realista</td></tr>
+<tr><td><code>ShowedUp</code></td><td>Custom</td><td>Você marca no CRM após a call</td><td class="n">não</td><td class="n">sim</td><td>Qualidade por criativo. Sem isso você não distingue criativo que agenda de criativo que aparece.</td></tr>
+<tr class="hi"><td><code>Purchase</code></td><td>Padrão</td><td>Contrato fechado, com <code>value</code> e <code>currency</code></td><td class="n">não</td><td class="n">sim</td><td>Sinal de valor, públicos semelhantes por valor, verdade do ROAS</td></tr>
+</tbody></table></div>
+<div class="box ok">
+<p class="lab">Por que <code>Lead</code> dispara para todos e não só para os qualificados</p>
+<p>Porque assim você mantém o dado completo e troca o alvo de otimização quando quiser, sem reinstrumentar nada. A conversão personalizada filtrada pelo parâmetro <code>qualified</code> é otimizável do mesmo jeito. Se você disparar <code>Lead</code> só para os qualificados, perde para sempre a base de comparação — e não consegue nem calcular a sua taxa de qualificação.</p>
+</div>
+
+<h3>11.3 · Pixel + CAPI e a deduplicação</h3>
+<p>Rode <strong>os dois em paralelo</strong> para todo evento marcado acima. O navegador perde entre 20% e 40% dos eventos (iOS, bloqueadores, navegador interno do Instagram, ITP); o servidor não perde. Mas os dois juntos, sem deduplicação, contam tudo em dobro e envenenam a otimização.</p>
+<div class="scroll"><table>
+<thead><tr><th>Regra</th><th>Implementação</th></tr></thead>
+<tbody>
+<tr><td><b>Mesmo <code>event_id</code></b></td><td>Gere um UUID por ocorrência do evento e envie o mesmo valor no Pixel (<code>eventID</code>) e no CAPI (<code>event_id</code>). Esta é a chave. Sem ela não há deduplicação confiável.</td></tr>
+<tr><td><b>Mesmo <code>event_name</code></b></td><td>Grafia idêntica, maiúsculas incluídas. <code>QuizStart</code> ≠ <code>quizstart</code>.</td></tr>
+<tr><td><b>Janela</b></td><td>A deduplicação acontece dentro de aproximadamente 48h. Evento de servidor atrasado além disso conta como novo — relevante para <code>ShowedUp</code> e <code>Purchase</code>, que por isso <b>só</b> devem ir por CAPI, nunca em par.</td></tr>
+<tr><td><b>Parâmetros de correspondência</b></td><td>Sempre que possível, no servidor: <code>em</code>, <code>ph</code>, <code>fn</code>, <code>ln</code>, <code>ct</code>, <code>country</code>, <code>external_id</code> (todos com hash SHA-256, minúsculas, sem espaços) + <code>fbp</code>, <code>fbc</code>, <code>client_ip_address</code>, <code>client_user_agent</code>, <code>action_source</code>, <code>event_source_url</code>.</td></tr>
+<tr><td><b>Meta de qualidade</b></td><td>Acompanhe a <b>Qualidade da correspondência de eventos</b> no Gerenciador. Abaixo de 6.0 você está desperdiçando sinal; telefone com DDI e e-mail resolvem quase sempre. No exterior, telefone com DDI correto é o parâmetro que mais move esse número.</td></tr>
+</tbody></table></div>
+
+<h3>11.4 · UTMs, fbclid e a chave que atravessa tudo</h3>
+<pre><b>URL DO ANÚNCIO — padrão fixo</b>
+
+https://avaliacao.wiltonmurilo.com/
+  ?utm_source=meta
+  &utm_medium=paid
+  &utm_campaign={{campaign.name}}
+  &utm_content={{ad.name}}
+  &utm_term={{adset.name}}
+  &utm_id={{ad.id}}
+
+<u>Use as macros do Meta entre chaves duplas — elas se preenchem sozinhas e não</u>
+<u>quebram quando você renomeia. E é por isso que o padrão de nome do Bloco 7 importa:</u>
+<u>o nome do anúncio VIRA o seu relatório.</u></pre>
+<ul>
+<li><b><code>fbclid</code></b> chega sozinho na URL. Se o cookie <code>_fbc</code> não existir, construa: <code>fb.1.{timestamp_ms}.{fbclid}</code> e persista.</li>
+<li><b>Grave os cookies no domínio raiz</b> (<code>.wiltonmurilo.com</code>), não no subdomínio. Assim <code>_fbp</code> e <code>_fbc</code> sobrevivem à navegação entre a landing, o quiz e qualquer outra página sua — e o índice de subdomínio do <code>_fbc</code> fica correto.</li>
+<li><b>Guarde primeiro toque e último toque.</b> Um lead que veio do anúncio, sumiu e voltou pelo Instagram orgânico precisa continuar creditado ao anúncio no seu CRM.</li>
+<li><b><code>lead_id</code>:</b> gere um UUID no primeiro carregamento, grave em cookie e localStorage, envie como parâmetro em <b>todos</b> os eventos e propague para o calendário. <b>É essa chave, e não o Meta, que responde "qual anúncio trouxe esse cliente".</b></li>
+</ul>
+
+<h3>11.5 · A travessia mais frágil: quiz → calendário</h3>
+<div class="box v">
+<p class="lab">É aqui que 90% dos funis de aplicação perdem a atribuição</p>
+<p>Quando o quiz manda a pessoa para <code>cal.com/wilton</code> ou <code>calendly.com/...</code>, o contexto morre: outro domínio, outros cookies, nenhum UTM. Você continua vendo agendamentos, mas deixa de saber de onde vieram — e é exatamente aí que a resposta valiosa mora.</p>
+<p><b>Correção:</b> monte a URL do calendário dinamicamente com os parâmetros e mapeie cada um para um campo oculto do formulário de agendamento:</p>
+<pre>https://cal.com/wilton/avaliacao
+  ?name={{nome}}&email={{email}}
+  &metadata[lead_id]={{lead_id}}
+  &metadata[utm_content]={{utm_content}}
+  &metadata[fbc]={{fbc}}&metadata[fbp]={{fbp}}</pre>
+<p>Depois, ligue o <b>webhook de <code>booking.created</code></b> do calendário ao seu servidor, e é o servidor — não o navegador — que dispara <code>Schedule</code> via CAPI, já com <code>fbc</code>, <code>fbp</code> e os dados com hash. Isso torna o evento mais importante do seu funil imune a bloqueador, a iOS e ao navegador interno do Instagram.</p>
+<p><b>Melhor ainda, se a ferramenta permitir:</b> embutir o calendário na própria página final do quiz. Elimina o redirect, elimina a perda de contexto e sobe a taxa de agendamento por si só.</p>
+</div>
+
+<h3>11.6 · CRM — o mínimo viável</h3>
+<p>No começo, uma planilha resolve. O que <strong>não</strong> pode faltar é o conjunto de colunas — mudar de ferramenta depois é fácil, recuperar dado que você nunca guardou é impossível:</p>
+<div class="scroll"><table>
+<thead><tr><th>Grupo</th><th>Colunas</th></tr></thead>
+<tbody>
+<tr><td>Identidade</td><td><code>lead_id</code> · nome · e-mail · telefone com DDI · <b>país de residência</b> · cidade</td></tr>
+<tr><td>Origem</td><td><code>utm_source</code> · <code>utm_campaign</code> · <code>utm_content</code> (= nome do anúncio) · <code>utm_term</code> · <code>fbclid</code> · <code>fbc</code> · <code>fbp</code> · data do primeiro toque</td></tr>
+<tr><td>Quiz</td><td>Todas as respostas · vazamento diagnosticado · faixa de investimento declarada · flag <code>qualified</code></td></tr>
+<tr><td>Agenda</td><td>Data do agendamento · data da call · fuso · confirmou? · compareceu? · remarcou quantas vezes?</td></tr>
+<tr><td>Venda</td><td>Fechou? · oferta (completo/entrada) · valor contratado · <b>valor recebido no mês 1</b> · forma de pagamento · data</td></tr>
+<tr><td>Perda</td><td>Motivo, usando as <b>sete categorias do seu próprio roteiro</b>: capacidade financeira · percepção de valor · timing · medo · aprovação do parceiro · cartão/limite · prioridade</td></tr>
+</tbody></table></div>
+<p>Essa última linha é a mais subestimada. Motivo de perda categorizado, cruzado com o anúncio de origem, te diz coisas que nenhuma métrica de mídia diz — por exemplo, que o AD 03 traz gente que ama a ideia e não tem dinheiro, enquanto o AD 05 traz gente com dinheiro que ainda não acredita no método. Esses dois problemas têm soluções opostas, e sem essa coluna eles parecem o mesmo problema: "não fechou".</p>
+
+<h3>11.7 · Devolvendo as vendas para o Meta</h3>
+<p>A API de Conversões Offline foi absorvida pela Conversions API. Envie <code>Purchase</code> pelo mesmo endpoint de CAPI, com <code>action_source: "system_generated"</code> (ou <code>"other"</code>), o <code>value</code> real, a <code>currency</code> correta — <b>BRL para o Brasil, USD se você adotar preço em dólar</b> — e o máximo de parâmetros de correspondência. Envie até 7 dias após o fato para permanecer dentro da janela de atribuição; mais que isso, o evento entra mas perde poder de atribuição.</p>
+<p>Isso não serve para "otimizar por Purchase" agora (Bloco 12 mostra que a matemática não fecha). Serve para três coisas que valem muito: alimentar o modelo de qualidade do seu pixel, permitir <b>públicos semelhantes por valor</b> quando a base crescer, e te dar o ROAS verdadeiro dentro do próprio Gerenciador, ao lado do custo — que é onde você toma decisão.</p>
+</section>
+
+<section id="b12">
+<p class="eyebrow">Bloco 12</p>
+<h2>Eventos de otimização — a estratégia progressiva</h2>
+<p>Sua preferência declarada — "o evento mais profundo que ainda tenha volume suficiente" — está exatamente certa. A questão é que "volume suficiente" tem um número, e ele está no Bloco 6: <strong>custo por evento × 7,1 ≤ orçamento diário do conjunto</strong>. Aplicando isso ao seu caso:</p>
+
+<div class="scroll"><table>
+<thead><tr><th>Fase</th><th>Evento</th><th>Gatilho para entrar</th><th>Gatilho para sair</th><th>Risco</th></tr></thead>
+<tbody>
+<tr class="hi"><td><b>1</b><br>Dias 1–21<br>Brasil</td><td><code>Lead</code><br>(quiz concluído)</td><td>Imediato. R$ 200/dia cobre os ~R$ 157/dia exigidos.</td><td>Quando o custo por <code>QualifiedLead</code> × 7,1 couber no orçamento do conjunto</td><td>Lead volumoso e raso. Mitigue com a pergunta de investimento dentro do quiz (Bloco 15) — ela melhora a qualidade do lead <b>antes</b> de o algoritmo aprender com ele.</td></tr>
+<tr><td><b>1-b</b><br>Dias 1–14<br>Exterior</td><td><code>QuizStart</code></td><td>Imediato. <code>Lead</code> no exterior exigiria ~R$ 429/dia, acima dos R$ 150 previstos.</td><td>Assim que houver 10–15 <code>Lead</code> no exterior e o custo real for conhecido</td><td>Evento raso demais em mercado caro. Por isso é temporário e por isso o criativo do exterior precisa qualificar sozinho no gancho.</td></tr>
+<tr><td><b>2</b><br>Semana 4–8</td><td><code>QualifiedLead</code><br>(conversão personalizada)</td><td>Custo por QL conhecido <b>e</b> × 7,1 ≤ orçamento do conjunto. Na prática: ~R$ 320/dia no Brasil.</td><td>Quando o custo por <code>Schedule</code> couber</td><td>Se a sua definição de "qualificado" for estreita demais, o volume desaba e o conjunto volta ao aprendizado. Comece com uma definição generosa.</td></tr>
+<tr><td><b>3</b><br>Mês 3+</td><td><code>Schedule</code><br>(agendamento confirmado)</td><td>~R$ 1.000/dia no Brasil, ou custo por agendamento comprovadamente menor que o estimado</td><td>—</td><td>É o <b>destino final realista</b> da sua otimização.</td></tr>
+<tr><td><b>—</b></td><td><code>Purchase</code></td><td><span class="pill crit">Provavelmente nunca como evento de otimização</span></td><td>—</td><td>Exigiria ~R$ 6.400/dia só no Brasil para manter 50 eventos semanais. <b>Mande o evento sempre, otimize por ele quase nunca.</b></td></tr>
+</tbody></table></div>
+
+<div class="box v">
+<p class="lab">O confronto que você pediu, aplicado aqui</p>
+<p>Você escreveu como hipótese: "Fase 1 → Booked Call, depois Qualified Lead, depois Purchase". A ordem está invertida e o destino é inatingível. <b>Booked Call é o fim da jornada de otimização, não o começo</b> — ele custa R$ 1.000/dia para sustentar. E <b>Purchase nunca vai ser seu evento de otimização</b> num negócio de call com ticket de R$ 3.000 e volume de consultor individual: o volume de 50 vendas semanais que o Meta pede está a duas ordens de grandeza do seu negócio, e estaria mesmo que ele fosse muito bem-sucedido.</p>
+<p>O caminho real é <b>Lead → QualifiedLead → Schedule</b>, e a venda entra como <b>sinal de valor</b>, não como alvo. Quem otimiza por evento sem volume não fica com "otimização profunda": fica com entrega errática, custo instável e um conjunto permanentemente em aprendizado.</p>
+</div>
+
+<h3>12.1 · Regra de transição</h3>
+<p>Ao trocar o evento de otimização, <strong>não edite o conjunto existente</strong> — duplique-o, configure o novo evento no duplicado, suba os dois em paralelo por 5 a 7 dias com o orçamento dividido, e só desligue o antigo quando o novo estabilizar. Editar o evento de um conjunto maduro joga fora todo o histórico de aprendizado dele de uma vez, e você fica sem nada rodando bem no meio da transição.</p>
+</section>
+
+<section id="b13">
+<p class="eyebrow">Bloco 13</p>
+<h2>Economics do funil e CAC máximo</h2>
+<p><em class="hyp">Aviso</em> Todas as taxas abaixo são <strong>hipóteses de trabalho</strong> para você ter uma estrutura de cálculo antes de ter dados. Não são benchmarks de mercado e não devem ser citados como tal. A partir da semana 2 você substitui cada uma pelo seu número real e a planilha continua funcionando — é para isso que ela existe.</p>
+
+<h3>13.1 · Três cenários por 1.000 cliques no link</h3>
+<p>Base de 1.000 cliques (divida por 10 para ler em blocos de 100). Ticket usado: <strong>R$ 2.550</strong>, o ticket médio realizado da Correção 1 — não R$ 4.000.</p>
+<div class="scroll"><table>
+<thead><tr><th>Etapa</th><th class="n">Ruim</th><th class="n">Custo</th><th class="n">Saudável</th><th class="n">Custo</th><th class="n">Excelente</th><th class="n">Custo</th></tr></thead>
+<tbody>
+<tr><td>CPM</td><td class="n">R$ 45</td><td class="n">—</td><td class="n">R$ 35</td><td class="n">—</td><td class="n">R$ 30</td><td class="n">—</td></tr>
+<tr><td>CTR (link)</td><td class="n">0,80%</td><td class="n">—</td><td class="n">1,30%</td><td class="n">—</td><td class="n">1,60%</td><td class="n">—</td></tr>
+<tr class="hi"><td><b>Investimento</b></td><td class="n"><b>R$ 5.625</b></td><td class="n">CPC R$ 5,63</td><td class="n"><b>R$ 2.692</b></td><td class="n">CPC R$ 2,69</td><td class="n"><b>R$ 1.875</b></td><td class="n">CPC R$ 1,88</td></tr>
+<tr><td>Landing Page Views</td><td class="n">700 <span style="color:var(--silver-dim)">70%</span></td><td class="n">R$ 8,04</td><td class="n">820 <span style="color:var(--silver-dim)">82%</span></td><td class="n">R$ 3,28</td><td class="n">850 <span style="color:var(--silver-dim)">85%</span></td><td class="n">R$ 2,21</td></tr>
+<tr><td>Iniciaram o quiz</td><td class="n">224 <span style="color:var(--silver-dim)">32%</span></td><td class="n">R$ 25,11</td><td class="n">369 <span style="color:var(--silver-dim)">45%</span></td><td class="n">R$ 7,30</td><td class="n">425 <span style="color:var(--silver-dim)">50%</span></td><td class="n">R$ 4,41</td></tr>
+<tr><td>Concluíram (CPL)</td><td class="n">90 <span style="color:var(--silver-dim)">40%</span></td><td class="n">R$ 62,78</td><td class="n">203 <span style="color:var(--silver-dim)">55%</span></td><td class="n">R$ 13,26</td><td class="n">255 <span style="color:var(--silver-dim)">60%</span></td><td class="n">R$ 7,35</td></tr>
+<tr><td>Qualificados (aplicação)</td><td class="n">31 <span style="color:var(--silver-dim)">35%</span></td><td class="n">R$ 179</td><td class="n">91 <span style="color:var(--silver-dim)">45%</span></td><td class="n">R$ 29,49</td><td class="n">122 <span style="color:var(--silver-dim)">48%</span></td><td class="n">R$ 15,32</td></tr>
+<tr><td>Calls agendadas</td><td class="n">8,8 <span style="color:var(--silver-dim)">28%</span></td><td class="n">R$ 639</td><td class="n">29,2 <span style="color:var(--silver-dim)">32%</span></td><td class="n">R$ 92</td><td class="n">42,8 <span style="color:var(--silver-dim)">35%</span></td><td class="n">R$ 44</td></tr>
+<tr><td>Calls realizadas</td><td class="n">4,0 <span style="color:var(--silver-dim)">45%</span></td><td class="n">R$ 1.421</td><td class="n">17,5 <span style="color:var(--silver-dim)">60%</span></td><td class="n">R$ 154</td><td class="n">29,1 <span style="color:var(--silver-dim)">68%</span></td><td class="n">R$ 64</td></tr>
+<tr class="hi"><td><b>Vendas</b></td><td class="n"><b>0,5</b> <span style="color:var(--silver-dim)">12%</span></td><td class="n"><b>CAC R$ 11.863</b></td><td class="n"><b>3,9</b> <span style="color:var(--silver-dim)">22%</span></td><td class="n"><b>CAC R$ 698</b></td><td class="n"><b>7,6</b> <span style="color:var(--silver-dim)">26%</span></td><td class="n"><b>CAC R$ 248</b></td></tr>
+<tr class="hi"><td><b>Receita contratada</b></td><td class="n">R$ 1.209</td><td class="n"><b>ROAS 0,21</b></td><td class="n">R$ 9.840</td><td class="n"><b>ROAS 3,65</b></td><td class="n">R$ 19.314</td><td class="n"><b>ROAS 10,3</b></td></tr>
+<tr><td><b>Caixa recebido no mês 1</b><br><span style="color:var(--muted)">12x sem antecipação</span></td><td class="n">R$ 142</td><td class="n"><span class="pill crit">−R$ 5.483</span></td><td class="n">R$ 1.158</td><td class="n"><span class="pill crit">−R$ 1.534</span></td><td class="n">R$ 2.272</td><td class="n"><span class="pill warn">+R$ 397</span></td></tr>
+</tbody></table></div>
+
+<div class="box v">
+<p class="lab">Leia esta linha duas vezes</p>
+<p>A última linha é a mais importante da tabela e é a que ninguém coloca no modelo. <b>No cenário saudável — com ROAS contratado de 3,65, que qualquer gestor de tráfego chamaria de ótimo — você fecha o mês 1 com R$ 1.534 negativos.</b> A operação é lucrativa e insolvente ao mesmo tempo. É exatamente por isso que a Correção 2 (antecipação de recebíveis) vem antes de qualquer otimização de criativo neste documento.</p>
+</div>
+
+<div class="box warn">
+<p class="lab">Sobre o cenário Excelente</p>
+<p>Ele é um <b>teto</b>, não uma meta. Note o que ele implica: 29 calls realizadas a cada R$ 1.875 investidos. A R$ 250/dia, isso seriam mais de 110 calls por mês. <b>Você não atende 110 calls por mês.</b> Se você chegar perto desse cenário, seu gargalo deixa de ser dinheiro no mesmo instante — e a prioridade vira triagem, SDR ou call mais curta, não mais orçamento.</p>
+</div>
+
+<h3>13.2 · CAC máximo</h3>
+<div class="scroll"><table>
+<thead><tr><th class="n">CAC</th><th class="n">ROAS<br>@ R$ 2.550 real</th><th class="n">ROAS<br>@ R$ 3.000 completo</th><th class="n">ROAS<br>@ R$ 4.000 do briefing</th><th class="n">% da contribuição</th><th>Classificação</th></tr></thead>
+<tbody>
+<tr><td class="n"><b>R$ 300</b></td><td class="n">8,50</td><td class="n">10,00</td><td class="n">13,33</td><td class="n">17%</td><td><span class="pill ok">Excelente</span> — reinvista tudo, o limite é a sua agenda</td></tr>
+<tr><td class="n"><b>R$ 500</b></td><td class="n">5,10</td><td class="n">6,00</td><td class="n">8,00</td><td class="n">28%</td><td><span class="pill ok">Bom</span> — patamar sustentável de escala</td></tr>
+<tr class="hi"><td class="n"><b>R$ 700</b></td><td class="n">3,64</td><td class="n">4,29</td><td class="n">5,71</td><td class="n">39%</td><td><span class="pill ok">Aceitável</span> — é o alvo realista dos primeiros 90 dias</td></tr>
+<tr><td class="n"><b>R$ 1.000</b></td><td class="n">2,55</td><td class="n">3,00</td><td class="n">4,00</td><td class="n">56%</td><td><span class="pill warn">Perigoso</span> — só com antecipação e com renovação definida</td></tr>
+<tr><td class="n"><b>R$ 1.200</b></td><td class="n">2,13</td><td class="n">2,50</td><td class="n">3,33</td><td class="n">68%</td><td><span class="pill crit">Muito perigoso</span> — sobra R$ 558 por cliente para 12 meses de trabalho</td></tr>
+<tr><td class="n"><b>R$ 1.500</b></td><td class="n">1,70</td><td class="n">2,00</td><td class="n">2,67</td><td class="n">85%</td><td><span class="pill crit">Inviável</span> — você trabalharia um ano por R$ 258 de margem</td></tr>
+</tbody></table></div>
+
+<h4>De onde vem a "contribuição"</h4>
+<p>Partindo de R$ 2.550 de ticket médio realizado <em class="hyp">valores hipotéticos, ajuste aos seus</em>:</p>
+<div class="scroll"><table>
+<thead><tr><th>Item</th><th class="n">%</th><th class="n">R$</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>Receita contratada</td><td class="n">100%</td><td class="n">2.550</td><td>—</td></tr>
+<tr><td>Impostos</td><td class="n">−8%</td><td class="n">−204</td><td>Simples Nacional; se o fator R te jogar no Anexo V, sobe para ~15,5% e todas as faixas abaixo pioram</td></tr>
+<tr><td>Taxa de cartão / antecipação</td><td class="n">−11%</td><td class="n">−281</td><td>É o preço de resolver o problema de caixa. Vale cada ponto.</td></tr>
+<tr><td>Inadimplência e chargeback</td><td class="n">−5%</td><td class="n">−128</td><td>Sobe com tráfego pago: o lead frio tem menos compromisso que a indicação</td></tr>
+<tr><td>Ferramentas por cliente / 12 meses</td><td class="n">−7%</td><td class="n">−179</td><td>App de treino, CRM, calendário, armazenamento</td></tr>
+<tr class="hi"><td><b>Contribuição por cliente</b></td><td class="n"><b>~69%</b></td><td class="n"><b>1.758</b></td><td>É deste número, e não do ticket, que o CAC sai</td></tr>
+</tbody></table></div>
+<p><strong>Regra prática:</strong> CAC saudável ≤ 40% da contribuição. No seu caso hoje, isso é <strong>R$ 700</strong>. Cada real de aumento no ticket ou de redução de imposto/taxa move esse teto proporcionalmente — e é por isso que a decisão de preço em dólar do Bloco 4 e a definição de renovação do Bloco 2 valem mais do que qualquer otimização de campanha que eu possa te entregar.</p>
+</section>
+
+<section id="b14">
+<p class="eyebrow">Bloco 14</p>
+<h2>Remarketing</h2>
+<p>Você tem +200 mil seguidores e provavelmente zero campanha de remarketing. Esse é o dinheiro mais barato disponível para você hoje — mas só depois que a prospecção estiver alimentando os públicos, senão você fica girando em cima de uma base minúscula e paga caro por frequência inútil.</p>
+
+<h3>14.1 · Volume mínimo para valer a pena</h3>
+<div class="scroll"><table>
+<thead><tr><th>Público</th><th class="n">Tamanho mínimo</th><th>Quando separar em conjunto próprio</th><th>Mensagem</th></tr></thead>
+<tbody>
+<tr><td><b>Concluiu o quiz e não agendou</b> · 7d</td><td class="n">300+</td><td>É o primeiro que vale a pena, sempre. Menor volume, maior intenção.</td><td>Remover o obstáculo específico: "a call é uma conversa, não uma venda sob pressão. 40 minutos, câmera opcional."</td></tr>
+<tr><td><b>Iniciou e não concluiu o quiz</b> · 7d</td><td class="n">300+</td><td>Junte com o de cima até somarem ~800. Depois separe.</td><td>Retomada: "sua avaliação ficou pela metade" + o que ela recebe ao terminar.</td></tr>
+<tr><td><b>Agendou e não compareceu</b></td><td class="n">—</td><td><b>Nunca separe em campanha.</b> Volume pequeno demais. Isso é trabalho de WhatsApp, não de mídia.</td><td>—</td></tr>
+<tr><td><b>Visitou o site</b> · 30d</td><td class="n">1.000+</td><td>Base do conjunto "morno"</td><td>Prova e autoridade. Aqui entra o conteúdo de bastidor, o processo, o depoimento.</td></tr>
+<tr><td><b>Vídeo 50%+</b> · 30d</td><td class="n">2.000+</td><td>Junte ao morno</td><td>Aprofundar o argumento que o vídeo abriu</td></tr>
+<tr><td><b>Engajou Instagram</b> · 365d</td><td class="n">—</td><td>Seu maior ativo. Vale conjunto próprio <b>desde o dia 1</b>, com verba pequena.</td><td>"Você me acompanha há um tempo. Talvez seja hora de sair do conteúdo e entrar no processo."</td></tr>
+</tbody></table></div>
+
+<h3>14.2 · Regras</h3>
+<ul>
+<li><b>Não crie remarketing antes de ter ~1.000 visitantes únicos em 30 dias.</b> Antes disso, cada real está melhor empregado enchendo o topo. Um público de 200 pessoas custa CPM alto, satura em três dias e te dá 2 leads que você teria pego de qualquer jeito.</li>
+<li><b>Teto de 10 a 15% do orçamento total.</b> Remarketing infla ROAS e não gera crescimento: ele colhe demanda que a prospecção criou. Se ele passar de 20% do investimento, você está lendo o próprio rastro e chamando de resultado.</li>
+<li><b>Limite de frequência:</b> 2 impressões a cada 3 dias no público quente. Perseguição destrói marca pessoal, e no seu caso a marca pessoal é o produto.</li>
+<li><b>Exclua sempre:</b> quem já agendou (do público de quem não agendou), quem já é cliente (de tudo), e quem concluiu (do público de quem iniciou e não concluiu). Exclusão mal feita é o erro mais comum e o mais caro.</li>
+<li><b>Criativo diferente do de prospecção.</b> Se a pessoa não converteu com aquele anúncio, mostrar o mesmo anúncio de novo é a definição de esperar resultado diferente do mesmo estímulo.</li>
+</ul>
+</section>
+
+<section id="b15">
+<p class="eyebrow">Bloco 15</p>
+<h2>Otimização do quiz</h2>
+<p>Escrito sem ver o seu quiz — então trate como a estrutura de referência contra a qual comparar o que existe, não como substituição. Quando você me mandar as perguntas atuais, eu reescrevo este bloco item a item.</p>
+
+<h3>15.1 · Princípios</h3>
+<div class="grid g2">
+<div class="card"><h5>O quiz não coleta dados. Ele constrói o diagnóstico.</h5><p>Cada pergunta deve fazer a pessoa chegar sozinha a uma conclusão sobre si mesma. Se uma pergunta serve só para preencher seu CRM, ela custa abandono e não paga nada de volta. Corte.</p></div>
+<div class="card"><h5>Uma pergunta por tela, avanço automático</h5><p>Sem botão "próximo". Cada clique extra é uma chance de sair. Barra de progresso sempre visível: a pessoa precisa ver que está perto do fim.</p></div>
+<div class="card"><h5>Fácil no começo, pesado no fim</h5><p>As três primeiras perguntas devem ser sobre o problema, com resposta de um clique, sem nada invasivo. Investimento, contato e comprometimento vêm depois de 70% do caminho, quando o custo psicológico de desistir já é alto.</p></div>
+<div class="card"><h5>Termine entregando, não pedindo</h5><p>A última tela precisa dar um <b>diagnóstico nomeado</b>. É o que transforma "preenchi um formulário" em "recebi uma leitura sobre mim" — e é o que dá à call um motivo específico de existir.</p></div>
+</div>
+
+<h3>15.2 · Sequência recomendada — 12 perguntas</h3>
+<div class="scroll"><table>
+<thead><tr><th class="n">#</th><th>Pergunta</th><th>Função</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td>Qual é o seu objetivo principal hoje? <span style="color:var(--muted)">perder gordura · ganhar massa · recompor · manter e melhorar performance</span></td><td>Entrada fácil, projeta desejo, zero fricção</td></tr>
+<tr><td class="n">2</td><td>Há quanto tempo você tenta chegar nesse resultado?</td><td>Microcompromisso: ela mesma verbaliza o tempo perdido</td></tr>
+<tr><td class="n">3</td><td>O que mais pesa hoje? <span style="color:var(--muted)">treino sem direção · dieta sem estratégia · recuperação ignorada · não tenho dados nenhum</span></td><td><b>Os 4 vazamentos do slide 4.</b> Esta resposta é o eixo da sua call</td></tr>
+<tr><td class="n">4</td><td>Como está sua rotina de treino hoje?</td><td>Contexto + qualificação implícita de comprometimento</td></tr>
+<tr><td class="n">5</td><td>E a alimentação?</td><td>Contexto</td></tr>
+<tr><td class="n">6</td><td>Quanto tempo por dia você <i>realmente</i> tem?</td><td>Qualificação de viabilidade. Quem marca "quase nenhum" precisa de mensagem diferente</td></tr>
+<tr><td class="n">7</td><td>O que você já tentou? <span style="color:var(--muted)">ficha pronta · dieta radical · treinar mais · mudar tudo de uma vez · nada estruturado</span></td><td><b>As 4 crenças do slide 5.</b> Antecipa a objeção antes da call</td></tr>
+<tr><td class="n">8</td><td>De 0 a 10, o quanto isso te incomoda hoje?</td><td>Microcompromisso emocional. Nota ≥ 8 é o seu melhor preditor de comparecimento</td></tr>
+<tr><td class="n">9</td><td>Se nada mudar, como você imagina que vai estar daqui a 12 meses?</td><td>Projeção de dor futura — a pergunta que mais constrói desejo no quiz inteiro</td></tr>
+<tr><td class="n">10</td><td>Onde você mora hoje? <span style="color:var(--muted)">Brasil · EUA · Canadá · Portugal · Reino Unido · Irlanda · outro</span></td><td><b>Obrigatória.</b> Sem ela você não fecha o loop do Mercado B</td></tr>
+<tr><td class="n">11</td><td>Quando você quer começar? <span style="color:var(--muted)">esta semana · este mês · nos próximos 3 meses · só pesquisando</span></td><td>Urgência. "Só pesquisando" vai para nutrição, não para a agenda</td></tr>
+<tr class="hi"><td class="n">12</td><td><b>A pergunta de investimento</b> — texto em 15.3</td><td>Qualificação financeira</td></tr>
+<tr><td class="n">13</td><td>Nome · WhatsApp com DDI · e-mail</td><td>Contato. <b>Sempre antes</b> da tela de diagnóstico</td></tr>
+</tbody></table></div>
+<p><strong>Por que o contato vem antes do diagnóstico:</strong> porque quem não agendar continua sendo seu — você tem WhatsApp e e-mail para recuperar. Se você entregar o diagnóstico primeiro e o contato só no calendário, todo abandono na última tela vira perda total.</p>
+
+<h3>15.3 · Qualificação financeira — onde, como e se</h3>
+<div class="box v">
+<p class="lab">Sim, deve perguntar. Mas de um jeito específico.</p>
+<p><b>Onde:</b> pergunta 12 de 13 — depois de todo o desejo construído, imediatamente antes do contato. Nunca antes de 70% do quiz.</p>
+<p><b>Como:</b> em faixas <b>mensais</b>, não em valor cheio. E isso não é detalhe de copy: a sua escada de preços já é mensal (12x R$ 300 e 12x R$ 149,70), e a pergunta que você faz na call também é mensal. As três coisas precisam falar a mesma língua.</p>
+</div>
+<pre><b>TEXTO SUGERIDO</b>
+
+"Última pergunta, e ela é sobre expectativa — não sobre venda.
+
+Se a gente identificar que o acompanhamento faz sentido para o seu caso,
+qual faixa de investimento mensal caberia confortavelmente na sua realidade hoje?"
+
+  ( ) Acima de R$ 500 por mês
+  ( ) Entre R$ 300 e R$ 500 por mês
+  ( ) Entre R$ 150 e R$ 300 por mês
+  ( ) Menos de R$ 150 por mês
+  ( ) Prefiro conversar sobre isso na call
+
+<u>Nota abaixo das opções, em texto pequeno:</u>
+<u>"Não existe resposta certa. Isso só me ajuda a preparar a conversa."</u></pre>
+<div class="scroll"><table>
+<thead><tr><th>Resposta</th><th>Como tratar</th><th>Flag <code>qualified</code></th></tr></thead>
+<tbody>
+<tr><td>Acima de R$ 500</td><td>Prioridade máxima na agenda. Programa completo, sem hesitação. Na call, a ramificação do seu roteiro já está pronta para isso.</td><td class="n">true</td></tr>
+<tr><td>R$ 300–500</td><td>Alvo central. Programa completo.</td><td class="n">true</td></tr>
+<tr><td>R$ 150–300</td><td><b>Continua qualificado.</b> Sua condição de entrada é R$ 149,70/mês — essa faixa está dentro da sua escada. Agende, apresente o completo primeiro, e siga a sua própria ramificação do roteiro.</td><td class="n">true</td></tr>
+<tr><td>Menos de R$ 150</td><td>Não agende. Nutrição por e-mail/WhatsApp. Reabra em 60–90 dias.</td><td class="n">false</td></tr>
+<tr><td>Prefiro conversar na call</td><td><b>Qualificado.</b> É frequentemente resposta de quem tem dinheiro e não quer se posicionar cedo. Agende e trate como faixa média.</td><td class="n">true</td></tr>
+</tbody></table></div>
+<p><strong>Impacto esperado</strong> <em class="hyp">hipótese</em>: perda de 15% a 30% das conclusões, ganho maior que isso em comparecimento e fechamento. A opção "prefiro conversar na call" é o que mantém a perda no piso dessa faixa — sem ela, a pergunta vira um portão e o abandono dobra. <strong>E note que essa faixa "não qualificada" é pequena de propósito:</strong> com uma porta de entrada a R$ 149,70/mês, quase ninguém que quer resolver o problema fica de fora por preço. Quem responde "menos de R$ 150" está te dizendo outra coisa — que isso não é prioridade agora. Essa é a informação útil.</p>
+
+<h3>15.4 · A tela final</h3>
+<pre><b>SEU DIAGNÓSTICO</b>
+
+  <i>"Pelas suas respostas, seu principal vazamento é: AUSÊNCIA DE DADOS."</i>
+
+  2 a 3 linhas explicando o que isso significa no caso dela
+  1 linha sobre o que acontece se não for corrigido
+  <u>[ prova: um número seu, ou uma frase de autoridade ]</u>
+
+  "Na avaliação individual eu te mostro exatamente como corrigir isso
+   no seu caso. São 40 minutos, por vídeo, sem compromisso."
+
+  <b>[ CALENDÁRIO EMBUTIDO — mesma página, sem redirecionamento ]</b>
+
+  <u>Abaixo: "O que acontece na call" em 3 bullets — reduz o medo de venda</u></pre>
+</section>
+
+<section id="b16">
+<p class="eyebrow">Bloco 16</p>
+<h2>Aumento do show rate</h2>
+<p>A diferença entre 45% e 70% de comparecimento é a diferença entre CAC de R$ 1.100 e CAC de R$ 700 — sem trocar um único criativo e sem gastar um real a mais. É a alavanca de melhor relação esforço/retorno do funil inteiro.</p>
+
+<h3>16.1 · A régua de contato</h3>
+<div class="scroll"><table>
+<thead><tr><th>Momento</th><th>Canal</th><th>Conteúdo</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr class="hi"><td><b>Imediato</b><br><span style="color:var(--muted)">&lt; 2 min</span></td><td>WhatsApp</td><td>Mensagem sua, com o nome da pessoa e o vazamento diagnosticado no quiz. Não é template genérico: cita a resposta dela.</td><td>É o único momento em que a intenção está no pico. Cada minuto depois disso custa comparecimento.</td></tr>
+<tr class="hi"><td><b>+5 min</b></td><td>WhatsApp</td><td><b>Áudio ou vídeo curto seu</b>, 30–45s: "oi [nome], vi que você marcou para [dia], é o Wilton mesmo que vai te atender." Termine pedindo <b>uma resposta</b>: "me confirma com um joinha?"</td><td>Duas coisas ao mesmo tempo: prova que existe uma pessoa do outro lado e cria o primeiro microcompromisso de resposta. Quem responde comparece muito mais.</td></tr>
+<tr><td><b>+30 min</b></td><td>E-mail</td><td>Confirmação com data, hora, <b>fuso explícito</b> e o link. Anexe o convite de calendário.</td><td>Fuso escrito por extenso é obrigatório no Mercado B. "15h" sem fuso é no-show garantido.</td></tr>
+<tr><td><b>24h antes</b></td><td>WhatsApp</td><td>Lembrete + as 2 ou 3 perguntas de pré-call (16.2)</td><td>Reativa e aprofunda o compromisso</td></tr>
+<tr><td><b>3h antes</b></td><td>WhatsApp</td><td>"Confirma que continua de pé?" — pergunta fechada, resposta de uma palavra</td><td>Última janela para remarcar em vez de sumir. Remarcação é infinitamente melhor que no-show.</td></tr>
+<tr><td><b>10 min antes</b></td><td>WhatsApp</td><td>Link direto da sala: "estou entrando, te espero aqui"</td><td>Elimina a fricção de procurar o link</td></tr>
+<tr><td><b>Se não apareceu</b><br><span style="color:var(--muted)">+10 min</span></td><td>WhatsApp + ligação</td><td>"Aconteceu alguma coisa? Consigo te encaixar hoje às X ou amanhã às Y." <b>Duas opções concretas, nunca "quando você pode?"</b></td><td>Boa parte do no-show é esquecimento e vergonha, não desinteresse. Recupera-se muito mais do que se imagina.</td></tr>
+</tbody></table></div>
+
+<h3>16.2 · Perguntas de pré-call</h3>
+<p>Sim, faça — e não é só para aumentar comprometimento: é para você chegar na call sabendo por onde conduzir. <strong>Máximo três, por WhatsApp, respondidas em texto ou áudio.</strong> Formulário longo aqui derruba comparecimento.</p>
+<ol>
+<li><b>"O que precisaria acontecer nessa conversa para ela ter valido a pena para você?"</b> — te dá o critério de sucesso dela, e é o que você retoma no fechamento.</li>
+<li><b>"O que você já tentou que não funcionou?"</b> — alimenta diretamente os slides 3 e 5.</li>
+<li><b>"De 0 a 10, o quanto você está pronto para começar nas próximas 2 semanas?"</b> — melhor preditor isolado de fechamento. Nota ≤ 5 muda a condução: mais diagnóstico, menos apresentação.</li>
+</ol>
+
+<h3>16.3 · Regras estruturais</h3>
+<ul>
+<li><b>Nunca ofereça horário além de 72h.</b> Intenção decai rápido. Se sua agenda está cheia além disso, o problema é capacidade — abra blocos ou reduz a duração da call, não estique o prazo.</li>
+<li><b>Ofereça poucos horários.</b> Calendário com 40 opções produz paralisia e agendamento leviano. 6 a 8 slots por semana, em blocos fixos, produz comparecimento melhor.</li>
+<li><b>Peça WhatsApp com DDI no agendamento.</b> Sem DDI, todo o Mercado B fica inalcançável.</li>
+<li><b>Bloqueie o fuso na confirmação.</b> Mostre o horário no fuso da pessoa <i>e</i> no seu.</li>
+<li><b>Meça o comparecimento por criativo.</b> Se um anúncio tem show rate de 40% enquanto a média é 65%, ele está trazendo agendamento leviano — e o custo por call agendada dele está mentindo para você.</li>
+</ul>
+</section>
+
+<section id="b17">
+<p class="eyebrow">Bloco 17</p>
+<h2>Processo de vendas</h2>
+<p>Seu deck e seu roteiro já são melhores que a média do mercado com folga — não vou refazer o que está bom. O que muda quando o lead passa a vir de tráfego pago é outra coisa, e é sobre isso que vale falar.</p>
+
+<h3>17.1 · O que muda com lead pago</h3>
+<div class="scroll"><table>
+<thead><tr><th>Aspecto</th><th>Lead orgânico (hoje)</th><th>Lead pago (a partir de agora)</th><th>Ajuste no roteiro</th></tr></thead>
+<tbody>
+<tr><td>Conhece você</td><td>Muito. Consome conteúdo há meses</td><td>Viu um vídeo de 45 segundos</td><td><b>Slide 2 ganha peso.</b> Não corra pela autoridade como se ela já estivesse dada — com lead pago, ela não está.</td></tr>
+<tr><td>Confia na promessa</td><td>Sim</td><td>Ainda não</td><td>Slides 3 a 5 (diagnóstico) precisam de <b>mais</b> perguntas e menos apresentação. É onde a confiança se constrói.</td></tr>
+<tr><td>Sabe o preço</td><td>Frequentemente intui</td><td>Não faz ideia</td><td>A pergunta de investimento do slide 9 fica <b>ainda mais importante</b>, porque é a única âncora antes do preço.</td></tr>
+<tr><td>Taxa de fechamento</td><td>Alta</td><td>Menor, previsivelmente</td><td>Não conclua que "o tráfego não funciona" nas primeiras 10 calls. Compare pago com pago.</td></tr>
+</tbody></table></div>
+
+<h3>17.2 · A disciplina da escada de preços</h3>
+<div class="box v">
+<p class="lab">O risco número 1 da sua operação de vendas com tráfego pago</p>
+<p>Com lead frio e volume, a tentação de descer para os R$ 1.497 cresce a cada call que não fecha. Se você ceder, em 60 dias seu ticket médio realizado será R$ 1.700, seu CAC máximo cai para R$ 476, e a operação inteira deste documento deixa de fechar — sem que nenhum número de mídia tenha piorado.</p>
+<p><b>Proteções, todas já previstas no seu próprio roteiro:</b></p>
+<ul class="tight">
+<li>Slide 11 só entra depois de você diagnosticar qual dos <b>sete motivos</b> é a objeção real, e só se for <i>capacidade financeira</i>. Se for percepção de valor, mostrar preço menor confirma que o produto valia menos.</li>
+<li>O escopo da entrada precisa estar preenchido e ser <b>materialmente diferente</b>. Mesmo escopo por metade do preço não é degrau, é desconto.</li>
+<li><b>Acompanhe semanalmente o mix</b>: % de vendas no completo vs. na entrada. Essa é uma métrica de mídia tanto quanto de vendas, porque é ela que define o seu CAC máximo. Coloque no dashboard.</li>
+</ul>
+</div>
+
+<h3>17.3 · Pós-call — o que fazer com quem não fechou na hora</h3>
+<ul>
+<li><b>Nunca termine uma call sem próximo passo com data.</b> "Vou pensar" sem data é perda com aparência de esperança.</li>
+<li><b>Registre o motivo de perda</b> em uma das sete categorias do seu roteiro, no CRM, na mesma hora. É esse dado, cruzado com o anúncio de origem, que vai te dizer qual criativo traz o cliente certo.</li>
+<li><b>Sequência de 3 toques:</b> +2h (resumo do diagnóstico por escrito, sem preço) · +2 dias (um conteúdo que ataca a objeção específica dela) · +7 dias (uma pergunta direta, aberta, sem pressão).</li>
+<li><b>Reabra em 60–90 dias</b> quem perdeu por <i>timing</i> ou <i>prioridade</i>. Esses fecham depois com frequência muito maior que a média — e já estão pagos.</li>
+</ul>
+</section>
+
+<section id="b18">
+<p class="eyebrow">Bloco 18</p>
+<h2>Dashboard completo</h2>
+
+<h3>18.1 · Painel semanal — sempre nesta ordem</h3>
+<p>Uma linha por semana. A coluna que interessa é a de <strong>taxa</strong>, nunca a de volume: é a razão entre etapas consecutivas que localiza o vazamento.</p>
+<div class="scroll"><table>
+<thead><tr><th>Etapa</th><th class="n">Volume</th><th class="n">Taxa vs. etapa anterior</th><th class="n">Custo unitário</th><th>Alerta quando</th></tr></thead>
+<tbody>
+<tr><td><b>Investimento</b></td><td class="n">R$</td><td class="n">—</td><td class="n">—</td><td>—</td></tr>
+<tr><td>Impressões</td><td class="n">#</td><td class="n">CPM</td><td class="n">CPM</td><td>CPM sobe &gt;25% sem troca de criativo</td></tr>
+<tr><td>Cliques no link</td><td class="n">#</td><td class="n"><b>CTR</b></td><td class="n">CPC</td><td>CTR &lt; 0,8%</td></tr>
+<tr><td>Landing Page Views</td><td class="n">#</td><td class="n">LPV / clique</td><td class="n">Custo/LPV</td><td>&lt; 75% — é problema técnico</td></tr>
+<tr><td>Quiz Start</td><td class="n">#</td><td class="n"><b>Start / LPV</b></td><td class="n">Custo/start</td><td>&lt; 35%</td></tr>
+<tr><td>Quiz Complete</td><td class="n">#</td><td class="n"><b>Complete / Start</b></td><td class="n">CPL</td><td>&lt; 45%</td></tr>
+<tr><td>Qualified Lead</td><td class="n">#</td><td class="n">QL / Complete</td><td class="n">Custo/aplicação</td><td>&lt; 35%</td></tr>
+<tr><td>Booked Call</td><td class="n">#</td><td class="n"><b>Booked / QL</b></td><td class="n">Custo/agendamento</td><td>&lt; 25%</td></tr>
+<tr><td>Show</td><td class="n">#</td><td class="n"><b>Show rate</b></td><td class="n">Custo/call realizada</td><td>&lt; 55%</td></tr>
+<tr><td>Vendas</td><td class="n">#</td><td class="n"><b>Close rate</b></td><td class="n"><b>CAC</b></td><td>&lt; 15%</td></tr>
+<tr class="hi"><td><b>Receita contratada</b></td><td class="n">R$</td><td class="n">ROAS</td><td class="n">Ticket médio</td><td>Ticket médio cai abaixo de R$ 2.400</td></tr>
+<tr class="hi"><td><b>Cash collected</b></td><td class="n">R$</td><td class="n">Cash / investimento</td><td class="n">—</td><td><b>&lt; 1,0 por mais de 60 dias</b></td></tr>
+</tbody></table></div>
+<p>Três colunas de contexto que precisam estar ao lado, e que quase ninguém coloca: <strong>% de vendas no programa completo vs. entrada</strong> (define o CAC máximo), <strong>show rate por criativo</strong> (revela agendamento leviano) e <strong>motivo de perda dominante da semana</strong> (diz se o problema é mídia, oferta ou preço).</p>
+
+<h3>18.2 · Árvore de diagnóstico</h3>
+<p>Leia sempre de cima para baixo e <strong>pare no primeiro sinal que dispara</strong>. Corrigir uma etapa de baixo enquanto uma de cima está quebrada é desperdício: os números de baixo estão contaminados pelo defeito de cima.</p>
+<div class="diag">
+<div class="row"><div class="sig"><b>CPM muito acima da média</b><br>e subindo</div><div class="dx"><b>Causas, em ordem:</b> criativo com engajamento negativo (denúncia, "ocultar anúncio") → audiência estreita demais → sazonalidade de leilão → qualidade de conta.<br><b>Primeira ação:</b> abra a taxa de feedback negativo por anúncio. Se um criativo estiver puxando, mate-o — ele encarece o conjunto inteiro, não só a si mesmo.</div></div>
+<div class="row"><div class="sig">CPM normal<br><b>CTR &lt; 0,8%</b></div><div class="dx"><b>É o gancho.</b> Não é o público, não é a oferta, não é a página. Os 3 primeiros segundos não estão parando ninguém.<br><b>Primeira ação:</b> 3 ganchos novos sobre o corpo que já existe (rodada A2/A3 do Bloco 10.6). É o teste mais barato e mais rápido do sistema.</div></div>
+<div class="row"><div class="sig">CTR bom<br><b>LPV/clique &lt; 75%</b></div><div class="dx"><b>Problema técnico, não de copy.</b> Página pesada, redirecionamento lento, script bloqueando renderização, ou o pixel disparando tarde demais.<br><b>Primeira ação:</b> teste no 4G real, não no wi-fi. Meta abaixo de 2,5s.</div></div>
+<div class="row"><div class="sig">LPV bom<br><b>Quiz Start &lt; 35%</b></div><div class="dx"><b>Quebra entre anúncio e página.</b> A pessoa chegou e não reconheceu o que viu no anúncio.<br><b>Primeira ação:</b> coloque o print do anúncio ao lado do print da dobra. Se não puderem ser lidos como a mesma frase, reescreva a dobra — não o anúncio. É mais barato.</div></div>
+<div class="row"><div class="sig">Start bom<br><b>Complete &lt; 45%</b></div><div class="dx"><b>É o quiz.</b> Comprimento, ou uma pergunta específica.<br><b>Primeira ação:</b> olhe o <code>QuizProgress</code> por passo. Queda concentrada em um índice = aquela pergunta. Queda distribuída = corte 3 perguntas.</div></div>
+<div class="row"><div class="sig">Complete bom<br><b>Qualified &lt; 35%</b></div><div class="dx"><b>Duas causas opostas</b> — e a distinção importa: (a) o criativo atrai gente sem capacidade de investir, ou (b) seu critério de qualificação está estreito demais.<br><b>Primeira ação:</b> olhe a distribuição das respostas de faixa de investimento. Concentração em "menos de R$ 150" = criativo. Distribuição normal com poucos qualificados = critério.</div></div>
+<div class="row"><div class="sig">Qualified bom<br><b>Booked &lt; 25%</b></div><div class="dx"><b>A transição.</b> Redirecionamento para outro domínio, tela final sem diagnóstico, calendário com poucos horários ou horários distantes.<br><b>Primeira ação:</b> embuta o calendário na própria tela final e entregue o diagnóstico antes dele.</div></div>
+<div class="row"><div class="sig">Booked bom<br><b>Show &lt; 55%</b></div><div class="dx"><b>Confirmação e prazo.</b> Falta contato humano nos primeiros minutos, ou o horário está longe demais.<br><b>Primeira ação:</b> régua do Bloco 16 completa + nenhum slot além de 72h. Isso costuma mover mais o CAC que qualquer troca de criativo.</div></div>
+<div class="row"><div class="sig">Show bom<br><b>Fechamento &lt; 15%</b></div><div class="dx"><b>Qualificação ou condução.</b> Se o motivo de perda dominante for "capacidade financeira", o problema é <b>upstream</b>: o criativo ou o quiz. Se for "percepção de valor", é a call — provavelmente diagnóstico curto demais antes de apresentar.<br><b>Primeira ação:</b> a tabela de motivo de perda decide. Nunca ajuste a call antes de olhá-la.</div></div>
+<div class="row"><div class="sig">Todas as taxas boas<br><b>CAC alto</b></div><div class="dx"><b>Economics, não funil.</b> CPM caro (mercado), ticket baixo (mix escorregando para a entrada) ou criativo saturado.<br><b>Primeira ação:</b> olhe o mix completo/entrada antes de mexer em mídia. Ticket médio caindo derruba o CAC máximo sem que nada na campanha tenha piorado.</div></div>
+<div class="row"><div class="sig">CAC bom<br><b>Caixa negativo</b></div><div class="dx"><b>Forma de pagamento.</b> Não é problema de mídia e nenhuma otimização de campanha resolve.<br><b>Primeira ação:</b> antecipação de recebíveis (Correção 2).</div></div>
+<div class="row"><div class="sig">Brasil bem<br><b>Exterior mal</b></div><div class="dx"><b>Verifique nesta ordem antes de concluir que o mercado não presta:</b> 1. o conjunto saiu do aprendizado? 2. o idioma está travado em Português? 3. está em "moram neste local"? 4. o criativo tem gancho de identidade nos 3 primeiros segundos? 5. o ticket em BRL está compatível com um CPM de país rico?<br>Na maioria das vezes o problema é o item 5, e a solução é preço em dólar — não pausar a campanha.</div></div>
+</div>
+
+<h3>18.3 · Tabela de decisão por criativo</h3>
+<p>Atualize toda segunda-feira, com janela de 7 dias fechada. <strong>A decisão sai da coluna mais profunda que tiver dado suficiente</strong> — nunca do CPC.</p>
+<div class="scroll"><table>
+<thead><tr><th>Ad</th><th>Hipótese</th><th class="n">Spend</th><th class="n">CPM</th><th class="n">CTR</th><th class="n">CPC</th><th class="n">LPV</th><th class="n">Start</th><th class="n">Compl.</th><th class="n">Booked</th><th class="n">Show</th><th class="n">Vendas</th><th class="n">Receita</th><th class="n">CAC</th><th class="n">ROAS</th><th>Decisão</th></tr></thead>
+<tbody>
+<tr><td>AD 01</td><td>dados</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td>escalar / manter / iterar / matar</td></tr>
+<tr><td>AD 02</td><td>ficha pronta</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td>—</td></tr>
+<tr><td colspan="15" style="color:var(--muted)">…uma linha por criativo. A coluna <b>Hipótese</b> é obrigatória: sem ela a tabela vira lista de códigos e você não aprende nada entre uma semana e outra.</td></tr>
+</tbody></table></div>
+<div class="box warn">
+<p class="lab">A regra que impede a otimização burra</p>
+<p><b>Nenhum criativo é declarado vencedor antes de ter dado de venda</b> — ou, no mínimo, de call realizada com qualificação registrada. CPC barato promove criativo raso. Se você precisa decidir antes de ter vendas, decida por <b>custo por call realizada</b>, nunca por CPC e nunca por CPL.</p>
+</div>
+</section>
+
+<section id="b19">
+<p class="eyebrow">Bloco 19</p>
+<h2>Plano dos primeiros 30 dias</h2>
+<div class="tl">
+<div class="ph"><p class="when">Dia 0 — antes de gastar um real</p>
+<ul class="tight">
+<li>Decidir e implementar a <b>antecipação de recebíveis</b>. Sem isso, não ligue as campanhas.</li>
+<li>Preencher o <b>escopo da condição de entrada</b> no slide 11 e congelar.</li>
+<li>Confirmar a nomenclatura da <b>certificação ACSM</b>; ajustar o slide 2.</li>
+<li>Definir a <b>política de arrependimento</b> e o processo de reembolso.</li>
+<li>Executar o <b>protocolo de 34 pontos</b> (Bloco 1.3) e anotar o placar.</li>
+<li>Instalar Pixel + CAPI com deduplicação; validar no Testar Eventos: <code>PageView</code>, <code>QuizStart</code>, <code>Lead</code>, <code>Schedule</code>.</li>
+<li>Criar a planilha de CRM com todas as colunas do Bloco 11.6.</li>
+<li>Preencher a ficha de classificação dos 9 criativos e aplicar o teste de diferenciação.</li>
+</ul></div>
+<div class="ph"><p class="when">Dias 1 a 3 — subir e não mexer</p>
+<ul class="tight">
+<li>Subir <b>Campanha BR</b>: 1 conjunto broad, R$ 200/dia, evento <code>Lead</code>, 5 criativos.</li>
+<li>Subir <b>Campanha EXT</b> (se o orçamento for de R$ 400/dia): EUA, Português, R$ 150/dia, evento <code>QuizStart</code>, 4 criativos.</li>
+<li><b>Não mexer em nada.</b> Nem orçamento, nem criativo, nem público. Fase de aprendizado.</li>
+<li>Trabalho do dia: montar a régua de WhatsApp do Bloco 16 e testar você mesmo, ponta a ponta, agendando como se fosse um lead.</li>
+</ul></div>
+<div class="ph"><p class="when">Dias 4 a 7 — primeira leitura</p>
+<ul class="tight">
+<li>Conferir <b>apenas</b>: os eventos estão chegando? o número do Meta bate com o da ferramenta do quiz (±20%)?</li>
+<li>Aplicar as regras de corte do Bloco 10.3 — só as de gasto acumulado. Provavelmente 1 ou 2 anúncios saem.</li>
+<li>Primeiras calls acontecendo. Registrar motivo de perda desde a primeira.</li>
+<li>Montar o painel semanal do Bloco 18.1 com a primeira semana fechada.</li>
+</ul></div>
+<div class="ph"><p class="when">Semana 2 — corrigir o funil, não a campanha</p>
+<ul class="tight">
+<li>Substituir <b>todas</b> as taxas hipotéticas deste documento pelos seus números reais. Recalcular CAC máximo e orçamento.</li>
+<li>Atacar o gargalo que a árvore de diagnóstico apontar — provavelmente entre Quiz Complete e Booked Call.</li>
+<li>Entrar com os criativos do round 2 (os que não rodaram no round 1).</li>
+<li>Se o exterior tiver 10+ leads: trocar o evento de otimização para <code>Lead</code> (duplicando o conjunto, nunca editando).</li>
+</ul></div>
+<div class="ph"><p class="when">Semana 3 — separar teste de escala</p>
+<ul class="tight">
+<li>Criar a <b>campanha de escala</b> com os vencedores e a <b>campanha de teste</b> com verba fixa.</li>
+<li>Primeira rodada de iteração criativa (A2/A3 sobre o corpo vencedor).</li>
+<li>Subir orçamento do vencedor em 20–30%, se os critérios do Bloco 10.4 forem atendidos.</li>
+<li>Ligar o remarketing de engajamento no Instagram, com verba pequena.</li>
+<li>Definir a <b>oferta de renovação/continuidade</b>. É o que destrava o CAC máximo.</li>
+</ul></div>
+<div class="ph"><p class="when">Semana 4 — decidir com dado</p>
+<ul class="tight">
+<li>Fechar os 30 dias: CAC real, ticket médio realizado, mix completo/entrada, show rate, cash collected.</li>
+<li><b>Decisão do Mercado B:</b> manter em BRL, subir preço em USD, ou pausar. Com 30 dias de dado, agora é decisão e não aposta.</li>
+<li>Avaliar migração do evento de otimização do Brasil para <code>QualifiedLead</code>.</li>
+<li>Se houver 1.000+ visitantes únicos: ligar o remarketing de site.</li>
+<li>Definir o orçamento do mês 2 a partir do CAC real, não da estimativa deste documento.</li>
+</ul></div>
+</div>
+</section>
+
+<section id="b20">
+<p class="eyebrow">Bloco 20</p>
+<h2>Próximos experimentos</h2>
+
+<h3>20.1 · O Creative Engine</h3>
+<p>Uma sessão de gravação por semana, um ritual de decisão por semana. O objetivo não é produzir mais anúncios — é <strong>ter sempre challengers novos contra o vencedor atual</strong>, porque todo vencedor satura, e o momento de ter o substituto pronto é antes dele saturar, não depois.</p>
+<pre><b>SEGUNDA</b>   ritual de decisão · janela de 7 dias fechada
+             cada criativo cai em uma das três gavetas abaixo
+
+<b>VENCEDOR</b>              → <i>ITERAÇÃO</i>
+   custo/call abaixo do alvo    3 variações: A2+B+C · A3+B+C · A+B+C2
+   30+ eventos acumulados       entram na campanha de teste, não na de escala
+
+<b>PERDEDOR INTERESSANTE</b>  → <i>NOVA HIPÓTESE</i>
+   CTR alto e conversão baixa   o gancho funciona, o corpo não entrega → novo corpo
+   CTR baixo e conversão alta   o corpo funciona, o gancho não para → novos ganchos
+   <u>este é o quadrante mais valioso e o mais ignorado</u>
+
+<b>PERDEDOR CLARO</b>         → <i>MATAR</i>
+   critérios do Bloco 10.3      registre a hipótese como refutada e não volte a ela
+                                <u>sem registro, você vai retestá-la em 3 meses</u>
+
+<b>TERÇA</b>     gravação em bloco · 3 a 5 criativos novos, mesma luz, mesma roupa
+<b>QUARTA</b>    edição e subida na campanha de teste, verba fixa
+<b>DOMINGO</b>   fechamento do painel semanal</pre>
+<p><strong>Regra de proporção:</strong> 70% do orçamento na escala com vencedores, 20% em iterações de vencedores, 10% em conceitos genuinamente novos. Quando o desempenho estabiliza por 3 semanas, inverta temporariamente para 50/20/30 — estabilidade prolongada é o aviso de saturação chegando.</p>
+
+<h3>20.2 · 24 ângulos de aquisição</h3>
+<p>Territórios, não frases. Cada um é uma tese sobre por que a pessoa não resolveu o problema — e cada um seleciona um público diferente. Todos escritos para respeitar a política de atributos pessoais (Bloco 1).</p>
+
+<h4>Identidade — quem a pessoa é</h4>
+<div class="scroll"><table>
+<thead><tr><th class="n">#</th><th>Ângulo</th><th>Tese</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td><b>O corpo que parou de responder sozinho</b></td><td>O que funcionava aos 25 deixa de funcionar, e ninguém avisa. Vende reajuste de estratégia, não esforço.</td></tr>
+<tr><td class="n">2</td><td><b>O profissional que gerencia tudo menos o próprio corpo</b></td><td>Quem tem planilha para o negócio e achismo para a própria saúde. Vende o corpo como o último sistema não gerenciado.</td></tr>
+<tr><td class="n">3</td><td><b>O ex-atleta</b></td><td>Quem já teve físico e perdeu. A dor não é estética, é de identidade. Ângulo emocionalmente mais forte que qualquer "emagrecimento" — e é o seu, biograficamente.</td></tr>
+<tr><td class="n">4</td><td><b>O pai que saiu do próprio radar</b></td><td>Não é falta de tempo, é ordem de prioridade. Reposiciona treinar como condição para dar conta, não como egoísmo.</td></tr>
+<tr><td class="n">5</td><td><b>O brasileiro nos dois primeiros anos fora</b></td><td>O período em que rotina, comida e corpo se reorganizam sem ninguém por perto. Só você tem lastro para falar disso.</td></tr>
+<tr><td class="n">6</td><td><b>Quem treina há anos e nunca mudou de foto</b></td><td>Frequência não é progressão. Vende medição contra hábito.</td></tr>
+</tbody></table></div>
+
+<h4>Fracasso — o que já foi tentado</h4>
+<div class="scroll"><table>
+<tbody>
+<tr><td class="n">7</td><td><b>A pasta de fichas antigas no celular</b></td><td>Seis planos salvos, nenhum válido hoje. Prova visual do problema, sem falar do corpo de ninguém.</td></tr>
+<tr><td class="n">8</td><td><b>O efeito sanfona como falha de sistema</b></td><td>Reposiciona um histórico de fracasso como evidência de que faltava estrutura, não força de vontade.</td></tr>
+<tr><td class="n">9</td><td><b>Já pagou consultoria e não funcionou</b></td><td>Contra-categoria. Alto risco, alto retorno: fala com quem tem dinheiro, já provou intenção e está cético. Público de fechamento mais alto que a média.</td></tr>
+<tr><td class="n">10</td><td><b>O app que não te conhece</b></td><td>IA e aplicativo genérico contra acompanhamento humano. Ângulo cada vez mais relevante e cada vez menos disputado.</td></tr>
+<tr><td class="n">11</td><td><b>O personal que passa o treino e vai embora</b></td><td>Contra-alternativa direta, e é exatamente o argumento do seu slide 8.</td></tr>
+<tr><td class="n">12</td><td><b>A dieta que só funciona enquanto a vida gira em torno dela</b></td><td>Crença 02 do seu deck. Fala com quem já foi rígido e não sustentou.</td></tr>
+</tbody></table></div>
+
+<h4>Mecanismo — por que trava</h4>
+<div class="scroll"><table>
+<tbody>
+<tr><td class="n">13</td><td><b>Seu peso mudou, a dieta continua igual</b></td><td>Par 1 do slide 3. O mais didático dos quatro e o de melhor compreensão em vídeo curto.</td></tr>
+<tr><td class="n">14</td><td><b>Sua força subiu, o treino continua igual</b></td><td>Par 2. Fala com quem treina sério — público de maior poder aquisitivo dentro do nicho.</td></tr>
+<tr><td class="n">15</td><td><b>A rotina apertou e o plano quebrou</b></td><td>Par 3. O mais universal.</td></tr>
+<tr><td class="n">16</td><td><b>A recuperação piorou e você treinou mais</b></td><td>Par 4. Contraintuitivo — logo, memorável.</td></tr>
+<tr><td class="n">17</td><td><b>Ajustar sem medir é adivinhar</b></td><td>Vazamento 04. Melhor ângulo para o público analítico.</td></tr>
+<tr><td class="n">18</td><td><b>A fase certa vale mais que o treino perfeito</b></td><td>Cutting, recomposição, manutenção. Ângulo técnico e altamente diferenciador.</td></tr>
+</tbody></table></div>
+
+<h4>Contrarian e consequência</h4>
+<div class="scroll"><table>
+<tbody>
+<tr><td class="n">19</td><td><b>"Não é falta de disciplina. Provavelmente nunca foi."</b></td><td>Descarga de culpa. Seu slide 1. A hipótese em que eu apostaria mais fichas.</td></tr>
+<tr><td class="n">20</td><td><b>"Você não precisa mudar 100% hoje"</b></td><td>O próprio Método 1%. Reduz o custo psicológico de começar, que é a barreira real de quem já falhou.</td></tr>
+<tr><td class="n">21</td><td><b>"Se você quer resultado em 30 dias, não me procure"</b></td><td>Desqualificação como gancho. CTR menor, lead muito melhor. Exatamente o caso do Bloco 10.1 — e por isso precisa ser julgado por custo por call, nunca por CPC.</td></tr>
+<tr><td class="n">22</td><td><b>Por que a indústria entrega ficha e some</b></td><td>Educacional e contra-mercado. Constrói autoridade e prepara terreno para todos os outros ângulos.</td></tr>
+<tr><td class="n">23</td><td><b>O custo composto de mais um ano tentando sozinho</b></td><td>Projeção de dor futura. É a pergunta 9 do quiz virando criativo.</td></tr>
+<tr><td class="n">24</td><td><b>O que a estagnação faz com a confiança</b></td><td>Sai do corpo e vai para a autoimagem — território mais profundo, menos disputado e alinhado com a sua formação em psicologia do esporte.</td></tr>
+</tbody></table></div>
+
+<h3>20.3 · Fila de experimentos, por valor esperado</h3>
+<div class="scroll"><table>
+<thead><tr><th class="n">Prio</th><th>Experimento</th><th>Hipótese</th><th>Como medir</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td>Diagnóstico nomeado na tela final</td><td>Sobe agendamento em 20%+</td><td>Booked / Qualified, antes e depois</td></tr>
+<tr><td class="n">2</td><td>Calendário embutido vs. redirecionamento</td><td>Sobe agendamento e recupera atribuição</td><td>Booked / Qualified + integridade de UTM</td></tr>
+<tr><td class="n">3</td><td>Preço em USD para o Mercado B</td><td>Triplica ticket sem derrubar fechamento</td><td>CAC / ticket por mercado</td></tr>
+<tr><td class="n">4</td><td>Vídeo de 45s vs. 90s no mesmo ângulo</td><td>O longo qualifica mais e converte melhor no fim do funil</td><td>Custo por call realizada</td></tr>
+<tr><td class="n">5</td><td>Quiz de 12 perguntas vs. 8</td><td>O curto sobe conclusão e derruba qualificação — saber o saldo líquido</td><td>Custo por call realizada, não CPL</td></tr>
+<tr><td class="n">6</td><td>Gancho de identidade vs. genérico no exterior</td><td>Identidade vence por margem larga</td><td>CTR + custo por Lead no conjunto EXT</td></tr>
+<tr><td class="n">7</td><td>Áudio vs. vídeo na confirmação de WhatsApp</td><td>Vídeo sobe comparecimento</td><td>Show rate</td></tr>
+<tr><td class="n">8</td><td>Oferta de renovação pós-ciclo</td><td>Dobra o LTV e o CAC máximo</td><td>LTV a 12 e 18 meses</td></tr>
+<tr><td class="n">9</td><td>Lookalike de quem concluiu o quiz</td><td>Escala sem perder qualidade</td><td>CAC vs. conjunto broad</td></tr>
+<tr><td class="n">10</td><td>Conjunto de Reels isolado</td><td>Só quando houver verba para não fragmentar</td><td>Custo por Lead por posicionamento</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="b21">
+<p class="eyebrow">Bloco 21</p>
+<h2>As 10 primeiras ações, em ordem</h2>
+<p>Ordenadas por impacto sobre o resultado, não por facilidade. As quatro primeiras acontecem <strong>antes</strong> de você gastar o primeiro real em mídia.</p>
+<div class="scroll"><table>
+<thead><tr><th class="n">#</th><th>Ação</th><th>Por que está nesta posição</th><th class="n">Prazo</th></tr></thead>
+<tbody>
+<tr class="hi"><td class="n">1</td><td><b>Resolver a antecipação de recebíveis</b></td><td>É o que separa uma operação lucrativa de uma operação insolvente. Nenhuma otimização de campanha compensa receber R$ 300 por mês contra CAC de R$ 700 à vista.</td><td class="n">Dia 0</td></tr>
+<tr class="hi"><td class="n">2</td><td><b>Definir o escopo da condição de entrada e congelar</b></td><td>Você está prestes a vender para lead frio com a oferta secundária indefinida. Improviso na call vira preço variável e derruba o ticket médio — que é o número do qual todo o resto depende.</td><td class="n">Dia 0</td></tr>
+<tr class="hi"><td class="n">3</td><td><b>Instalar Pixel + CAPI com deduplicação e o <code>lead_id</code> atravessando até o calendário</b></td><td>Sem isso você vai gastar 30 dias e não vai conseguir responder qual anúncio trouxe qual cliente — que é a única pergunta que importa.</td><td class="n">Dia 0</td></tr>
+<tr><td class="n">4</td><td><b>Rodar o protocolo de 34 pontos no seu próprio funil</b></td><td>25 minutos que evitam subir orçamento em cima de um funil que perde 60% na transição para o calendário.</td><td class="n">Dia 0</td></tr>
+<tr><td class="n">5</td><td><b>Classificar os 9 criativos e aplicar o teste de diferenciação</b></td><td>Se sete deles forem a mesma hipótese com roupas diferentes, você precisa saber disso antes de gastar R$ 6.000 descobrindo.</td><td class="n">Dia 0</td></tr>
+<tr class="hi"><td class="n">6</td><td><b>Subir 2 campanhas — BR R$ 250 e EXT R$ 150 — ABO, broad, evento <code>Lead</code></b></td><td>A estrutura do Bloco 3. Não é 1–1–9.</td><td class="n">Dia 1</td></tr>
+<tr><td class="n">7</td><td><b>Montar a régua de WhatsApp de comparecimento</b></td><td>Melhor relação esforço/retorno do funil: mover show rate de 45% para 65% derruba o CAC em ~30% sem tocar em mídia.</td><td class="n">Dias 1–3</td></tr>
+<tr><td class="n">8</td><td><b>Colocar diagnóstico nomeado na tela final + calendário embutido</b></td><td>A maior alavanca isolada de agendamento, e provavelmente o seu maior gargalo atual.</td><td class="n">Dias 4–7</td></tr>
+<tr><td class="n">9</td><td><b>Substituir todas as hipóteses deste documento pelos seus números reais</b></td><td>A partir daí o plano deixa de ser meu e passa a ser seu. Toda a matemática foi construída para ser recalculada.</td><td class="n">Semana 2</td></tr>
+<tr><td class="n">10</td><td><b>Definir a oferta de renovação e decidir o preço do Mercado B</b></td><td>São as duas decisões que mudam o CAC máximo — e mudar o CAC máximo vale mais do que qualquer ganho de eficiência que eu consiga te entregar na campanha.</td><td class="n">Semanas 3–4</td></tr>
+</tbody></table></div>
+
+<div class="box v">
+<p class="lab">O princípio final</p>
+<p style="font-family:var(--mono);font-size:13.5px;line-height:1.9;color:var(--paper)">CRIATIVO × AQUISIÇÃO × FUNIL × QUALIFICAÇÃO × SHOW RATE × FECHAMENTO × TICKET = RECEITA</p>
+<p>É uma <b>multiplicação</b>, e é por isso que ela é implacável: um zero em qualquer fator zera o produto, e — mais importante no seu caso — <b>o fator mais fraco define o retorno de melhorar todos os outros</b>. Hoje os seus dois fatores mais fracos não são criativo nem aquisição, que é onde a atenção naturalmente vai. São <b>ticket</b> (36% menor do que você acreditava) e <b>a forma de recebimento</b> (que impede reinvestir o que você ganha).</p>
+<p>Melhorar CTR em 30% multiplica a receita por 1,3. Corrigir ticket e caixa muda a viabilidade da máquina inteira. <b>Comece por onde o multiplicador é maior.</b></p>
+</div>
+</section>
+
+</main>
+</div>
+
+<footer><div class="inner">
+<p><b>Método 1% · Plano de aquisição paga.</b> Escrito a partir do deck de vendas, do roteiro de call e da escada de preços deste repositório. A auditoria da página do quiz está pendente — o domínio está bloqueado pela política de rede desta sessão.</p>
+<p>Toda taxa marcada como hipótese existe para dar estrutura de cálculo antes de haver dado, e deve ser substituída pelos números reais a partir da segunda semana. Nenhum número deste documento é benchmark de mercado.</p>
+</div></footer>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var secs = Array.prototype.slice.call(document.querySelectorAll('main section'));
+  if(!('IntersectionObserver' in window)) return;
+  var visible = {};
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting; });
+    var current = null;
+    for(var i=0;i<secs.length;i++){ if(visible[secs[i].id]){ current = secs[i].id; break; } }
+    if(!current) return;
+    links.forEach(function(a){ a.classList.remove('on'); });
+    if(map[current]) map[current].classList.add('on');
+  }, {rootMargin:'-10% 0px -70% 0px', threshold:0});
+  secs.forEach(function(s){ obs.observe(s); });
+})();
+</script>
